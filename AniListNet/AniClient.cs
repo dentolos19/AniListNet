@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using AniListNet.Helpers;
+﻿using AniListNet.Helpers;
 using AniListNet.Objects;
 using GraphQL;
 using GraphQL.Client.Http;
@@ -100,7 +99,7 @@ public class AniClient
         return response["Media"]["relations"]["nodes"].ToObject<Media[]>();
     }
 
-    public async Task<AniPagination<Character>> GetMediaCharactersAsync(int id, AniPaginationOptions? options = null)
+    public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int id, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
         var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
@@ -110,7 +109,7 @@ public class AniClient
                 new("characters", new GqlSelection[]
                 {
                     new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                    new("nodes", GqlParser.ParseType(typeof(Character)))
+                    new("edges", GqlParser.ParseType(typeof(CharacterEdge)))
                 }, new GqlParameter[]
                 {
                     new("page", options.PageIndex),
@@ -124,11 +123,39 @@ public class AniClient
         var response = await SendRequestAsync(request);
         var data = response["Media"]["characters"];
         var pageInfo = data["pageInfo"].ToObject<PageInfo>();
-        var characters = data["nodes"].ToObject<Character[]>();
-        return new AniPagination<Character>(pageInfo, characters);
+        var characters = data["edges"].ToObject<CharacterEdge[]>();
+        return new AniPagination<CharacterEdge>(pageInfo, characters);
     }
 
-    public async Task<Character> GetCharacter(int id)
+    public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int id, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        {
+            new("Media", new GqlSelection[]
+            {
+                new("staff", new GqlSelection[]
+                {
+                    new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+                    new("edges", GqlParser.ParseType(typeof(StaffEdge)))
+                }, new GqlParameter[]
+                {
+                    new("page", options.PageIndex),
+                    new("perPage", options.PageSize)
+                })
+            }, new GqlParameter[]
+            {
+                new("id", id)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        var data = response["Media"]["staff"];
+        var pageInfo = data["pageInfo"].ToObject<PageInfo>();
+        var staff = data["edges"].ToObject<StaffEdge[]>();
+        return new AniPagination<StaffEdge>(pageInfo, staff);
+    }
+
+    public async Task<Character> GetCharacterAsync(int id)
     {
         var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
         {
@@ -139,6 +166,19 @@ public class AniClient
         });
         var response = await SendRequestAsync(request);
         return response["Character"].ToObject<Character>();
+    }
+
+    public async Task<Staff> GetStaffAsync(int id)
+    {
+        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        {
+            new("Staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
+            {
+                new("id", id)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        return response["Staff"].ToObject<Staff>();
     }
 
 }

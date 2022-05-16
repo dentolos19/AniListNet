@@ -10,8 +10,8 @@ public class Name
     [JsonProperty("last")] public string? LastName { get; private init; }
     [JsonProperty("full")] public string FullName { get; private init; }
     [JsonProperty("native")] public string NativeName { get; private init; }
-    [JsonProperty("alternative")] public string[]? AlternativeNames { get; private init; }
-    [JsonProperty("alternativeSpoiler")] public string[]? AlternativeSpoilerNames { get; private init; }
+    [JsonProperty("alternative")] public string[] AlternativeNames { get; private init; }
+    // TODO: Add "AlternativeSpoilerNames" for character name
     [JsonProperty("userPreferred")] public string PreferredName { get; private init; }
 
 }

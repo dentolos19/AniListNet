@@ -52,9 +52,27 @@ public class Tests
 
     [Test]
     [TestCase(1)]
+    public async Task GetMediaStaffTest(int id)
+    {
+        var data = await _client.GetMediaStaffAsync(id);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    [TestCase(1)]
     public async Task GetCharacterTest(int id)
     {
-        var data = await _client.GetCharacter(id);
+        var data = await _client.GetCharacterAsync(id);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    [TestCase(95269)]
+    public async Task GetStaffTest(int id)
+    {
+        var data = await _client.GetStaffAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
