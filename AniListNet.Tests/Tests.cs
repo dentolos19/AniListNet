@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using AniListNet.Objects;
 using NUnit.Framework;
 
 namespace AniListNet.Tests;
@@ -15,11 +16,16 @@ public class Tests
     }
 
     [Test]
-    [TestCase("one piece")]
+    [TestCase("test")]
     public async Task SearchMediaTest(string query)
     {
-        var data = await _client.SearchMediaAsync(new AniFilter { Query = query });
-        Console.WriteLine(ObjectDumper.Dump(data));
+        var results = await _client.SearchMediaAsync(new AniFilter
+        {
+            Query = query,
+            Sort = MediaSort.Popularity,
+            Type = MediaType.Anime
+        }, new AniPaginationOptions(2, 10));
+        Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
 
@@ -45,7 +51,7 @@ public class Tests
     [TestCase(1)]
     public async Task GetMediaCharactersTest(int id)
     {
-        var data = await _client.GetMediaCharactersAsync(id);
+        var data = await _client.GetMediaCharactersAsync(id, new AniPaginationOptions(2, 5));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -54,7 +60,16 @@ public class Tests
     [TestCase(1)]
     public async Task GetMediaStaffTest(int id)
     {
-        var data = await _client.GetMediaStaffAsync(id);
+        var data = await _client.GetMediaStaffAsync(id, new AniPaginationOptions(2, 5));
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    [TestCase(1)]
+    public async Task GetMediaStudiosTest(int id)
+    {
+        var data = await _client.GetMediaStudiosAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }

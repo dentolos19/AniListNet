@@ -21,13 +21,9 @@ public class AniClient
         _client = new GraphQLHttpClient(new GraphQLHttpClientOptions { EndPoint = new Uri("https://graphql.anilist.co") }, new NewtonsoftJsonSerializer(), _httpClient);
     }
 
-    private async Task<JObject> SendRequestAsync(string request, GqlType type = GqlType.Query)
+    private async Task<JObject> SendRequestAsync(string request)
     {
-        GraphQLResponse<JObject>? response;
-        if (type == GqlType.Query)
-            response = await _client.SendQueryAsync<JObject>(new GraphQLRequest(request));
-        else
-            response = await _client.SendMutationAsync<JObject>(new GraphQLRequest(request));
+        var response = await _client.SendQueryAsync<JObject>(new GraphQLRequest(request));
         var headers = response.AsGraphQLHttpResponse().ResponseHeaders;
         headers.TryGetValues("X-RateLimit-Limit", out var rateLimitValues);
         headers.TryGetValues("X-RateLimit-Remaining", out var rateRemainingValues);
@@ -48,7 +44,7 @@ public class AniClient
             parameters.Add(new GqlParameter("search", filter.Query));
         if (filter.Type != null)
             parameters.Add(new GqlParameter("type", filter.Type));
-        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        var request = GqlParser.ParseSelections(new GqlSelection[]
         {
             new("Page", new GqlSelection[]
             {
@@ -69,7 +65,7 @@ public class AniClient
 
     public async Task<Media> GetMediaAsync(int id)
     {
-        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        var request = GqlParser.ParseSelections(new GqlSelection[]
         {
             new("Media", GqlParser.ParseType(typeof(Media)), new GqlParameter[]
             {
@@ -80,15 +76,15 @@ public class AniClient
         return response["Media"].ToObject<Media>();
     }
 
-    public async Task<Media[]> GetMediaRelationsAsync(int id)
+    public async Task<MediaEdge[]> GetMediaRelationsAsync(int id)
     {
-        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        var request = GqlParser.ParseSelections(new GqlSelection[]
         {
             new("Media", new GqlSelection[]
             {
                 new("relations", new GqlSelection[]
                 {
-                    new("nodes", GqlParser.ParseType(typeof(Media)))
+                    new("edges", GqlParser.ParseType(typeof(MediaEdge)))
                 })
             }, new GqlParameter[]
             {
@@ -96,13 +92,13 @@ public class AniClient
             })
         });
         var response = await SendRequestAsync(request);
-        return response["Media"]["relations"]["nodes"].ToObject<Media[]>();
+        return response["Media"]["relations"]["edges"].ToObject<MediaEdge[]>();
     }
 
     public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int id, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        var request = GqlParser.ParseSelections(new GqlSelection[]
         {
             new("Media", new GqlSelection[]
             {
@@ -130,7 +126,7 @@ public class AniClient
     public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int id, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        var request = GqlParser.ParseSelections(new GqlSelection[]
         {
             new("Media", new GqlSelection[]
             {
@@ -155,9 +151,28 @@ public class AniClient
         return new AniPagination<StaffEdge>(pageInfo, staff);
     }
 
+    public async Task<StudioEdge[]> GetMediaStudiosAsync(int id)
+    {
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("Media", new GqlSelection[]
+            {
+                new("studios", new GqlSelection[]
+                {
+                    new("edges", GqlParser.ParseType(typeof(StudioEdge)))
+                })
+            }, new GqlParameter[]
+            {
+                new("id", id)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
+    }
+
     public async Task<Character> GetCharacterAsync(int id)
     {
-        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        var request = GqlParser.ParseSelections(new GqlSelection[]
         {
             new("Character", GqlParser.ParseType(typeof(Character)), new GqlParameter[]
             {
@@ -170,7 +185,7 @@ public class AniClient
 
     public async Task<Staff> GetStaffAsync(int id)
     {
-        var request = GqlParser.ParseSelections(GqlType.Query, new GqlSelection[]
+        var request = GqlParser.ParseSelections(new GqlSelection[]
         {
             new("Staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
             {
