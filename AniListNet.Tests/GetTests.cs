@@ -1,33 +1,11 @@
-using System.Diagnostics;
-using AniListNet.Objects;
 using NUnit.Framework;
 
 namespace AniListNet.Tests;
 
-public class Tests
+public class GetTests
 {
 
     private readonly AniClient _client = new();
-
-    [SetUp]
-    public void SetupTests()
-    {
-        _client.RateChanged += (_, args) => Debug.WriteLine($"Rate Limit: {args.RateRemaining}/{args.RateLimit}");
-    }
-
-    [Test]
-    [TestCase("test")]
-    public async Task SearchMediaTest(string query)
-    {
-        var results = await _client.SearchMediaAsync(new AniFilter
-        {
-            Query = query,
-            Sort = MediaSort.Popularity,
-            Type = MediaType.Anime
-        }, new AniPaginationOptions(2, 10));
-        Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.Pass();
-    }
 
     [Test]
     [TestCase(1)]
