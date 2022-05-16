@@ -8,46 +8,17 @@ public class GetTests
     private readonly AniClient _client = new();
 
     [Test]
-    [TestCase(1)]
-    public async Task GetMediaTest(int id)
+    public async Task GetGenreCollection()
     {
-        var data = await _client.GetMediaAsync(id);
+        var data = await _client.GetGenreCollection();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
 
     [Test]
-    [TestCase(21)]
-    public async Task GetMediaRelationsTest(int id)
+    public async Task GetMediaTagCollection()
     {
-        var data = await _client.GetMediaRelationsAsync(id);
-        Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
-    }
-
-    [Test]
-    [TestCase(1)]
-    public async Task GetMediaCharactersTest(int id)
-    {
-        var data = await _client.GetMediaCharactersAsync(id, new AniPaginationOptions(2, 5));
-        Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
-    }
-
-    [Test]
-    [TestCase(1)]
-    public async Task GetMediaStaffTest(int id)
-    {
-        var data = await _client.GetMediaStaffAsync(id, new AniPaginationOptions(2, 5));
-        Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
-    }
-
-    [Test]
-    [TestCase(1)]
-    public async Task GetMediaStudiosTest(int id)
-    {
-        var data = await _client.GetMediaStudiosAsync(id);
+        var data = await _client.GetMediaTagCollection();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -66,6 +37,15 @@ public class GetTests
     public async Task GetStaffTest(int id)
     {
         var data = await _client.GetStaffAsync(id);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    [TestCase(5741649)]
+    public async Task GetUserTest(int id)
+    {
+        var data = await _client.GetUserAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }

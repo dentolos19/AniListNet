@@ -63,4 +63,13 @@ public class SearchTests
         Assert.Pass();
     }
 
+    [Test]
+    [TestCase("kazuha")]
+    public async Task SearchUserTest(string query)
+    {
+        var results = await _client.SearchUserAsync(query, new AniPaginationOptions(3, 5));
+        Console.WriteLine(ObjectDumper.Dump(results));
+        Assert.Pass();
+    }
+
 }

@@ -9,8 +9,6 @@ using AniListNet;
 
 var client = new AniClient();
 
-// client.SetAccessToken("<INSERT IMPLICIT GRANT TOKEN>");
-
 var results = await client.SearchMediaAsync(
     "one piece", // search term
     new AniPaginationOptions(2, 5) // set pagination to page 2 with 5 items

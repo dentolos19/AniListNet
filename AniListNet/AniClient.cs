@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using AniListNet.Helpers;
+﻿using AniListNet.Helpers;
 using AniListNet.Objects;
 using GraphQL;
 using GraphQL.Client.Http;
@@ -37,12 +36,7 @@ public class AniClient
         return response.Data;
     }
 
-    public void SetAccessToken(string? accessToken)
-    {
-        _httpClient.DefaultRequestHeaders.Authorization = !string.IsNullOrEmpty(accessToken)
-            ? new AuthenticationHeaderValue("Bearer", accessToken)
-            : null;
-    }
+    #region Search Functions
 
     public Task<AniPagination<Media>> SearchMediaAsync(string query, AniPaginationOptions? options = null)
     {
@@ -151,6 +145,98 @@ public class AniClient
         return new AniPagination<Studio>(pageInfo, studios);
     }
 
+    public async Task<AniPagination<User>> SearchUserAsync(string query, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("Page", new GqlSelection[]
+            {
+                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+                new("users", GqlParser.ParseType(typeof(User)), new GqlParameter[]
+                {
+                    new("search", query)
+                })
+            }, new GqlParameter[]
+            {
+                new("page", options.PageIndex),
+                new("perPage", options.PageSize)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        var page = response["Page"];
+        var pageInfo = page["pageInfo"].ToObject<PageInfo>();
+        var users = page["users"].ToObject<User[]>();
+        return new AniPagination<User>(pageInfo, users);
+    }
+
+    #endregion
+
+    #region Get Functions
+
+    public async Task<string[]> GetGenreCollection()
+    {
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("GenreCollection")
+        });
+        var response = await SendRequestAsync(request);
+        return response["GenreCollection"].ToObject<string[]>();
+    }
+
+    public async Task<MediaTag[]> GetMediaTagCollection()
+    {
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("MediaTagCollection", GqlParser.ParseType(typeof(MediaTag)))
+        });
+        var response = await SendRequestAsync(request);
+        return response["MediaTagCollection"].ToObject<MediaTag[]>();
+    }
+
+    public async Task<Character> GetCharacterAsync(int id)
+    {
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("Character", GqlParser.ParseType(typeof(Character)), new GqlParameter[]
+            {
+                new("id", id)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        return response["Character"].ToObject<Character>();
+    }
+
+    public async Task<Staff> GetStaffAsync(int id)
+    {
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("Staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
+            {
+                new("id", id)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        return response["Staff"].ToObject<Staff>();
+    }
+
+    public async Task<User> GetUserAsync(int id)
+    {
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("User", GqlParser.ParseType(typeof(User)), new GqlParameter[]
+            {
+                new("id", id)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        return response["User"].ToObject<User>();
+    }
+
+    #endregion
+
+    #region Media-Specific Get Functions
+
     public async Task<Media> GetMediaAsync(int id)
     {
         var request = GqlParser.ParseSelections(new GqlSelection[]
@@ -258,30 +344,6 @@ public class AniClient
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
     }
 
-    public async Task<Character> GetCharacterAsync(int id)
-    {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
-        {
-            new("Character", GqlParser.ParseType(typeof(Character)), new GqlParameter[]
-            {
-                new("id", id)
-            })
-        });
-        var response = await SendRequestAsync(request);
-        return response["Character"].ToObject<Character>();
-    }
-
-    public async Task<Staff> GetStaffAsync(int id)
-    {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
-        {
-            new("Staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
-            {
-                new("id", id)
-            })
-        });
-        var response = await SendRequestAsync(request);
-        return response["Staff"].ToObject<Staff>();
-    }
+    #endregion
 
 }
