@@ -8,17 +8,17 @@ public class GetTests
     private readonly AniClient _client = new();
 
     [Test]
-    public async Task GetGenreCollection()
+    public async Task GetGenreCollectionTest()
     {
-        var data = await _client.GetGenreCollection();
+        var data = await _client.GetGenreCollectionAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
 
     [Test]
-    public async Task GetMediaTagCollection()
+    public async Task GetTagCollectionTest()
     {
-        var data = await _client.GetMediaTagCollection();
+        var data = await _client.GetTagCollectionAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -29,7 +29,7 @@ public class GetTests
     {
         var data = await _client.GetCharacterAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.IsTrue(data.Id == id);
     }
 
     [Test]
@@ -38,7 +38,7 @@ public class GetTests
     {
         var data = await _client.GetStaffAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.IsTrue(data.Id == id);
     }
 
     [Test]
@@ -47,7 +47,7 @@ public class GetTests
     {
         var data = await _client.GetUserAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.IsTrue(data.Id == id);
     }
 
 }

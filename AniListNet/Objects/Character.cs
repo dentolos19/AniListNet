@@ -12,5 +12,6 @@ public class Character
     [JsonProperty("gender")] public string? Gender { get; private init; }
     [JsonProperty("dateOfBirth")] public Date DateOfBirth { get; private init; }
     [JsonProperty("age")] public string? Age { get; private init; }
+    [JsonProperty("favourites")] public int Favorites { get; private init; }
 
 }

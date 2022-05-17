@@ -9,6 +9,6 @@ public class Staff : Character
     [JsonProperty("primaryOccupations")] public string[] PrimaryOccupations { get; private init; }
     [JsonProperty("dateOfDeath")] public Date DateOfDeath { get; private init; }
     [JsonProperty("yearsActive")] public int[] YearsActive { get; private init; }
-    [JsonProperty("homeTown")] public string HomeTown { get; private init; }
+    [JsonProperty("homeTown")] public string? HomeTown { get; private init; }
 
 }

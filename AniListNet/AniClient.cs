@@ -174,7 +174,7 @@ public class AniClient
 
     #region Get Functions
 
-    public async Task<string[]> GetGenreCollection()
+    public async Task<string[]> GetGenreCollectionAsync()
     {
         var request = GqlParser.ParseSelections(new GqlSelection[]
         {
@@ -184,7 +184,7 @@ public class AniClient
         return response["GenreCollection"].ToObject<string[]>();
     }
 
-    public async Task<MediaTag[]> GetMediaTagCollection()
+    public async Task<MediaTag[]> GetTagCollectionAsync()
     {
         var request = GqlParser.ParseSelections(new GqlSelection[]
         {
