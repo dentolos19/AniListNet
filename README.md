@@ -27,12 +27,31 @@ foreach (var relatedItem in relations) // prints related media info
 
 ## Features (Currently work-in-progress!)
 
-- [X] Enables searching for media, characters, staff & more
-- [X] Enables fetching relations for specific media
-- [X] Enables fetching info for individual media, character, staff, etc.
-- [ ] Allows for fetching airing schedules (from AniChart)
-- [ ] Supports user mutution
-  - [ ] Updating user settings
-  - [ ] Updating user lists
-- [X] Supports implicit grant authentication
-- more features to be added soon!
+- [X] Has data search functions
+  - [X] `SearchMediaAsync`
+  - [X] `SearchCharacterAsync`
+  - [X] `SearchStaffAsync`
+  - [X] `SearchStudioAsync`
+  - [X] `SearchUserAsync`
+- [X] Has data get functions
+  - [X] `GetGenreCollection`
+  - [X] `GetTagCollection`
+  - [X] `GetMediaAsync`
+  - [ ] `GetMediaSchedulesAsync`
+  - [X] `GetCharacterAsync`
+  - [X] `GetStaffAsync`
+  - [ ] `GetStudioAsync`
+  - [X] `GetUserAsync`
+- [X] Has user mutation functions
+  - [ ] `GetAuthenticatedUserAsync`
+  - [ ] `SaveMediaEntryAsync`
+  - [ ] `DeleteMediaEntryAsync`
+- [X] Has media-specific data get functions
+  - [X] `GetMediaRelationsAsync`
+  - [X] `GetMediaCharactersAsync`
+  - [X] `GetMediaStaffAsync`
+  - [X] `GetMediaStudiosAsync`
+- [X] Has character-specific data get functions (TODO)
+- [X] Has staff-specific data get functions (TODO)
+- [X] Has studio-specific data get functions (TODO)
+- [X] Has user-specific data get functions (TODO)

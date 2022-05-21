@@ -194,6 +194,19 @@ public class AniClient
         return response["MediaTagCollection"].ToObject<MediaTag[]>();
     }
 
+    public async Task<Media> GetMediaAsync(int id)
+    {
+        var request = GqlParser.ParseSelections(new GqlSelection[]
+        {
+            new("Media", GqlParser.ParseType(typeof(Media)), new GqlParameter[]
+            {
+                new("id", id)
+            })
+        });
+        var response = await SendRequestAsync(request);
+        return response["Media"].ToObject<Media>();
+    }
+
     public async Task<Character> GetCharacterAsync(int id)
     {
         var request = GqlParser.ParseSelections(new GqlSelection[]
@@ -236,19 +249,6 @@ public class AniClient
     #endregion
 
     #region Media-Specific Get Functions
-
-    public async Task<Media> GetMediaAsync(int id)
-    {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
-        {
-            new("Media", GqlParser.ParseType(typeof(Media)), new GqlParameter[]
-            {
-                new("id", id)
-            })
-        });
-        var response = await SendRequestAsync(request);
-        return response["Media"].ToObject<Media>();
-    }
 
     public async Task<MediaEdge[]> GetMediaRelationsAsync(int id)
     {
