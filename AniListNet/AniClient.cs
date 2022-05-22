@@ -51,123 +51,108 @@ public class AniClient
             parameters.Add(new GqlParameter("search", filter.Query));
         if (filter.Type != null)
             parameters.Add(new GqlParameter("type", filter.Type));
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
-            new("Page", new GqlSelection[]
-            {
-                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                new("media", GqlParser.ParseType(typeof(Media)), parameters.ToArray())
-            }, new GqlParameter[]
-            {
-                new("page", options.PageIndex),
-                new("perPage", options.PageSize)
-            })
-        });
+            new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+            new("media", GqlParser.ParseType(typeof(Media)), parameters.ToArray())
+        }, new GqlParameter[]
+        {
+            new("page", options.PageIndex),
+            new("perPage", options.PageSize)
+        }));
         var response = await SendRequestAsync(request);
-        var page = response["Page"];
-        var pageInfo = page["pageInfo"].ToObject<PageInfo>();
-        var media = page["media"].ToObject<Media[]>();
-        return new AniPagination<Media>(pageInfo, media);
+        return new AniPagination<Media>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["media"].ToObject<Media[]>()
+        );
     }
 
     public async Task<AniPagination<Character>> SearchCharacterAsync(string query, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
-            new("Page", new GqlSelection[]
+            new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+            new("characters", GqlParser.ParseType(typeof(Character)), new GqlParameter[]
             {
-                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                new("characters", GqlParser.ParseType(typeof(Character)), new GqlParameter[]
-                {
-                    new("search", query)
-                })
-            }, new GqlParameter[]
-            {
-                new("page", options.PageIndex),
-                new("perPage", options.PageSize)
+                new("search", query)
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("page", options.PageIndex),
+            new("perPage", options.PageSize)
+        }));
         var response = await SendRequestAsync(request);
-        var page = response["Page"];
-        var pageInfo = page["pageInfo"].ToObject<PageInfo>();
-        var characters = page["characters"].ToObject<Character[]>();
-        return new AniPagination<Character>(pageInfo, characters);
+        return new AniPagination<Character>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["characters"].ToObject<Character[]>()
+        );
     }
 
     public async Task<AniPagination<Staff>> SearchStaffAsync(string query, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
-            new("Page", new GqlSelection[]
+            new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+            new("staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
             {
-                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                new("staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
-                {
-                    new("search", query)
-                })
-            }, new GqlParameter[]
-            {
-                new("page", options.PageIndex),
-                new("perPage", options.PageSize)
+                new("search", query)
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("page", options.PageIndex),
+            new("perPage", options.PageSize)
+        }));
         var response = await SendRequestAsync(request);
-        var page = response["Page"];
-        var pageInfo = page["pageInfo"].ToObject<PageInfo>();
-        var staff = page["staff"].ToObject<Staff[]>();
-        return new AniPagination<Staff>(pageInfo, staff);
+        return new AniPagination<Staff>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["staff"].ToObject<Staff[]>()
+        );
     }
 
     public async Task<AniPagination<Studio>> SearchStudioAsync(string query, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
-            new("Page", new GqlSelection[]
+            new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+            new("studios", GqlParser.ParseType(typeof(Studio)), new GqlParameter[]
             {
-                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                new("studios", GqlParser.ParseType(typeof(Studio)), new GqlParameter[]
-                {
-                    new("search", query)
-                })
-            }, new GqlParameter[]
-            {
-                new("page", options.PageIndex),
-                new("perPage", options.PageSize)
+                new("search", query)
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("page", options.PageIndex),
+            new("perPage", options.PageSize)
+        }));
         var response = await SendRequestAsync(request);
-        var page = response["Page"];
-        var pageInfo = page["pageInfo"].ToObject<PageInfo>();
-        var studios = page["studios"].ToObject<Studio[]>();
-        return new AniPagination<Studio>(pageInfo, studios);
+        return new AniPagination<Studio>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["studios"].ToObject<Studio[]>()
+        );
     }
 
     public async Task<AniPagination<User>> SearchUserAsync(string query, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
-            new("Page", new GqlSelection[]
+            new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+            new("users", GqlParser.ParseType(typeof(User)), new GqlParameter[]
             {
-                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                new("users", GqlParser.ParseType(typeof(User)), new GqlParameter[]
-                {
-                    new("search", query)
-                })
-            }, new GqlParameter[]
-            {
-                new("page", options.PageIndex),
-                new("perPage", options.PageSize)
+                new("search", query)
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("page", options.PageIndex),
+            new("perPage", options.PageSize)
+        }));
         var response = await SendRequestAsync(request);
-        var page = response["Page"];
-        var pageInfo = page["pageInfo"].ToObject<PageInfo>();
-        var users = page["users"].ToObject<User[]>();
-        return new AniPagination<User>(pageInfo, users);
+        return new AniPagination<User>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["users"].ToObject<User[]>()
+        );
     }
 
     #endregion
@@ -205,6 +190,25 @@ public class AniClient
         });
         var response = await SendRequestAsync(request);
         return response["Media"].ToObject<Media>();
+    }
+
+    public async Task<AniPagination<MediaSchedule>> GetMediaSchedulesAsync(AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
+        {
+            new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+            new("airingSchedules", GqlParser.ParseType(typeof(MediaSchedule)))
+        }, new GqlParameter[]
+        {
+            new("page", options.PageIndex),
+            new("perPage", options.PageSize)
+        }));
+        var response = await SendRequestAsync(request);
+        return new AniPagination<MediaSchedule>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["airingSchedules"].ToObject<MediaSchedule[]>()
+        );
     }
 
     public async Task<Character> GetCharacterAsync(int id)

@@ -28,16 +28,16 @@ foreach (var relatedItem in relations) // prints related media info
 ## Features (Currently work-in-progress!)
 
 - [X] Has data search functions
-  - [X] `SearchMediaAsync`
+  - [X] `SearchMediaAsync`: searches for Anime & Manga (supports filtering)
   - [X] `SearchCharacterAsync`
   - [X] `SearchStaffAsync`
   - [X] `SearchStudioAsync`
   - [X] `SearchUserAsync`
 - [X] Has data get functions
-  - [X] `GetGenreCollection`
-  - [X] `GetTagCollection`
+  - [X] `GetGenreCollection`: gets all supported genres (e.g. Action, Fantasy, Romance)
+  - [X] `GetTagCollection`: gets all supported tags (e.g. Male Protagonist, Heterosexual, Cultivation)
   - [X] `GetMediaAsync`
-  - [ ] `GetMediaSchedulesAsync`
+  - [X] `GetMediaSchedulesAsync`
   - [X] `GetCharacterAsync`
   - [X] `GetStaffAsync`
   - [ ] `GetStudioAsync`
@@ -51,7 +51,7 @@ foreach (var relatedItem in relations) // prints related media info
   - [X] `GetMediaCharactersAsync`
   - [X] `GetMediaStaffAsync`
   - [X] `GetMediaStudiosAsync`
-- [X] Has character-specific data get functions (TODO)
-- [X] Has staff-specific data get functions (TODO)
-- [X] Has studio-specific data get functions (TODO)
-- [X] Has user-specific data get functions (TODO)
+- [ ] Has character-specific data get functions (TODO)
+- [ ] Has staff-specific data get functions (TODO)
+- [ ] Has studio-specific data get functions (TODO)
+- [ ] Has user-specific data get functions (TODO)

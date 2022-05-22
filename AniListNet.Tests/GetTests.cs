@@ -25,6 +25,23 @@ public class GetTests
 
     [Test]
     [TestCase(1)]
+    public async Task GetMediaTest(int id)
+    {
+        var data = await _client.GetMediaAsync(id);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task GetMediaSchedulesTest()
+    {
+        var data = await _client.GetMediaSchedulesAsync(new AniPaginationOptions(2, 10));
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    [TestCase(1)]
     public async Task GetCharacterTest(int id)
     {
         var data = await _client.GetCharacterAsync(id);

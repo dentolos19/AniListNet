@@ -8,15 +8,6 @@ public class MediaGetTests
     private readonly AniClient _client = new();
 
     [Test]
-    [TestCase(1)]
-    public async Task GetMediaTest(int id)
-    {
-        var data = await _client.GetMediaAsync(id);
-        Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
-    }
-
-    [Test]
     [TestCase(21)]
     public async Task GetMediaRelationsTest(int id)
     {
