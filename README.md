@@ -1,4 +1,4 @@
-# AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/PasteMystNet)
+# <img src=".github/icon.png" width="32"/> AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/AniListNet)
 
 [![](https://img.shields.io/badge/Powered%20By-.NET-blue?logo=microsoft&style=flat-square)](https://dotnet.microsoft.com)
 [![](https://img.shields.io/badge/Made%20With-Visual%20Studio-blue?logo=visual-studio&style=flat-square)](https://visualstudio.microsoft.com)
@@ -12,25 +12,22 @@ using AniListNet;
 
 var client = new AniClient();
 
-var results = await client.SearchMediaAsync(
-    "one piece", // search term
-    new AniPaginationOptions(2, 5) // set pagination to page 2 with 5 items
-    );
+Console.WriteLine("Search results for \"one piece\"");
+var results = await client.SearchMediaAsync("one piece"); // searches for the term
+foreach (var item in results.Data)
+    Console.WriteLine($"  {item.Format}: {item.Title.PreferredTitle}");
+Console.WriteLine();
 
-Console.WriteLine("Search term: one piece");
-foreach (var item in results.Data) // prints results info
-    Console.WriteLine($"  {item.Type}: {item.Title.PreferredTitle} ({item.Format})");
-
-var relations = await client.GetMediaRelationsAsync(1); // gets related media of id 1
-
-Console.WriteLine($"Related media: ({relations.Length})");
-foreach (var relatedItem in relations) // prints related media info
-    Console.WriteLine($"  {relatedItem.Media.Type}: {relatedItem.Media.Title.PreferredTitle} ({relatedItem.Relation})");
+var firstResult = results.Data.First();
+Console.WriteLine($"Characters of the first result: {firstResult.Title.PreferredTitle} ({firstResult.Format})");
+var characters = await client.GetMediaCharactersAsync(firstResult.Id); // gets character list of the first result
+foreach (var character in characters.Data)
+    Console.WriteLine($"  {character.Role}: {character.Character.Name.FullName}");
 ```
 
 ## Features
 
-- [X] Has data search functions
+- [X] Has search query functions
   - [X] `SearchMediaAsync`: searches for Anime & Manga (supports filtering)
   - [X] `SearchCharacterAsync`
   - [X] `SearchStaffAsync`
@@ -45,12 +42,12 @@ foreach (var relatedItem in relations) // prints related media info
   - [X] `GetStaffAsync`
   - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
-- [ ] Has user mutation functions (TODO)
+- [ ] Has user-only mutation functions (TODO)
   - [X] `TryAuthenticateAsync`: only supports implicit grant tokens
   - [X] `GetAuthenticatedUserAsync`
   - [ ] `SaveMediaEntryAsync`
   - [ ] `DeleteMediaEntryAsync`
-- [X] Has media-specific data get functions
+- [X] Has media-specific data query functions
   - [X] `GetMediaRelationsAsync`
   - [X] `GetMediaCharactersAsync`
   - [X] `GetMediaStaffAsync`

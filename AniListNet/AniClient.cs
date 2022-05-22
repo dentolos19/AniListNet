@@ -52,6 +52,17 @@ public class AniClient
         }
     }
 
+    #region Authenticated-Only Functions
+
+    public async Task<User> GetAuthenticatedUserAsync()
+    {
+        var request = GqlParser.ParseSelection(new GqlSelection("Viewer", GqlParser.ParseType(typeof(User))));
+        var response = await SendRequestAsync(request);
+        return response["Viewer"].ToObject<User>();
+    }
+
+    #endregion
+
     #region Search Functions
 
     public Task<AniPagination<Media>> SearchMediaAsync(string query, AniPaginationOptions? options = null)
@@ -63,16 +74,18 @@ public class AniClient
     {
         options ??= new AniPaginationOptions();
         var parameters = new List<GqlParameter> { new("sort", filter.Sort) };
-        if (!string.IsNullOrEmpty(filter.Query))
-            parameters.Add(new GqlParameter("search", filter.Query));
-        if (filter.Type != null)
-            parameters.Add(new GqlParameter("type", filter.Type));
         if (filter.Season != null)
             parameters.AddRange(new GqlParameter[]
             {
                 new("season", filter.Season),
                 new("seasonYear", filter.SeasonYear)
             });
+        if (filter.Type != null)
+            parameters.Add(new GqlParameter("type", filter.Type));
+        if (!string.IsNullOrEmpty(filter.Query))
+            parameters.Add(new GqlParameter("search", filter.Query));
+        if (filter.Genres is { Length: > 0 })
+            parameters.Add(new GqlParameter("genre_in", filter.Genres));
         var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
             new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
@@ -348,17 +361,6 @@ public class AniClient
         }));
         var response = await SendRequestAsync(request);
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
-    }
-
-    #endregion
-
-    #region Authenticated-Only Functions
-
-    public async Task<User> GetAuthenticatedUserAsync()
-    {
-        var request = GqlParser.ParseSelection(new GqlSelection("Viewer", GqlParser.ParseType(typeof(User))));
-        var response = await SendRequestAsync(request);
-        return response["Viewer"].ToObject<User>();
     }
 
     #endregion

@@ -35,7 +35,7 @@ public class SearchTests
     }
 
     [Test]
-    public async Task SearchSeasonalMediaTest()
+    public async Task SearchMediaBySeasonTest()
     {
         var results = await SingletonObjects.AniClient.SearchMediaAsync(new AniFilter
         {
@@ -43,6 +43,17 @@ public class SearchTests
         });
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.IsTrue(results.Data.Any(item => item.Season == MediaSeason.Winter));
+    }
+
+    [Test]
+    public async Task SearchMediaByGenreTest()
+    {
+        var results = await SingletonObjects.AniClient.SearchMediaAsync(new AniFilter
+        {
+            Genres = new[] { "Action", "Fantasy" }
+        });
+        Console.WriteLine(ObjectDumper.Dump(results));
+        Assert.IsTrue(results.Data.Any(item => item.Genres.Contains("Action") && item.Genres.Contains("Fantasy")));
     }
 
     [Test]
