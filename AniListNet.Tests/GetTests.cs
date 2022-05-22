@@ -29,7 +29,7 @@ public class GetTests
     {
         var data = await _client.GetMediaAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.IsTrue(data.Id == id);
     }
 
     [Test]
@@ -54,6 +54,15 @@ public class GetTests
     public async Task GetStaffTest(int id)
     {
         var data = await _client.GetStaffAsync(id);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.IsTrue(data.Id == id);
+    }
+
+    [Test]
+    [TestCase(1)]
+    public async Task GetStudioTest(int id)
+    {
+        var data = await _client.GetStudioAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(data.Id == id);
     }

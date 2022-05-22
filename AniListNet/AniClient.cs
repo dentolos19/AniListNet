@@ -51,6 +51,12 @@ public class AniClient
             parameters.Add(new GqlParameter("search", filter.Query));
         if (filter.Type != null)
             parameters.Add(new GqlParameter("type", filter.Type));
+        if (filter.Season != null)
+            parameters.AddRange(new GqlParameter[]
+            {
+                new("season", filter.Season),
+                new("seasonYear", filter.SeasonYear)
+            });
         var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
             new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
@@ -181,13 +187,10 @@ public class AniClient
 
     public async Task<Media> GetMediaAsync(int id)
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Media", GqlParser.ParseType(typeof(Media)), new GqlParameter[]
         {
-            new("Media", GqlParser.ParseType(typeof(Media)), new GqlParameter[]
-            {
-                new("id", id)
-            })
-        });
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
         return response["Media"].ToObject<Media>();
     }
@@ -213,39 +216,40 @@ public class AniClient
 
     public async Task<Character> GetCharacterAsync(int id)
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Character", GqlParser.ParseType(typeof(Character)), new GqlParameter[]
         {
-            new("Character", GqlParser.ParseType(typeof(Character)), new GqlParameter[]
-            {
-                new("id", id)
-            })
-        });
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
         return response["Character"].ToObject<Character>();
     }
 
     public async Task<Staff> GetStaffAsync(int id)
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
         {
-            new("Staff", GqlParser.ParseType(typeof(Staff)), new GqlParameter[]
-            {
-                new("id", id)
-            })
-        });
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
         return response["Staff"].ToObject<Staff>();
     }
 
+    public async Task<Studio> GetStudioAsync(int id)
+    {
+        var request = GqlParser.ParseSelection(new GqlSelection("Studio", GqlParser.ParseType(typeof(Studio)), new GqlParameter[]
+        {
+            new("id", id)
+        }));
+        var response = await SendRequestAsync(request);
+        return response["Studio"].ToObject<Studio>();
+    }
+
     public async Task<User> GetUserAsync(int id)
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("User", GqlParser.ParseType(typeof(User)), new GqlParameter[]
         {
-            new("User", GqlParser.ParseType(typeof(User)), new GqlParameter[]
-            {
-                new("id", id)
-            })
-        });
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
         return response["User"].ToObject<User>();
     }
@@ -256,19 +260,16 @@ public class AniClient
 
     public async Task<MediaEdge[]> GetMediaRelationsAsync(int id)
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Media", new GqlSelection[]
         {
-            new("Media", new GqlSelection[]
+            new("relations", new GqlSelection[]
             {
-                new("relations", new GqlSelection[]
-                {
-                    new("edges", GqlParser.ParseType(typeof(MediaEdge)))
-                })
-            }, new GqlParameter[]
-            {
-                new("id", id)
+                new("edges", GqlParser.ParseType(typeof(MediaEdge)))
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
         return response["Media"]["relations"]["edges"].ToObject<MediaEdge[]>();
     }
@@ -276,74 +277,65 @@ public class AniClient
     public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int id, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Media", new GqlSelection[]
         {
-            new("Media", new GqlSelection[]
+            new("characters", new GqlSelection[]
             {
-                new("characters", new GqlSelection[]
-                {
-                    new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                    new("edges", GqlParser.ParseType(typeof(CharacterEdge)))
-                }, new GqlParameter[]
-                {
-                    new("page", options.PageIndex),
-                    new("perPage", options.PageSize)
-                })
+                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+                new("edges", GqlParser.ParseType(typeof(CharacterEdge)))
             }, new GqlParameter[]
             {
-                new("id", id)
+                new("page", options.PageIndex),
+                new("perPage", options.PageSize)
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
-        var data = response["Media"]["characters"];
-        var pageInfo = data["pageInfo"].ToObject<PageInfo>();
-        var characters = data["edges"].ToObject<CharacterEdge[]>();
-        return new AniPagination<CharacterEdge>(pageInfo, characters);
+        return new AniPagination<CharacterEdge>(
+            response["Media"]["characters"]["pageInfo"].ToObject<PageInfo>(),
+            response["Media"]["characters"]["edges"].ToObject<CharacterEdge[]>()
+        );
     }
 
     public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int id, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Media", new GqlSelection[]
         {
-            new("Media", new GqlSelection[]
+            new("staff", new GqlSelection[]
             {
-                new("staff", new GqlSelection[]
-                {
-                    new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-                    new("edges", GqlParser.ParseType(typeof(StaffEdge)))
-                }, new GqlParameter[]
-                {
-                    new("page", options.PageIndex),
-                    new("perPage", options.PageSize)
-                })
+                new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
+                new("edges", GqlParser.ParseType(typeof(StaffEdge)))
             }, new GqlParameter[]
             {
-                new("id", id)
+                new("page", options.PageIndex),
+                new("perPage", options.PageSize)
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
-        var data = response["Media"]["staff"];
-        var pageInfo = data["pageInfo"].ToObject<PageInfo>();
-        var staff = data["edges"].ToObject<StaffEdge[]>();
-        return new AniPagination<StaffEdge>(pageInfo, staff);
+        return new AniPagination<StaffEdge>(
+            response["Media"]["staff"]["pageInfo"].ToObject<PageInfo>(),
+            response["Media"]["staff"]["edges"].ToObject<StaffEdge[]>()
+        );
     }
 
     public async Task<StudioEdge[]> GetMediaStudiosAsync(int id)
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
+        var request = GqlParser.ParseSelection(new GqlSelection("Media", new GqlSelection[]
         {
-            new("Media", new GqlSelection[]
+            new("studios", new GqlSelection[]
             {
-                new("studios", new GqlSelection[]
-                {
-                    new("edges", GqlParser.ParseType(typeof(StudioEdge)))
-                })
-            }, new GqlParameter[]
-            {
-                new("id", id)
+                new("edges", GqlParser.ParseType(typeof(StudioEdge)))
             })
-        });
+        }, new GqlParameter[]
+        {
+            new("id", id)
+        }));
         var response = await SendRequestAsync(request);
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
     }
