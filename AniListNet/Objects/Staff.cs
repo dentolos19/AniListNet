@@ -11,4 +11,8 @@ public class Staff : Character
     [JsonProperty("yearsActive")] public int[] YearsActive { get; private init; }
     [JsonProperty("homeTown")] public string? HomeTown { get; private init; }
 
+    /* below is properties specific for the authenticated user */
+
+    [JsonProperty("isFavourite")] public bool IsFavorite { get; private init; }
+
 }

@@ -10,4 +10,8 @@ public class Studio
     [JsonProperty("isAnimationStudio")] public bool IsAnimationStudio { get; private init; }
     [JsonProperty("favourites")] public int Favorites { get; private init; }
 
+    /* below is properties specific for the authenticated user */
+
+    [JsonProperty("isFavourite")] public bool IsFavorite { get; private init; }
+
 }

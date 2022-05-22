@@ -1,9 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+
+		<Product>AniList.NET</Product>
+		<Description>A simple .NET API wrapper for AniList!</Description>
+		<Version>1.0.0</Version>
+		<Authors>Dennise Catolos</Authors>
+		<PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
+		<Copyright>Copyright © 2022</Copyright>
+
 	</PropertyGroup>
 
 	<ItemGroup>

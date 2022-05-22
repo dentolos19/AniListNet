@@ -1,4 +1,7 @@
-# AniList.NET (currently wip)
+# AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/PasteMystNet)
+
+[![](https://img.shields.io/badge/Powered%20By-.NET-blue?logo=microsoft&style=flat-square)](https://dotnet.microsoft.com)
+[![](https://img.shields.io/badge/Made%20With-Visual%20Studio-blue?logo=visual-studio&style=flat-square)](https://visualstudio.microsoft.com)
 
 A simple .NET API wrapper for [AniList](https://anilist.co)!
 
@@ -43,7 +46,8 @@ foreach (var relatedItem in relations) // prints related media info
   - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
 - [ ] Has user mutation functions (TODO)
-  - [ ] `GetAuthenticatedUserAsync`
+  - [X] `TryAuthenticateAsync`: only supports implicit grant tokens
+  - [X] `GetAuthenticatedUserAsync`
   - [ ] `SaveMediaEntryAsync`
   - [ ] `DeleteMediaEntryAsync`
 - [X] Has media-specific data get functions
