@@ -13,8 +13,6 @@ public class Date
     {
         if (Year.HasValue && Month.HasValue && Day.HasValue)
             return new DateOnly(Year.Value, Month.Value, Day.Value);
-        if (Year.HasValue)
-            return new DateOnly(Year.Value, 0, 0);
         return null;
     }
 

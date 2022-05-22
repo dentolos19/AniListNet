@@ -167,20 +167,14 @@ public class AniClient
 
     public async Task<string[]> GetGenreCollectionAsync()
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
-        {
-            new("GenreCollection")
-        });
+        var request = GqlParser.ParseSelection(new GqlSelection("GenreCollection"));
         var response = await SendRequestAsync(request);
         return response["GenreCollection"].ToObject<string[]>();
     }
 
     public async Task<MediaTag[]> GetTagCollectionAsync()
     {
-        var request = GqlParser.ParseSelections(new GqlSelection[]
-        {
-            new("MediaTagCollection", GqlParser.ParseType(typeof(MediaTag)))
-        });
+        var request = GqlParser.ParseSelection(new GqlSelection("MediaTagCollection", GqlParser.ParseType(typeof(MediaTag))));
         var response = await SendRequestAsync(request);
         return response["MediaTagCollection"].ToObject<MediaTag[]>();
     }

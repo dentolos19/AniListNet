@@ -5,12 +5,10 @@ namespace AniListNet.Tests;
 public class GetTests
 {
 
-    private readonly AniClient _client = new();
-
     [Test]
     public async Task GetGenreCollectionTest()
     {
-        var data = await _client.GetGenreCollectionAsync();
+        var data = await SingletonObjects.AniClient.GetGenreCollectionAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -18,7 +16,7 @@ public class GetTests
     [Test]
     public async Task GetTagCollectionTest()
     {
-        var data = await _client.GetTagCollectionAsync();
+        var data = await SingletonObjects.AniClient.GetTagCollectionAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -27,7 +25,7 @@ public class GetTests
     [TestCase(1)]
     public async Task GetMediaTest(int id)
     {
-        var data = await _client.GetMediaAsync(id);
+        var data = await SingletonObjects.AniClient.GetMediaAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(data.Id == id);
     }
@@ -35,7 +33,7 @@ public class GetTests
     [Test]
     public async Task GetMediaSchedulesTest()
     {
-        var data = await _client.GetMediaSchedulesAsync(new AniPaginationOptions(2, 10));
+        var data = await SingletonObjects.AniClient.GetMediaSchedulesAsync(new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -44,7 +42,7 @@ public class GetTests
     [TestCase(1)]
     public async Task GetCharacterTest(int id)
     {
-        var data = await _client.GetCharacterAsync(id);
+        var data = await SingletonObjects.AniClient.GetCharacterAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(data.Id == id);
     }
@@ -53,7 +51,7 @@ public class GetTests
     [TestCase(95269)]
     public async Task GetStaffTest(int id)
     {
-        var data = await _client.GetStaffAsync(id);
+        var data = await SingletonObjects.AniClient.GetStaffAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(data.Id == id);
     }
@@ -62,7 +60,7 @@ public class GetTests
     [TestCase(1)]
     public async Task GetStudioTest(int id)
     {
-        var data = await _client.GetStudioAsync(id);
+        var data = await SingletonObjects.AniClient.GetStudioAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(data.Id == id);
     }
@@ -71,7 +69,7 @@ public class GetTests
     [TestCase(5741649)]
     public async Task GetUserTest(int id)
     {
-        var data = await _client.GetUserAsync(id);
+        var data = await SingletonObjects.AniClient.GetUserAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(data.Id == id);
     }

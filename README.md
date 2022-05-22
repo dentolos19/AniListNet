@@ -1,4 +1,4 @@
-# AniList.NET
+# AniList.NET (currently wip)
 
 A simple .NET API wrapper for [AniList](https://anilist.co)!
 
@@ -25,7 +25,7 @@ foreach (var relatedItem in relations) // prints related media info
     Console.WriteLine($"  {relatedItem.Media.Type}: {relatedItem.Media.Title.PreferredTitle} ({relatedItem.Relation})");
 ```
 
-## Features (Currently work-in-progress!)
+## Features
 
 - [X] Has data search functions
   - [X] `SearchMediaAsync`: searches for Anime & Manga (supports filtering)
@@ -33,16 +33,16 @@ foreach (var relatedItem in relations) // prints related media info
   - [X] `SearchStaffAsync`
   - [X] `SearchStudioAsync`
   - [X] `SearchUserAsync`
-- [X] Has data get functions
+- [X] Has data query functions
   - [X] `GetGenreCollection`: gets all supported genres (e.g. Action, Fantasy, Romance)
   - [X] `GetTagCollection`: gets all supported tags (e.g. Male Protagonist, Heterosexual, Cultivation)
   - [X] `GetMediaAsync`
   - [X] `GetMediaSchedulesAsync`
   - [X] `GetCharacterAsync`
   - [X] `GetStaffAsync`
-  - [ ] `GetStudioAsync`
+  - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
-- [X] Has user mutation functions
+- [ ] Has user mutation functions (TODO)
   - [ ] `GetAuthenticatedUserAsync`
   - [ ] `SaveMediaEntryAsync`
   - [ ] `DeleteMediaEntryAsync`
@@ -51,7 +51,7 @@ foreach (var relatedItem in relations) // prints related media info
   - [X] `GetMediaCharactersAsync`
   - [X] `GetMediaStaffAsync`
   - [X] `GetMediaStudiosAsync`
-- [ ] Has character-specific data get functions (TODO)
-- [ ] Has staff-specific data get functions (TODO)
-- [ ] Has studio-specific data get functions (TODO)
-- [ ] Has user-specific data get functions (TODO)
+- [ ] Has character-specific data query functions (TODO)
+- [ ] Has staff-specific data query functions (TODO)
+- [ ] Has studio-specific data query functions (TODO)
+- [ ] Has user-specific data query functions (TODO)

@@ -6,13 +6,11 @@ namespace AniListNet.Tests;
 public class SearchTests
 {
 
-    private readonly AniClient _client = new();
-
     [Test]
     [TestCase("demon slayer")]
     public async Task SearchAnimeMediaTest(string query)
     {
-        var results = await _client.SearchMediaAsync(new AniFilter
+        var results = await SingletonObjects.AniClient.SearchMediaAsync(new AniFilter
         {
             Query = query,
             Sort = MediaSort.Popularity,
@@ -26,7 +24,7 @@ public class SearchTests
     [TestCase("one piece")]
     public async Task SearchMangaMediaTest(string query)
     {
-        var results = await _client.SearchMediaAsync(new AniFilter
+        var results = await SingletonObjects.AniClient.SearchMediaAsync(new AniFilter
         {
             Query = query,
             Sort = MediaSort.Popularity,
@@ -37,10 +35,21 @@ public class SearchTests
     }
 
     [Test]
+    public async Task SearchSeasonalMediaTest()
+    {
+        var results = await SingletonObjects.AniClient.SearchMediaAsync(new AniFilter
+        {
+            Season = MediaSeason.Winter
+        });
+        Console.WriteLine(ObjectDumper.Dump(results));
+        Assert.IsTrue(results.Data.Any(item => item.Season == MediaSeason.Winter));
+    }
+
+    [Test]
     [TestCase("kazuha")]
     public async Task SearchCharacterTest(string query)
     {
-        var results = await _client.SearchCharacterAsync(query, new AniPaginationOptions(2, 10));
+        var results = await SingletonObjects.AniClient.SearchCharacterAsync(query, new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
@@ -49,7 +58,7 @@ public class SearchTests
     [TestCase("kazuha")]
     public async Task SearchStaffTest(string query)
     {
-        var results = await _client.SearchStaffAsync(query, new AniPaginationOptions(2, 10));
+        var results = await SingletonObjects.AniClient.SearchStaffAsync(query, new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
@@ -58,7 +67,7 @@ public class SearchTests
     [TestCase("a")]
     public async Task SearchStudioTest(string query)
     {
-        var results = await _client.SearchStudioAsync(query, new AniPaginationOptions(2, 10));
+        var results = await SingletonObjects.AniClient.SearchStudioAsync(query, new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
@@ -67,7 +76,7 @@ public class SearchTests
     [TestCase("kazuha")]
     public async Task SearchUserTest(string query)
     {
-        var results = await _client.SearchUserAsync(query, new AniPaginationOptions(3, 5));
+        var results = await SingletonObjects.AniClient.SearchUserAsync(query, new AniPaginationOptions(3, 5));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }

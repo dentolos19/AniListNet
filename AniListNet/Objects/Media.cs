@@ -15,8 +15,10 @@ public class Media
     [JsonProperty("description")] public string Description { get; private init; }
     [JsonProperty("startDate")] public Date StartDate { get; private init; }
     [JsonProperty("endDate")] public Date EndDate { get; private init; }
+    [JsonProperty("season")] public MediaSeason Season { get; private init; }
+    [JsonProperty("seasonYear")] public int SeasonYear { get; private init; }
     [JsonProperty("episodes")] public int? Episodes { get; private init; }
-    [JsonProperty("duration")] public int? Duration { get; private init; }
+    [JsonProperty("duration")] public int? Duration { get; private init; } // TODO: simplify data (TimeSpan)
     [JsonProperty("chapters")] public int? Chapters { get; private init; }
     [JsonProperty("volumes")] public int? Volumes { get; private init; }
     [JsonProperty("source")] [GqlParameter("version", 3)] public MediaSource? Source { get; private init; }
