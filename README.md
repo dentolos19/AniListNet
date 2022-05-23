@@ -1,11 +1,6 @@
 # <img src=".github/icon.png" width="32"/> AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/AniListNet)
 
-[![](https://img.shields.io/badge/Powered%20By-.NET-blue?logo=microsoft&style=flat-square)](https://dotnet.microsoft.com)
-[![](https://img.shields.io/badge/Made%20With-Visual%20Studio-blue?logo=visual-studio&style=flat-square)](https://visualstudio.microsoft.com)
-
 A simple .NET API wrapper for [AniList](https://anilist.co)!
-
-> **Fact**: This was a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
 
 ```cs
 using AniListNet;
@@ -24,6 +19,8 @@ var characters = await client.GetMediaCharactersAsync(firstResult.Id); // gets c
 foreach (var character in characters.Data)
     Console.WriteLine($"  {character.Role}: {character.Character.Name.FullName}");
 ```
+
+> **Note**: This was a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
 
 ## Features
 
