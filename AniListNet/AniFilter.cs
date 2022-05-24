@@ -5,11 +5,11 @@ namespace AniListNet;
 public class AniFilter
 {
 
-    public MediaSeason? Season { get; init; }
-    public int SeasonYear { get; init; } = DateTime.Now.Year;
-    public MediaType? Type { get; init; }
-    public string? Query { get; init; }
-    public string[]? Genres { get; init; }
-    public MediaSort Sort { get; init; } = MediaSort.Relevance;
+    public MediaSeason? Season { get; set; }
+    public int SeasonYear { get; set; } = DateTime.Now.Year;
+    public MediaType? Type { get; set; }
+    public string? Query { get; set; }
+    public string[]? Genres { get; set; }
+    public MediaSort Sort { get; set; } = MediaSort.Relevance;
 
 }

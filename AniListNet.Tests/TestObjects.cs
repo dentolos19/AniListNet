@@ -1,6 +1,6 @@
 ﻿namespace AniListNet.Tests;
 
-public static class SingletonObjects
+public static class TestObjects
 {
 
     private static AniClient? _aniClient;
