@@ -24,8 +24,23 @@ internal static class GqlParser
         var elementType = type.GetElementType();
         if (elementType != null)
             type = elementType;
-        var properties = type.GetProperties();
         var selections = new List<GqlSelection>();
+        var variables = type.GetProperties().Cast<MemberInfo>().Concat(type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance));
+        foreach (var variable in variables)
+        {
+            var jsonAttribute = variable.GetCustomAttribute<JsonPropertyAttribute>();
+            if (jsonAttribute == null)
+                continue;
+            var subSelections = ParseType(variable.MemberType switch
+            {
+                MemberTypes.Field => ((FieldInfo)variable).FieldType,
+                MemberTypes.Property => ((PropertyInfo)variable).PropertyType
+            });
+            var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => attribute.Parameter).ToArray();
+            selections.Add(new GqlSelection(jsonAttribute.PropertyName, subSelections, parameters));
+        }
+        /*
+        var properties = type.GetProperties();
         foreach (var property in properties)
         {
             var jsonAttribute = property.GetCustomAttribute<JsonPropertyAttribute>();
@@ -35,6 +50,17 @@ internal static class GqlParser
             var parameters = property.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => attribute.Parameter).ToArray();
             selections.Add(new GqlSelection(jsonAttribute.PropertyName, subSelections, parameters));
         }
+        var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+        foreach (var field in fields)
+        {
+            var jsonAttribute = field.GetCustomAttribute<JsonPropertyAttribute>();
+            if (jsonAttribute == null)
+                continue;
+            var subSelections = ParseType(field.FieldType);
+            var parameters = field.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => attribute.Parameter).ToArray();
+            selections.Add(new GqlSelection(jsonAttribute.PropertyName, subSelections, parameters));
+        }
+        */
         return selections.ToArray();
     }
 

@@ -1,11 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using System.Drawing;
+using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
 public class Cover : Image
 {
 
+    [JsonProperty("color")] private readonly string? _color;
+
     [JsonProperty("extraLarge")] public Uri ExtraLargeImageUrl { get; private init; }
-    [JsonProperty("color")] public string Color { get; private init; } // TODO: simplify data (Color)
+
+    public Color Color => _color != null ? ColorTranslator.FromHtml(_color) : Color.Empty;
 
 }

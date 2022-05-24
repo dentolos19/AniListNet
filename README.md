@@ -8,7 +8,7 @@ using AniListNet;
 var client = new AniClient();
 
 Console.WriteLine("Search results for \"one piece\"");
-var results = await client.SearchMediaAsync("one piece"); // searches for the term
+var results = await client.SearchMediaAsync("one piece"); // searches for the term "one piece"
 foreach (var item in results.Data)
     Console.WriteLine($"  {item.Format}: {item.Title.PreferredTitle}");
 Console.WriteLine();
@@ -39,8 +39,8 @@ foreach (var character in characters.Data)
   - [X] `GetStaffAsync`
   - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
-- [ ] Has user-only mutation functions (TODO)
-  - [X] `TryAuthenticateAsync`: only supports implicit grant tokens
+- [ ] Has user-only mutation functions
+  - [X] `TryAuthenticateAsync`: only supports [implicit grant authorization](https://anilist.gitbook.io/anilist-apiv2-docs/overview/oauth/implicit-grant)
   - [X] `GetAuthenticatedUserAsync`
   - [ ] `SaveMediaEntryAsync`
   - [ ] `DeleteMediaEntryAsync`
@@ -55,6 +55,5 @@ foreach (var character in characters.Data)
 - [ ] Has user-specific data query functions
   - [X] `GetUserFollowersAsync`
   - [X] `GetUserFollowingsAsync`
-  - [X] `GetUserEntriesAsync`
   - [X] `GetUserEntriesAsync`
   - [ ] `GetUserEntryCollectionAsync`

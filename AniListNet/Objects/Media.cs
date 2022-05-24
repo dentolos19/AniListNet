@@ -6,6 +6,8 @@ namespace AniListNet.Objects;
 public class Media
 {
 
+    [JsonProperty("duration")] private readonly int? _duration;
+
     [JsonProperty("id")] public int Id { get; private init; }
     [JsonProperty("idMal")] public int? MalId { get; private init; }
     [JsonProperty("title")] public MediaTitle Title { get; private init; }
@@ -18,7 +20,6 @@ public class Media
     [JsonProperty("season")] public MediaSeason? Season { get; private init; }
     [JsonProperty("seasonYear")] public int? SeasonYear { get; private init; }
     [JsonProperty("episodes")] public int? Episodes { get; private init; }
-    [JsonProperty("duration")] public int? Duration { get; private init; } // TODO: simplify data (TimeSpan)
     [JsonProperty("chapters")] public int? Chapters { get; private init; }
     [JsonProperty("volumes")] public int? Volumes { get; private init; }
     [JsonProperty("source")] [GqlParameter("version", 3)] public MediaSource? Source { get; private init; }
@@ -32,6 +33,8 @@ public class Media
     [JsonProperty("favourites")] public int Favorites { get; private init; }
     [JsonProperty("tags")] public MediaTag[] Tags { get; private init; }
     [JsonProperty("isAdult")] public bool IsAdult { get; private init; }
+
+    public TimeSpan? Duration => _duration.HasValue ? new TimeSpan(0, _duration.Value, 0) : null;
 
     /* below is properties specific for the authenticated user */
 

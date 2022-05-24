@@ -36,7 +36,10 @@ public partial class AniClient
         var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {
             new("pageInfo", GqlParser.ParseType(typeof(PageInfo))),
-            new("airingSchedules", GqlParser.ParseType(typeof(MediaSchedule)))
+            new("airingSchedules", GqlParser.ParseType(typeof(MediaSchedule)), new GqlParameter[]
+            {
+                new("notYetAired", true)
+            })
         }, new GqlParameter[]
         {
             new("page", options.PageIndex),
