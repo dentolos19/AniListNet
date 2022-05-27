@@ -1,4 +1,5 @@
 ﻿using AniListNet.Helpers;
+using AniListNet.Models;
 using AniListNet.Objects;
 
 namespace AniListNet;
@@ -8,10 +9,10 @@ public partial class AniClient
 
     public Task<AniPagination<Media>> SearchMediaAsync(string query, AniPaginationOptions? options = null)
     {
-        return SearchMediaAsync(new AniFilter { Query = query }, options);
+        return SearchMediaAsync(new MediaFilter { Query = query }, options);
     }
 
-    public async Task<AniPagination<Media>> SearchMediaAsync(AniFilter filter, AniPaginationOptions? options = null)
+    public async Task<AniPagination<Media>> SearchMediaAsync(MediaFilter filter, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
         var parameters = new List<GqlParameter> { new("sort", filter.Sort) };

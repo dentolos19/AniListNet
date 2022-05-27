@@ -1,4 +1,5 @@
-﻿using AniListNet.Objects;
+﻿using AniListNet.Models;
+using AniListNet.Objects;
 using NUnit.Framework;
 
 namespace AniListNet.Tests;
@@ -10,7 +11,7 @@ public class SearchTests
     [TestCase("demon slayer")]
     public async Task SearchAnimeMediaTest(string query)
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new AniFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
         {
             Query = query,
             Sort = MediaSort.Popularity,
@@ -24,7 +25,7 @@ public class SearchTests
     [TestCase("one piece")]
     public async Task SearchMangaMediaTest(string query)
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new AniFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
         {
             Query = query,
             Sort = MediaSort.Popularity,
@@ -37,7 +38,7 @@ public class SearchTests
     [Test]
     public async Task SearchMediaBySeasonTest()
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new AniFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
         {
             Season = MediaSeason.Winter
         });
@@ -48,7 +49,7 @@ public class SearchTests
     [Test]
     public async Task SearchMediaByGenreTest()
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new AniFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
         {
             Genres = new[] { "Action", "Fantasy" }
         });

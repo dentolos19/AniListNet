@@ -1,7 +1,4 @@
-﻿using System.Net.Http.Headers;
-using AniListNet.Helpers;
-using AniListNet.Objects;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using Newtonsoft.Json.Linq;
@@ -13,6 +10,8 @@ public partial class AniClient
 
     private readonly GraphQLHttpClient _client;
     private readonly HttpClient _httpClient;
+
+    public bool IsAuthenticated { get; private set; }
 
     public event EventHandler<AniRateEventArgs>? RateChanged;
 
@@ -35,28 +34,6 @@ public partial class AniClient
         if (rateLimitValidated && rateRemainingValidated)
             RateChanged?.Invoke(this, new AniRateEventArgs(rateLimit, rateRemaining));
         return response.Data;
-    }
-
-    public async Task<bool> TryAuthenticateAsync(string token)
-    {
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        try
-        {
-            _ = await GetAuthenticatedUserAsync();
-            return true;
-        }
-        catch
-        {
-            _httpClient.DefaultRequestHeaders.Authorization = null;
-            return false;
-        }
-    }
-
-    public async Task<User> GetAuthenticatedUserAsync()
-    {
-        var request = GqlParser.ParseSelection(new GqlSelection("Viewer", GqlParser.ParseType(typeof(User))));
-        var response = await SendRequestAsync(request);
-        return response["Viewer"].ToObject<User>();
     }
 
 }

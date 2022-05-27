@@ -39,11 +39,11 @@ foreach (var character in characters.Data)
   - [X] `GetStaffAsync`
   - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
-- [ ] Has user-only mutation functions
+- [X] Has user-only mutation functions
   - [X] `TryAuthenticateAsync`: only supports [implicit grant authorization](https://anilist.gitbook.io/anilist-apiv2-docs/overview/oauth/implicit-grant)
   - [X] `GetAuthenticatedUserAsync`
-  - [ ] `SaveMediaEntryAsync`
-  - [ ] `DeleteMediaEntryAsync`
+  - [X] `SaveMediaEntryAsync`
+  - [X] `DeleteMediaEntryAsync`
 - [X] Has media-specific data query functions
   - [X] `GetMediaRelationsAsync`
   - [X] `GetMediaCharactersAsync`

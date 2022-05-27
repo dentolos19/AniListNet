@@ -1,8 +1,8 @@
 ﻿using AniListNet.Objects;
 
-namespace AniListNet;
+namespace AniListNet.Models;
 
-public class AniFilter
+public class MediaFilter
 {
 
     public MediaSeason? Season { get; set; }

@@ -10,6 +10,6 @@ public class MediaEntry
     [JsonProperty("score")] public float Score { get; private init; }
     [JsonProperty("progress")] public int Progress { get; private init; }
     [JsonProperty("startedAt")] public Date StartDate { get; private init; }
-    [JsonProperty("completedAt")] public Date EndDate { get; private init; }
+    [JsonProperty("completedAt")] public Date CompleteDate { get; private init; }
 
 }
