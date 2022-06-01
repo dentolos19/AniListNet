@@ -9,10 +9,10 @@ public partial class AniClient
 
     public Task<AniPagination<Media>> SearchMediaAsync(string query, AniPaginationOptions? options = null)
     {
-        return SearchMediaAsync(new MediaFilter { Query = query }, options);
+        return SearchMediaAsync(new SearchMediaFilter { Query = query }, options);
     }
 
-    public async Task<AniPagination<Media>> SearchMediaAsync(MediaFilter filter, AniPaginationOptions? options = null)
+    public async Task<AniPagination<Media>> SearchMediaAsync(SearchMediaFilter filter, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
         var parameters = new List<GqlParameter> { new("sort", filter.Sort) };
@@ -26,7 +26,7 @@ public partial class AniClient
             parameters.Add(new GqlParameter("type", filter.Type));
         if (!string.IsNullOrEmpty(filter.Query))
             parameters.Add(new GqlParameter("search", filter.Query));
-        if (filter.Genres is { Length: > 0 })
+        if (filter.Genres is { Count: > 0 })
             parameters.Add(new GqlParameter("genre_in", filter.Genres));
         var request = GqlParser.ParseSelection(new GqlSelection("Page", new GqlSelection[]
         {

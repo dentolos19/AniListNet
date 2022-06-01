@@ -14,7 +14,7 @@ internal static class GqlParser
         return ParseSelections(new[] { selection }, isMutation);
     }
 
-    public static string ParseSelections(GqlSelection[] selections, bool isMutation = false)
+    public static string ParseSelections(IEnumerable<GqlSelection> selections, bool isMutation = false)
     {
         var stringBuilder = new StringBuilder();
         if (isMutation)
@@ -25,7 +25,7 @@ internal static class GqlParser
         return stringBuilder.ToString();
     }
 
-    public static GqlSelection[] ParseType(Type type)
+    public static IList<GqlSelection> ParseType(Type type)
     {
         var elementType = type.GetElementType();
         if (elementType != null)
@@ -43,28 +43,26 @@ internal static class GqlParser
                 MemberTypes.Property => ((PropertyInfo)variable).PropertyType
             });
             var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => attribute.Parameter).ToArray();
-            selections.Add(new GqlSelection(jsonAttribute.PropertyName, subSelections, parameters));
+            selections.Add(new GqlSelection(jsonAttribute.PropertyName ?? variable.Name, subSelections, parameters));
         }
-        return selections.ToArray();
+        return selections;
     }
 
-    private static string BuildSelections(GqlSelection[] selections)
+    private static string BuildSelections(IEnumerable<GqlSelection> selections)
     {
         var stringBuilder = new StringBuilder();
-        var isFirst = true;
         foreach (var selection in selections)
         {
-            stringBuilder.Append((isFirst ? string.Empty : ",") + selection.Name);
-            if (selection.Parameters is { Length: > 0 })
+            stringBuilder.Append((stringBuilder.Length > 0 ? ',' : string.Empty) + selection.Name);
+            if (selection.Parameters is { Count: > 0 })
                 stringBuilder.Append($"({BuildParameters(selection.Parameters)})");
-            if (selection.Selections is { Length: > 0 })
+            if (selection.Selections is { Count: > 0 })
                 stringBuilder.Append($"{{{BuildSelections(selection.Selections)}}}");
-            isFirst = false;
         }
         return stringBuilder.ToString();
     }
 
-    private static string BuildParameters(GqlParameter[] parameters)
+    private static string BuildParameters(IEnumerable<GqlParameter> parameters)
     {
         var stringBuilder = new StringBuilder();
         foreach (var parameter in parameters)

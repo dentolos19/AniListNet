@@ -8,12 +8,11 @@ public class SearchTests
 {
 
     [Test]
-    [TestCase("demon slayer")]
-    public async Task SearchAnimeMediaTest(string query)
+    public async Task SearchAnimeMediaTest()
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
         {
-            Query = query,
+            Query = "demon slayer",
             Sort = MediaSort.Popularity,
             Type = MediaType.Anime
         }, new AniPaginationOptions(1, 5));
@@ -22,12 +21,11 @@ public class SearchTests
     }
 
     [Test]
-    [TestCase("one piece")]
-    public async Task SearchMangaMediaTest(string query)
+    public async Task SearchMangaMediaTest()
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
         {
-            Query = query,
+            Query = "one piece",
             Sort = MediaSort.Popularity,
             Type = MediaType.Manga
         }, new AniPaginationOptions(1, 5));
@@ -38,7 +36,7 @@ public class SearchTests
     [Test]
     public async Task SearchMediaBySeasonTest()
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
         {
             Season = MediaSeason.Winter
         });
@@ -49,7 +47,7 @@ public class SearchTests
     [Test]
     public async Task SearchMediaByGenreTest()
     {
-        var results = await TestObjects.AniClient.SearchMediaAsync(new MediaFilter
+        var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
         {
             Genres = new[] { "Action", "Fantasy" }
         });
@@ -58,37 +56,33 @@ public class SearchTests
     }
 
     [Test]
-    [TestCase("kazuha")]
-    public async Task SearchCharacterTest(string query)
+    public async Task SearchCharacterTest()
     {
-        var results = await TestObjects.AniClient.SearchCharacterAsync(query, new AniPaginationOptions(2, 10));
+        var results = await TestObjects.AniClient.SearchCharacterAsync("kazuha", new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
 
     [Test]
-    [TestCase("kazuha")]
-    public async Task SearchStaffTest(string query)
+    public async Task SearchStaffTest()
     {
-        var results = await TestObjects.AniClient.SearchStaffAsync(query, new AniPaginationOptions(2, 10));
+        var results = await TestObjects.AniClient.SearchStaffAsync("kazuha", new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
 
     [Test]
-    [TestCase("a")]
-    public async Task SearchStudioTest(string query)
+    public async Task SearchStudioTest()
     {
-        var results = await TestObjects.AniClient.SearchStudioAsync(query, new AniPaginationOptions(2, 10));
+        var results = await TestObjects.AniClient.SearchStudioAsync("a", new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
 
     [Test]
-    [TestCase("kazuha")]
-    public async Task SearchUserTest(string query)
+    public async Task SearchUserTest()
     {
-        var results = await TestObjects.AniClient.SearchUserAsync(query, new AniPaginationOptions(3, 5));
+        var results = await TestObjects.AniClient.SearchUserAsync("kazuha", new AniPaginationOptions(3, 5));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }

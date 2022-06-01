@@ -3,7 +3,7 @@
 internal static class GqlExtensions
 {
 
-    public static GqlSelection[] ToSelections(this Type type)
+    public static IList<GqlSelection> ToSelections(this Type type)
     {
         return GqlParser.ParseType(type);
     }

@@ -31,8 +31,8 @@ foreach (var character in characters.Data)
   - [X] `SearchStudioAsync`
   - [X] `SearchUserAsync`
 - [X] Has data query functions
-  - [X] `GetGenreCollection`: gets all supported genres (e.g. Action, Fantasy, Romance)
-  - [X] `GetTagCollection`: gets all supported tags (e.g. Male Protagonist, Heterosexual, Cultivation)
+  - [X] `GetGenreCollectionAsync`: gets all supported genres (e.g. Action, Fantasy, Romance)
+  - [X] `GetTagCollectionAsync`: gets all supported tags (e.g. Male Protagonist, Heterosexual, Cultivation)
   - [X] `GetMediaAsync`
   - [X] `GetMediaSchedulesAsync`
   - [X] `GetCharacterAsync`

@@ -6,37 +6,41 @@ public class MediaTests
 {
 
     [Test]
-    [TestCase(21)]
-    public async Task GetMediaRelationsTest(int id)
+    public async Task GetMediaRelationsTest()
     {
-        var data = await TestObjects.AniClient.GetMediaRelationsAsync(id);
+        var data = await TestObjects.AniClient.GetMediaRelationsAsync(21);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
 
     [Test]
-    [TestCase(1)]
-    public async Task GetMediaCharactersTest(int id)
+    public async Task GetMediaCharactersTest()
     {
-        var data = await TestObjects.AniClient.GetMediaCharactersAsync(id, new AniPaginationOptions(2, 5));
+        var data = await TestObjects.AniClient.GetMediaCharactersAsync(1, new AniPaginationOptions(2, 5));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
 
     [Test]
-    [TestCase(1)]
-    public async Task GetMediaStaffTest(int id)
+    public async Task GetMediaStaffTest()
     {
-        var data = await TestObjects.AniClient.GetMediaStaffAsync(id, new AniPaginationOptions(2, 5));
+        var data = await TestObjects.AniClient.GetMediaStaffAsync(1, new AniPaginationOptions(2, 5));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
 
     [Test]
-    [TestCase(1)]
-    public async Task GetMediaStudiosTest(int id)
+    public async Task GetMediaStudiosTest()
     {
-        var data = await TestObjects.AniClient.GetMediaStudiosAsync(id);
+        var data = await TestObjects.AniClient.GetMediaStudiosAsync(1);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task GetMediaEntryTest() // TODO: need improvement
+    {
+        var data = await TestObjects.AniClient.GetMediaEntryAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }

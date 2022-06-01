@@ -11,5 +11,6 @@ public class MediaEntry
     [JsonProperty("progress")] public int Progress { get; private init; }
     [JsonProperty("startedAt")] public Date StartDate { get; private init; }
     [JsonProperty("completedAt")] public Date CompleteDate { get; private init; }
+    [JsonProperty("media")] public Media Media { get; private init; }
 
 }

@@ -88,4 +88,19 @@ public partial class AniClient
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
     }
 
+    /* below is properties specific for the authenticated user */
+
+    public async Task<MediaEntry?> GetMediaEntryAsync(int id)
+    {
+        var request = GqlParser.ParseSelection(new GqlSelection("Media", new GqlSelection[]
+        {
+            new("mediaListEntry", typeof(MediaEntry).ToSelections())
+        }, new GqlParameter[]
+        {
+            new("id", id)
+        }));
+        var response = await SendRequestAsync(request);
+        return response["Media"]["mediaListEntry"].ToObject<MediaEntry?>();
+    }
+
 }

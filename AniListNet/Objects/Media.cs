@@ -14,7 +14,7 @@ public class Media
     [JsonProperty("type")] public MediaType Type { get; private init; }
     [JsonProperty("format")] public MediaFormat Format { get; private init; }
     [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus Status { get; private init; }
-    [JsonProperty("description")] public string Description { get; private init; }
+    [JsonProperty("description")] public string? Description { get; private init; }
     [JsonProperty("startDate")] public Date StartDate { get; private init; }
     [JsonProperty("endDate")] public Date EndDate { get; private init; }
     [JsonProperty("season")] public MediaSeason? Season { get; private init; }

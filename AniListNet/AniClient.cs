@@ -11,8 +11,6 @@ public partial class AniClient
     private readonly GraphQLHttpClient _client;
     private readonly HttpClient _httpClient;
 
-    public bool IsAuthenticated { get; private set; }
-
     public event EventHandler<AniRateEventArgs>? RateChanged;
 
     public AniClient()

@@ -4,10 +4,10 @@ internal class GqlSelection
 {
 
     public string Name { get; }
-    public GqlSelection[]? Selections { get; }
-    public GqlParameter[]? Parameters { get; }
+    public IList<GqlSelection>? Selections { get; }
+    public IList<GqlParameter>? Parameters { get; }
 
-    public GqlSelection(string name, GqlSelection[]? selections = null, GqlParameter[]? parameters = null)
+    public GqlSelection(string name, IList<GqlSelection>? selections = null, IList<GqlParameter>? parameters = null)
     {
         Name = name;
         Selections = selections;

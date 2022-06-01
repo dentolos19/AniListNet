@@ -2,15 +2,15 @@
 
 namespace AniListNet;
 
-public class AniPagination<T>
+public class AniPagination<TData>
 {
 
     public int CurrentPageIndex { get; }
     public int LastPageIndex { get; }
     public bool HasNextPage { get; }
-    public T[] Data { get; }
+    public TData[] Data { get; }
 
-    public AniPagination(PageInfo pageInfo, T[] data)
+    public AniPagination(PageInfo pageInfo, TData[] data)
     {
         CurrentPageIndex = pageInfo.CurrentPageIndex;
         LastPageIndex = pageInfo.LastPageIndex;

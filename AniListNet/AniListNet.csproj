@@ -10,9 +10,10 @@
 		<Description>A simple .NET API wrapper for AniList!</Description>
 		<Version>1.0.1</Version>
 		<Authors>Dennise Catolos</Authors>
+		<Copyright>Copyright © 2022</Copyright>
+
 		<PackageIcon>Icon.png</PackageIcon>
 		<PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
-		<Copyright>Copyright © 2022</Copyright>
 
 	</PropertyGroup>
 
