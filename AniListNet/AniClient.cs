@@ -1,6 +1,5 @@
-﻿using GraphQL;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.Newtonsoft;
+﻿using System.Text;
+using AniListNet.Helpers;
 using Newtonsoft.Json.Linq;
 
 namespace AniListNet;
@@ -8,30 +7,32 @@ namespace AniListNet;
 public partial class AniClient
 {
 
-    private readonly GraphQLHttpClient _client;
-    private readonly HttpClient _httpClient;
+    private readonly Uri _url = new("https://graphql.anilist.co");
+    private readonly HttpClient _httpClient = new();
 
     public event EventHandler<AniRateEventArgs>? RateChanged;
 
-    public AniClient()
+    private Task<JToken> PostRequestAsync(GqlSelection selection, bool isMutation = false)
     {
-        _httpClient = new HttpClient();
-        _client = new GraphQLHttpClient(new GraphQLHttpClientOptions { EndPoint = new Uri("https://graphql.anilist.co") }, new NewtonsoftJsonSerializer(), _httpClient);
+        return PostRequestAsync(GqlParser.ParseSelection(selection));
     }
 
-    private async Task<JObject> SendRequestAsync(string request)
+    private async Task<JToken> PostRequestAsync(string request, bool isMutation = false)
     {
-        var response = await _client.SendQueryAsync<JObject>(new GraphQLRequest(request));
-        var responseHeaders = response.AsGraphQLHttpResponse().ResponseHeaders;
-        responseHeaders.TryGetValues("X-RateLimit-Limit", out var rateLimitValues);
-        responseHeaders.TryGetValues("X-RateLimit-Remaining", out var rateRemainingValues);
+        var body = JObject.FromObject(new { query = (isMutation ? "mutation" : string.Empty) + request });
+        var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
+        var response = await _httpClient.PostAsync(_url, content);
+        response.EnsureSuccessStatusCode();
+        response.Headers.TryGetValues("X-RateLimit-Limit", out var rateLimitValues);
+        response.Headers.TryGetValues("X-RateLimit-Remaining", out var rateRemainingValues);
         var rateLimitString = rateLimitValues?.FirstOrDefault();
         var rateRemainingString = rateRemainingValues?.FirstOrDefault();
         var rateLimitValidated = int.TryParse(rateLimitString, out var rateLimit);
         var rateRemainingValidated = int.TryParse(rateRemainingString, out var rateRemaining);
         if (rateLimitValidated && rateRemainingValidated)
             RateChanged?.Invoke(this, new AniRateEventArgs(rateLimit, rateRemaining));
-        return response.Data;
+        var responseContent = await response.Content.ReadAsStringAsync();
+        return JObject.Parse(responseContent)["data"];
     }
 
 }

@@ -28,8 +28,7 @@ public partial class AniClient
 
     public async Task<User> GetAuthenticatedUserAsync()
     {
-        var request = GqlParser.ParseSelection(new GqlSelection("Viewer", GqlParser.ParseType(typeof(User))));
-        var response = await SendRequestAsync(request);
+        var response = await PostRequestAsync(new GqlSelection("Viewer", GqlParser.ParseType(typeof(User))));
         return response["Viewer"].ToObject<User>();
     }
 
@@ -56,21 +55,20 @@ public partial class AniClient
                 new("month", mutation.CompleteDate.Value.Month),
                 new("day", mutation.CompleteDate.Value.Day)
             }));
-        var request = GqlParser.ParseSelection(new GqlSelection("SaveMediaListEntry", typeof(MediaEntry).ToSelections(), parameters.ToArray()), true);
-        var response = await SendRequestAsync(request);
+        var response = await PostRequestAsync(new GqlSelection("SaveMediaListEntry", typeof(MediaEntry).ToSelections(), parameters.ToArray()), true);
         return response["SaveMediaListEntry"].ToObject<MediaEntry>();
     }
 
     public async Task<bool> DeleteMediaEntryAsync(int id)
     {
-        var request = GqlParser.ParseSelection(new GqlSelection("DeleteMediaListEntry", new GqlSelection[]
-        {
-            new("deleted")
-        }, new GqlParameter[]
-        {
-            new("id", id)
-        }), true);
-        var response = await SendRequestAsync(request);
+        var response = await PostRequestAsync(
+            new GqlSelection("DeleteMediaListEntry", new GqlSelection[]
+            {
+                new("deleted")
+            }, new GqlParameter[]
+            {
+                new("id", id)
+            }), true);
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
 

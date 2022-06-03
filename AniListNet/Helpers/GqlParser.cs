@@ -9,16 +9,14 @@ namespace AniListNet.Helpers;
 internal static class GqlParser
 {
 
-    public static string ParseSelection(GqlSelection selection, bool isMutation = false)
+    public static string ParseSelection(GqlSelection selection)
     {
-        return ParseSelections(new[] { selection }, isMutation);
+        return ParseSelections(new[] { selection });
     }
 
-    public static string ParseSelections(IEnumerable<GqlSelection> selections, bool isMutation = false)
+    public static string ParseSelections(IEnumerable<GqlSelection> selections)
     {
         var stringBuilder = new StringBuilder();
-        if (isMutation)
-            stringBuilder.Append("mutation");
         stringBuilder.Append('{');
         stringBuilder.Append(BuildSelections(selections));
         stringBuilder.Append('}');
