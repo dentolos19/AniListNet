@@ -6,7 +6,7 @@ public class Character
 {
 
     [JsonProperty("id")] public int Id { get; private init; }
-    [JsonProperty("name")] public Name Name { get; private init; }
+    [JsonProperty("name")] public CharacterName Name { get; private init; }
     [JsonProperty("image")] public Image Image { get; private init; }
     [JsonProperty("description")] public string Description { get; private init; }
     [JsonProperty("gender")] public string? Gender { get; private init; }

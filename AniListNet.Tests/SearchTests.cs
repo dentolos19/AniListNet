@@ -49,10 +49,19 @@ public class SearchTests
     {
         var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
         {
-            Genres = new[] { "Action", "Fantasy" }
+            Genres = new Dictionary<string, bool>
+            {
+                { "Action", true },
+                { "Fantasy", true },
+                { "Romance", false }
+            }
         });
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.IsTrue(results.Data.Any(item => item.Genres.Contains("Action") && item.Genres.Contains("Fantasy")));
+        Assert.IsTrue(results.Data.Any(item =>
+            item.Genres.Contains("Action") &&
+            item.Genres.Contains("Fantasy") &&
+            !item.Genres.Contains("Romance")
+        ));
     }
 
     [Test]

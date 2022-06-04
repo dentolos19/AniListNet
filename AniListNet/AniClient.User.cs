@@ -75,4 +75,19 @@ public partial class AniClient
         );
     }
 
+    public async Task<MediaEntryCollection> GetUserEntryCollectionAsync(int id, MediaType type, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        var response = await PostRequestAsync(
+            new GqlSelection("MediaListCollection", typeof(MediaEntryCollection).ToSelections(), new GqlParameter[]
+            {
+                new("userId", id),
+                new("type", type),
+                new("chunk", options.PageIndex),
+                new("perChunk", options.PageSize)
+            })
+        );
+        return response["MediaListCollection"].ToObject<MediaEntryCollection>();
+    }
+
 }

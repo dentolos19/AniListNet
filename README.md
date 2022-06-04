@@ -52,8 +52,8 @@ foreach (var character in characters.Data)
 - [ ] Has character-specific data query functions (TODO)
 - [ ] Has staff-specific data query functions (TODO)
 - [ ] Has studio-specific data query functions (TODO)
-- [ ] Has user-specific data query functions
+- [X] Has user-specific data query functions
   - [X] `GetUserFollowersAsync`
   - [X] `GetUserFollowingsAsync`
   - [X] `GetUserEntriesAsync`
-  - [ ] `GetUserEntryCollectionAsync`
+  - [X] `GetUserEntryCollectionAsync`

@@ -11,7 +11,6 @@ public class Name
     [JsonProperty("full")] public string FullName { get; private init; }
     [JsonProperty("native")] public string NativeName { get; private init; }
     [JsonProperty("alternative")] public string[] AlternativeNames { get; private init; }
-    // TODO: add "AlternativeSpoilerNames" for character name
     [JsonProperty("userPreferred")] public string PreferredName { get; private init; }
 
 }

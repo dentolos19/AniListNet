@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using AniListNet.Objects;
+using NUnit.Framework;
 
 namespace AniListNet.Tests;
 
@@ -25,6 +26,14 @@ public class UserTests
     public async Task GetUserEntriesTest()
     {
         var data = await TestObjects.AniClient.GetUserEntriesAsync(1);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task GetUserEntryCollectionTest()
+    {
+        var data = await TestObjects.AniClient.GetUserEntryCollectionAsync(1, MediaType.Anime);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }

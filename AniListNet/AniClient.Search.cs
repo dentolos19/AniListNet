@@ -24,10 +24,44 @@ public partial class AniClient
             });
         if (filter.Type != null)
             parameters.Add(new GqlParameter("type", filter.Type));
+        if (filter.IsAdult != null)
+            parameters.Add(new GqlParameter("isAdult", filter.IsAdult));
+        if (filter.OnList != null)
+            parameters.Add(new GqlParameter("onList", filter.OnList));
         if (!string.IsNullOrEmpty(filter.Query))
             parameters.Add(new GqlParameter("search", filter.Query));
+        if (filter.Format is { Count: > 0 })
+        {
+            var (includedItems, excludedItems) = filter.Format.SeparateByBooleans();
+            if (includedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("format_in", includedItems));
+            if (excludedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("format_not_in", excludedItems));
+        }
+        if (filter.Status is { Count: > 0 })
+        {
+            var (includedItems, excludedItems) = filter.Status.SeparateByBooleans();
+            if (includedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("status_in", includedItems));
+            if (excludedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("status_not_in", excludedItems));
+        }
         if (filter.Genres is { Count: > 0 })
-            parameters.Add(new GqlParameter("genre_in", filter.Genres));
+        {
+            var (includedItems, excludedItems) = filter.Genres.SeparateByBooleans();
+            if (includedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("genre_in", includedItems));
+            if (excludedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("genre_not_in", excludedItems));
+        }
+        if (filter.Tags is { Count: > 0 })
+        {
+            var (includedItems, excludedItems) = filter.Tags.SeparateByBooleans();
+            if (includedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("tag_in", includedItems));
+            if (excludedItems is { Length: > 0 })
+                parameters.Add(new GqlParameter("tag_not_in", excludedItems));
+        }
         var response = await PostRequestAsync(
             new GqlSelection("Page", new GqlSelection[]
             {
