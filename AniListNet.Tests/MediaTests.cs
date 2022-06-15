@@ -6,6 +6,14 @@ public class MediaTests
 {
 
     [Test]
+    public async Task GetMediaTagsAsync()
+    {
+        var data = await TestObjects.AniClient.GetMediaTagsAsync(1);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
     public async Task GetMediaRelationsTest()
     {
         var data = await TestObjects.AniClient.GetMediaRelationsAsync(21);

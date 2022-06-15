@@ -8,11 +8,11 @@ internal static class HelperExtensions
         return GqlParser.ParseType(type);
     }
 
-    internal static KeyValuePair<T[], T[]> SeparateByBooleans<T>(this IDictionary<T, bool> dictionary)
+    internal static KeyValuePair<TObject[], TObject[]> SeparateByBooleans<TObject>(this IDictionary<TObject, bool> dictionary)
     {
         var includedItems = dictionary.Where(item => item.Value);
         var excludedItems = dictionary.Where(item => !item.Value);
-        return new KeyValuePair<T[], T[]>(
+        return new KeyValuePair<TObject[], TObject[]>(
             includedItems.Select(item => item.Key).ToArray(),
             excludedItems.Select(item => item.Key).ToArray()
         );

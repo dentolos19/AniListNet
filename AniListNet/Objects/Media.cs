@@ -12,7 +12,7 @@ public class Media
     [JsonProperty("idMal")] public int? MalId { get; private init; }
     [JsonProperty("title")] public MediaTitle Title { get; private init; }
     [JsonProperty("type")] public MediaType Type { get; private init; }
-    [JsonProperty("format")] public MediaFormat Format { get; private init; }
+    [JsonProperty("format")] public MediaFormat? Format { get; private init; }
     [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus Status { get; private init; }
     [JsonProperty("description")] public string? Description { get; private init; }
     [JsonProperty("startDate")] public Date StartDate { get; private init; }
@@ -31,7 +31,7 @@ public class Media
     [JsonProperty("meanScore")] public int? MeanScore { get; private init; }
     [JsonProperty("popularity")] public int Popularity { get; private init; }
     [JsonProperty("favourites")] public int Favorites { get; private init; }
-    [JsonProperty("tags")] public MediaTag[] Tags { get; private init; }
+    // [JsonProperty("tags")] public MediaTag[] Tags { get; private init; }
     [JsonProperty("isAdult")] public bool IsAdult { get; private init; }
 
     public TimeSpan? Duration => _duration.HasValue ? new TimeSpan(0, _duration.Value, 0) : null;

@@ -6,6 +6,19 @@ namespace AniListNet;
 public partial class AniClient
 {
 
+    public async Task<MediaTag[]> GetMediaTagsAsync(int id)
+    {
+        var selections = new GqlSelection("Media", new List<GqlSelection>
+        {
+            new("tags", typeof(MediaTag).ToSelections())
+        }, new List<GqlParameter>
+        {
+            new("id", id)
+        });
+        var response = await PostRequestAsync(selections);
+        return response["Media"]["tags"].ToObject<MediaTag[]>();
+    }
+
     public async Task<MediaEdge[]> GetMediaRelationsAsync(int id)
     {
         var response = await PostRequestAsync(

@@ -12,7 +12,7 @@ public partial class AniClient
 
     public async Task<bool> TryAuthenticateAsync(string token)
     {
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         try
         {
             _ = await GetAuthenticatedUserAsync();
@@ -20,7 +20,7 @@ public partial class AniClient
         }
         catch
         {
-            _httpClient.DefaultRequestHeaders.Authorization = null;
+            _client.DefaultRequestHeaders.Authorization = null;
             IsAuthenticated = false;
         }
         return IsAuthenticated;
@@ -49,26 +49,27 @@ public partial class AniClient
                 new("day", mutation.StartDate.Value.Day)
             }));
         if (mutation.CompleteDate.HasValue)
-            parameters.Add(new GqlParameter("completedAt", new GqlParameter[]
+            parameters.Add(new GqlParameter("completedAt", new List<GqlParameter>
             {
                 new("year", mutation.CompleteDate.Value.Year),
                 new("month", mutation.CompleteDate.Value.Month),
                 new("day", mutation.CompleteDate.Value.Day)
             }));
-        var response = await PostRequestAsync(new GqlSelection("SaveMediaListEntry", typeof(MediaEntry).ToSelections(), parameters.ToArray()), true);
+        var selections = new GqlSelection("SaveMediaListEntry", typeof(MediaEntry).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections, true);
         return response["SaveMediaListEntry"].ToObject<MediaEntry>();
     }
 
     public async Task<bool> DeleteMediaEntryAsync(int id)
     {
-        var response = await PostRequestAsync(
-            new GqlSelection("DeleteMediaListEntry", new GqlSelection[]
-            {
-                new("deleted")
-            }, new GqlParameter[]
-            {
-                new("id", id)
-            }), true);
+        var selections = new GqlSelection("DeleteMediaListEntry", new GqlSelection[]
+        {
+            new("deleted")
+        }, new GqlParameter[]
+        {
+            new("id", id)
+        });
+        var response = await PostRequestAsync(selections, true);
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
 

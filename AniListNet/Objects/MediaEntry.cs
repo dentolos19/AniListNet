@@ -13,4 +13,6 @@ public class MediaEntry
     [JsonProperty("completedAt")] public Date CompleteDate { get; private init; }
     [JsonProperty("media")] public Media Media { get; private init; }
 
+    public int? MaxProgress => Media.Episodes ?? Media.Episodes;
+
 }

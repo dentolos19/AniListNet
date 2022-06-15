@@ -2,6 +2,15 @@
 
 A simple .NET API wrapper for [AniList](https://anilist.co)!
 
+> **Note**: This was a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
+
+## Usage
+
+Install the library in your project.
+
+- .NET CLI: `dotnet add package AniListNet`
+- Package Manager CLI: `Install-Package AniListNet`
+
 ```cs
 using AniListNet;
 
@@ -20,7 +29,7 @@ foreach (var character in characters.Data)
     Console.WriteLine($"  {character.Role}: {character.Character.Name.FullName}");
 ```
 
-> **Note**: This was a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
+For more examples for using this library, visit the [usage wiki](https://github.com/dentolos19/AniListNet/wiki/Usage) or check out the [unit tests](./AniListNet.Tests).
 
 ## Features
 
@@ -40,7 +49,7 @@ foreach (var character in characters.Data)
   - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
 - [X] Has user-only mutation functions
-  - [X] `TryAuthenticateAsync`: only supports [implicit grant authorization](https://anilist.gitbook.io/anilist-apiv2-docs/overview/oauth/implicit-grant)
+  - [X] `TryAuthenticateAsync`: authenticate with user's access token
   - [X] `GetAuthenticatedUserAsync`
   - [X] `SaveMediaEntryAsync`
   - [X] `DeleteMediaEntryAsync`
