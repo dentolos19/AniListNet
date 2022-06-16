@@ -9,7 +9,7 @@ namespace AniListNet.Helpers;
 internal static class GqlParser
 {
 
-    public static string ParseSelection(GqlSelection selection)
+    public static string ParseSelections(GqlSelection selection)
     {
         return ParseSelections(new[] { selection });
     }

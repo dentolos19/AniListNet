@@ -14,4 +14,9 @@ internal class GqlSelection
         Parameters = parameters;
     }
 
+    public override string ToString()
+    {
+        return GqlParser.ParseSelections(this);
+    }
+
 }

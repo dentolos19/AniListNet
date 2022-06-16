@@ -12,14 +12,9 @@ public partial class AniClient
 
     public event EventHandler<AniRateEventArgs>? RateChanged;
 
-    private Task<JToken> PostRequestAsync(GqlSelection selection, bool isMutation = false)
+    private async Task<JToken> PostRequestAsync(GqlSelection selection, bool isMutation = false)
     {
-        return PostRequestAsync(GqlParser.ParseSelection(selection), isMutation);
-    }
-
-    private async Task<JToken> PostRequestAsync(string request, bool isMutation = false)
-    {
-        var body = JObject.FromObject(new { query = (isMutation ? "mutation" : string.Empty) + request });
+        var body = JObject.FromObject(new { query = (isMutation ? "mutation" : string.Empty) + selection });
         var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
         var response = await _client.PostAsync(_url, content);
         response.EnsureSuccessStatusCode();

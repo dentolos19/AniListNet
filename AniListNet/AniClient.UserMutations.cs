@@ -28,7 +28,8 @@ public partial class AniClient
 
     public async Task<User> GetAuthenticatedUserAsync()
     {
-        var response = await PostRequestAsync(new GqlSelection("Viewer", GqlParser.ParseType(typeof(User))));
+        var selections = new GqlSelection("Viewer", GqlParser.ParseType(typeof(User)));
+        var response = await PostRequestAsync(selections);
         return response["Viewer"].ToObject<User>();
     }
 
@@ -41,6 +42,8 @@ public partial class AniClient
             parameters.Add(new GqlParameter("score", mutation.Score.Value));
         if (mutation.Progress.HasValue)
             parameters.Add(new GqlParameter("progress", mutation.Progress.Value));
+        if (mutation.VolumeProgress.HasValue)
+            parameters.Add(new GqlParameter("progressVolumes", mutation.VolumeProgress.Value));
         if (mutation.StartDate.HasValue)
             parameters.Add(new GqlParameter("startedAt", new GqlParameter[]
             {

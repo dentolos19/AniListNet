@@ -1,31 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
+    <PropertyGroup>
 
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
 
-		<Product>AniList.NET</Product>
-		<Description>A simple .NET API wrapper for AniList!</Description>
-		<Version>1.1.0</Version>
-		<Authors>Dennise Catolos</Authors>
-		<Copyright>Copyright © 2022</Copyright>
+        <Title>AniList.NET</Title>
+        <Description>A simple .NET API wrapper for AniList!</Description>
+        <Version>1.1.0</Version>
+        <Authors>Dennise Catolos</Authors>
+        <Copyright>Copyright © 2022</Copyright>
 
-		<PackageIcon>Icon.png</PackageIcon>
-		<PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
 
-	</PropertyGroup>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<Content Include="Resources\Icon.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <Content Include="Resources\Icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </Content>
+    </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
 
 </Project>
