@@ -76,33 +76,37 @@ public partial class AniClient
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
 
-    public Task ToggleMediaFavorite(int id, MediaType type)
+    public async Task<bool> ToggleMediaFavoriteAsync(int id, MediaType type)
     {
-        return type switch
+        await ToggleFavoriteAsync(type switch
         {
-            MediaType.Anime => ToggleFavorite("animeId", id),
-            MediaType.Manga => ToggleFavorite("mangaId", id)
-        };
+            MediaType.Anime => "animeId",
+            MediaType.Manga => "mangaId"
+        }, id);
+        return (await GetMediaAsync(id)).IsFavorite; // TODO: can be updated to improve performance
     }
 
-    public Task ToggleCharacterFavorite(int id)
+    public async Task<bool> ToggleCharacterFavoriteAsync(int id)
     {
-        return ToggleFavorite("characterId", id);
+        await ToggleFavoriteAsync("characterId", id);
+        return (await GetCharacterAsync(id)).IsFavorite; // TODO: can be updated to improve performance
     }
 
-    public Task ToggleStaffFavorite(int id)
+    public async Task<bool> ToggleStaffFavoriteAsync(int id)
     {
-        return ToggleFavorite("staffId", id);
+        await ToggleFavoriteAsync("staffId", id);
+        return (await GetStaffAsync(id)).IsFavorite; // TODO: can be updated to improve performance
     }
 
-    public Task ToggleStudioFavorite(int id)
+    public async Task<bool> ToggleStudioFavoriteAsync(int id)
     {
-        return ToggleFavorite("studioId", id);
+        await ToggleFavoriteAsync("studioId", id);
+        return (await GetStudioAsync(id)).IsFavorite; // TODO: can be updated to improve performance
     }
 
     /* below is methods that is privately used */
 
-    private async Task ToggleFavorite(string field, int id)
+    private async Task ToggleFavoriteAsync(string field, int id)
     {
         var selections = new GqlSelection("ToggleFavourite", new GqlSelection[]
         {
