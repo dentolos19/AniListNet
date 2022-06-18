@@ -45,4 +45,16 @@ public class UserMutationsTests
         Assert.IsTrue(isDeleted);
     }
 
+    [Test]
+    public async Task ToggleFavoriteTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var media = await TestObjects.AniClient.GetMediaAsync(1);
+        var mediaFavorited = media.IsFavorite;
+        await TestObjects.AniClient.ToggleMediaFavorite(media.Id, media.Type);
+        media = await TestObjects.AniClient.GetMediaAsync(media.Id);
+        Assert.IsTrue(media.IsFavorite == !mediaFavorited);
+    }
+
 }

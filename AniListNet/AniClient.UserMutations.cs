@@ -76,4 +76,48 @@ public partial class AniClient
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
 
+    public Task ToggleMediaFavorite(int id, MediaType type)
+    {
+        return type switch
+        {
+            MediaType.Anime => ToggleFavorite("animeId", id),
+            MediaType.Manga => ToggleFavorite("mangaId", id)
+        };
+    }
+
+    public Task ToggleCharacterFavorite(int id)
+    {
+        return ToggleFavorite("characterId", id);
+    }
+
+    public Task ToggleStaffFavorite(int id)
+    {
+        return ToggleFavorite("staffId", id);
+    }
+
+    public Task ToggleStudioFavorite(int id)
+    {
+        return ToggleFavorite("studioId", id);
+    }
+
+    /* below is methods that is privately used */
+
+    private async Task ToggleFavorite(string field, int id)
+    {
+        var selections = new GqlSelection("ToggleFavourite", new GqlSelection[]
+        {
+            new("anime", new GqlSelection[]
+            {
+                new("pageInfo", new GqlSelection[]
+                {
+                    new("total")
+                })
+            })
+        }, new GqlParameter[]
+        {
+            new(field, id)
+        });
+        _ = await PostRequestAsync(selections, true);
+    }
+
 }
