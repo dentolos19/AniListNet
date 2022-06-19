@@ -1,5 +1,5 @@
-﻿using AniListNet.Models;
-using AniListNet.Objects;
+﻿using AniListNet.Objects;
+using AniListNet.Parameters;
 using NUnit.Framework;
 
 namespace AniListNet.Tests;

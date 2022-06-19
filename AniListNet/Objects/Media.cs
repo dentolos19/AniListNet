@@ -31,7 +31,6 @@ public class Media
     [JsonProperty("meanScore")] public int? MeanScore { get; private set; }
     [JsonProperty("popularity")] public int Popularity { get; private set; }
     [JsonProperty("favourites")] public int Favorites { get; private set; }
-    // [JsonProperty("tags")] public MediaTag[] Tags { get; private set; }
     [JsonProperty("isAdult")] public bool IsAdult { get; private set; }
 
     public TimeSpan? Duration => _duration.HasValue ? new TimeSpan(0, _duration.Value, 0) : null;

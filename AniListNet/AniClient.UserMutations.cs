@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Headers;
 using AniListNet.Helpers;
-using AniListNet.Models;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 

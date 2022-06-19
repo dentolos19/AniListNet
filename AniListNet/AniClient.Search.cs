@@ -1,25 +1,19 @@
 ﻿using AniListNet.Helpers;
-using AniListNet.Models;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 
 public partial class AniClient
 {
 
-    public Task<AniPagination<Media>> SearchMediaAsync(string query, AniPaginationOptions? options = null)
-    {
-        return SearchMediaAsync(new SearchMediaFilter { Query = query }, options);
-    }
-
     public async Task<AniPagination<Media>> SearchMediaAsync(SearchMediaFilter filter, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var parameters = new List<GqlParameter> { new("sort", filter.Sort) }.Concat(filter.ToParameters());
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
             new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("media", typeof(Media).ToSelections(), parameters.ToArray())
+            new("media", typeof(Media).ToSelections(), filter.ToParameters().ToArray())
         }, new GqlParameter[]
         {
             new("page", options.PageIndex),
@@ -32,16 +26,13 @@ public partial class AniClient
         );
     }
 
-    public async Task<AniPagination<Character>> SearchCharacterAsync(string query, AniPaginationOptions? options = null)
+    public async Task<AniPagination<Character>> SearchCharacterAsync(SearchCharacterFilter filter, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
             new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("characters", typeof(Character).ToSelections(), new GqlParameter[]
-            {
-                new("search", query)
-            })
+            new("characters", typeof(Character).ToSelections(), filter.ToParameters().ToArray())
         }, new GqlParameter[]
         {
             new("page", options.PageIndex),
@@ -118,6 +109,18 @@ public partial class AniClient
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
             response["Page"]["users"].ToObject<User[]>()
         );
+    }
+
+    /* below are methods that are the simplified versions of the above */
+
+    public Task<AniPagination<Media>> SearchMediaAsync(string query, AniPaginationOptions? options = null)
+    {
+        return SearchMediaAsync(new SearchMediaFilter { Query = query }, options);
+    }
+
+    public Task<AniPagination<Character>> SearchCharacterAsync(string query, AniPaginationOptions? options = null)
+    {
+        return SearchCharacterAsync(new SearchCharacterFilter { Query = query }, options);
     }
 
 }

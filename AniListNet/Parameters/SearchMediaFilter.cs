@@ -1,7 +1,7 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
 
-namespace AniListNet.Models;
+namespace AniListNet.Parameters;
 
 public class SearchMediaFilter
 {
@@ -20,7 +20,7 @@ public class SearchMediaFilter
 
     internal IEnumerable<GqlParameter> ToParameters()
     {
-        var parameters = new List<GqlParameter>();
+        var parameters = new List<GqlParameter> { new("sort", Sort) };
         if (Season != null)
             parameters.AddRange(new GqlParameter[]
             {

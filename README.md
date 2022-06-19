@@ -1,8 +1,8 @@
 # <img src=".github/icon.png" width="32"/> AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/AniListNet)
 
-A simple .NET API wrapper for [AniList](https://anilist.co)!
+A simple .NET API wrapper for [AniList](https://anilist.co)/[AniChart](https://anichart.net)!
 
-This project is a simple wrapper for the AniList API. It is not intended to be a complete API wrapper, but rather a simple wrapper for the AniList API.
+This project is designed to bring you a simpler way to access and interact with the AniList API. For more information about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anilist-apiv2-docs).
 
 > **Note**: This was a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
 

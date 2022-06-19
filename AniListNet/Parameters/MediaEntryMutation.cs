@@ -1,7 +1,7 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
 
-namespace AniListNet.Models;
+namespace AniListNet.Parameters;
 
 public class MediaEntryMutation
 {
