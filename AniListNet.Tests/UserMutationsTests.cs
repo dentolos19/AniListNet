@@ -46,6 +46,16 @@ public class UserMutationsTests
     }
 
     [Test]
+    public async Task ToggleFollowUserAsync()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized");
+        var user = await TestObjects.AniClient.GetUserAsync(5114158);
+        var userFollowed = await TestObjects.AniClient.ToggleFollowUserAsync(user.Id);
+        Assert.AreEqual(!user.IsFollowing, userFollowed);
+    }
+
+    [Test]
     public async Task ToggleMediaFavoriteTest()
     {
         if (!TestObjects.AniClient.IsAuthenticated)

@@ -15,53 +15,7 @@ public partial class AniClient
     public async Task<AniPagination<Media>> SearchMediaAsync(SearchMediaFilter filter, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
-        var parameters = new List<GqlParameter> { new("sort", filter.Sort) };
-        if (filter.Season != null)
-            parameters.AddRange(new GqlParameter[]
-            {
-                new("season", filter.Season),
-                new("seasonYear", filter.SeasonYear)
-            });
-        if (filter.Type != null)
-            parameters.Add(new GqlParameter("type", filter.Type));
-        if (filter.IsAdult != null)
-            parameters.Add(new GqlParameter("isAdult", filter.IsAdult));
-        if (filter.OnList != null)
-            parameters.Add(new GqlParameter("onList", filter.OnList));
-        if (!string.IsNullOrEmpty(filter.Query))
-            parameters.Add(new GqlParameter("search", filter.Query));
-        if (filter.Format is { Count: > 0 })
-        {
-            var (includedItems, excludedItems) = filter.Format.SeparateByBooleans();
-            if (includedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("format_in", includedItems));
-            if (excludedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("format_not_in", excludedItems));
-        }
-        if (filter.Status is { Count: > 0 })
-        {
-            var (includedItems, excludedItems) = filter.Status.SeparateByBooleans();
-            if (includedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("status_in", includedItems));
-            if (excludedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("status_not_in", excludedItems));
-        }
-        if (filter.Genres is { Count: > 0 })
-        {
-            var (includedItems, excludedItems) = filter.Genres.SeparateByBooleans();
-            if (includedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("genre_in", includedItems));
-            if (excludedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("genre_not_in", excludedItems));
-        }
-        if (filter.Tags is { Count: > 0 })
-        {
-            var (includedItems, excludedItems) = filter.Tags.SeparateByBooleans();
-            if (includedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("tag_in", includedItems));
-            if (excludedItems is { Length: > 0 })
-                parameters.Add(new GqlParameter("tag_not_in", excludedItems));
-        }
+        var parameters = new List<GqlParameter> { new("sort", filter.Sort) }.Concat(filter.ToParameters());
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
             new("pageInfo", typeof(PageInfo).ToSelections()),

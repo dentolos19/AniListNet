@@ -27,7 +27,7 @@ public class GetTests
         var id = 1;
         var data = await TestObjects.AniClient.GetMediaAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.IsTrue(data.Id == id);
+        Assert.AreEqual(id, data.Id);
     }
 
     [Test]
@@ -44,7 +44,7 @@ public class GetTests
         var id = 1;
         var data = await TestObjects.AniClient.GetCharacterAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.IsTrue(data.Id == id);
+        Assert.AreEqual(id, data.Id);
     }
 
     [Test]
@@ -53,7 +53,7 @@ public class GetTests
         var id = 95269;
         var data = await TestObjects.AniClient.GetStaffAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.IsTrue(data.Id == id);
+        Assert.AreEqual(id, data.Id);
     }
 
     [Test]
@@ -62,16 +62,16 @@ public class GetTests
         var id = 1;
         var data = await TestObjects.AniClient.GetStudioAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.IsTrue(data.Id == id);
+        Assert.AreEqual(id, data.Id);
     }
 
     [Test]
     public async Task GetUserTest()
     {
-        var id = 5741649;
+        var id = 5114158;
         var data = await TestObjects.AniClient.GetUserAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.IsTrue(data.Id == id);
+        Assert.AreEqual(id, data.Id);
     }
 
 }

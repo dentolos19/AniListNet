@@ -2,6 +2,8 @@
 
 A simple .NET API wrapper for [AniList](https://anilist.co)!
 
+This project is a simple wrapper for the AniList API. It is not intended to be a complete API wrapper, but rather a simple wrapper for the AniList API.
+
 > **Note**: This was a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
 
 ## Usage
@@ -29,7 +31,7 @@ foreach (var character in characters.Data)
     Console.WriteLine($"  {character.Role}: {character.Character.Name.FullName}");
 ```
 
-For more examples for using this library, visit the [usage wiki](https://github.com/dentolos19/AniListNet/wiki/Usage) or check out the [unit tests](./AniListNet.Tests).
+For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages) or check out the [unit tests](./AniListNet.Tests).
 
 ## Features
 
@@ -53,6 +55,11 @@ For more examples for using this library, visit the [usage wiki](https://github.
   - [X] `GetAuthenticatedUserAsync`
   - [X] `SaveMediaEntryAsync`
   - [X] `DeleteMediaEntryAsync`
+  - [X] `ToggleFollowUserAsync`
+  - [X] `ToggleMediaFavoriteAsync`
+  - [X] `ToggleCharacterFavoriteAsync`
+  - [X] `ToggleStaffFavoriteAsync`
+  - [X] `ToggleStudioFavoriteAsync`
 - [X] Has media-specific data query functions
   - [X] `GetMediaRelationsAsync`
   - [X] `GetMediaCharactersAsync`

@@ -91,7 +91,7 @@ public class SearchTests
     [Test]
     public async Task SearchUserTest()
     {
-        var results = await TestObjects.AniClient.SearchUserAsync("kazuha", new AniPaginationOptions(3, 5));
+        var results = await TestObjects.AniClient.SearchUserAsync("dentolos", new AniPaginationOptions(1, 5));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
