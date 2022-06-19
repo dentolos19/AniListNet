@@ -73,7 +73,7 @@ internal static class GqlParser
         return value switch
         {
             null => "null",
-            string @string => @string.StartsWith('$') ? @string.TrimStart('$') : $"\"{@string}\"",
+            string @string => @string.StartsWith("$") ? @string.TrimStart('$') : $"\"{@string}\"",
             bool @bool => @bool ? "true" : "false",
             Enum @enum => ((Func<string>)(() =>
             {

@@ -5,7 +5,7 @@ namespace AniListNet.Objects;
 public class MediaEntryCollection
 {
 
-    [JsonProperty("lists")] public MediaEntryList[] Lists { get; private init; }
-    [JsonProperty("hasNextChunk")] public bool HasNextChunk { get; private init; }
+    [JsonProperty("lists")] public MediaEntryList[] Lists { get; private set; }
+    [JsonProperty("hasNextChunk")] public bool HasNextChunk { get; private set; }
 
 }

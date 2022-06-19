@@ -8,36 +8,36 @@ public class Media
 
     [JsonProperty("duration")] private readonly int? _duration;
 
-    [JsonProperty("id")] public int Id { get; private init; }
-    [JsonProperty("idMal")] public int? MalId { get; private init; }
-    [JsonProperty("title")] public MediaTitle Title { get; private init; }
-    [JsonProperty("type")] public MediaType Type { get; private init; }
-    [JsonProperty("format")] public MediaFormat? Format { get; private init; }
-    [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus Status { get; private init; }
-    [JsonProperty("description")] public string? Description { get; private init; }
-    [JsonProperty("startDate")] public Date StartDate { get; private init; }
-    [JsonProperty("endDate")] public Date EndDate { get; private init; }
-    [JsonProperty("season")] public MediaSeason? Season { get; private init; }
-    [JsonProperty("seasonYear")] public int? SeasonYear { get; private init; }
-    [JsonProperty("episodes")] public int? Episodes { get; private init; }
-    [JsonProperty("chapters")] public int? Chapters { get; private init; }
-    [JsonProperty("volumes")] public int? Volumes { get; private init; }
-    [JsonProperty("source")] [GqlParameter("version", 3)] public MediaSource? Source { get; private init; }
-    [JsonProperty("coverImage")] public Cover Cover { get; private init; }
-    [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private init; }
-    [JsonProperty("genres")] public string[] Genres { get; private init; }
-    [JsonProperty("synonyms")] public string[] Synonyms { get; private init; }
-    [JsonProperty("averageScore")] public int? AverageScore { get; private init; }
-    [JsonProperty("meanScore")] public int? MeanScore { get; private init; }
-    [JsonProperty("popularity")] public int Popularity { get; private init; }
-    [JsonProperty("favourites")] public int Favorites { get; private init; }
-    // [JsonProperty("tags")] public MediaTag[] Tags { get; private init; }
-    [JsonProperty("isAdult")] public bool IsAdult { get; private init; }
+    [JsonProperty("id")] public int Id { get; private set; }
+    [JsonProperty("idMal")] public int? MalId { get; private set; }
+    [JsonProperty("title")] public MediaTitle Title { get; private set; }
+    [JsonProperty("type")] public MediaType Type { get; private set; }
+    [JsonProperty("format")] public MediaFormat? Format { get; private set; }
+    [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus Status { get; private set; }
+    [JsonProperty("description")] public string? Description { get; private set; }
+    [JsonProperty("startDate")] public Date StartDate { get; private set; }
+    [JsonProperty("endDate")] public Date EndDate { get; private set; }
+    [JsonProperty("season")] public MediaSeason? Season { get; private set; }
+    [JsonProperty("seasonYear")] public int? SeasonYear { get; private set; }
+    [JsonProperty("episodes")] public int? Episodes { get; private set; }
+    [JsonProperty("chapters")] public int? Chapters { get; private set; }
+    [JsonProperty("volumes")] public int? Volumes { get; private set; }
+    [JsonProperty("source")] [GqlParameter("version", 3)] public MediaSource? Source { get; private set; }
+    [JsonProperty("coverImage")] public Cover Cover { get; private set; }
+    [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
+    [JsonProperty("genres")] public string[] Genres { get; private set; }
+    [JsonProperty("synonyms")] public string[] Synonyms { get; private set; }
+    [JsonProperty("averageScore")] public int? AverageScore { get; private set; }
+    [JsonProperty("meanScore")] public int? MeanScore { get; private set; }
+    [JsonProperty("popularity")] public int Popularity { get; private set; }
+    [JsonProperty("favourites")] public int Favorites { get; private set; }
+    // [JsonProperty("tags")] public MediaTag[] Tags { get; private set; }
+    [JsonProperty("isAdult")] public bool IsAdult { get; private set; }
 
     public TimeSpan? Duration => _duration.HasValue ? new TimeSpan(0, _duration.Value, 0) : null;
 
     /* below is properties specific for the authenticated user */
 
-    [JsonProperty("isFavourite")] public bool IsFavorite { get; private init; }
+    [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
 
 }

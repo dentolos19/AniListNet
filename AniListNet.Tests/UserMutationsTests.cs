@@ -20,7 +20,7 @@ public class UserMutationsTests
             Assert.Fail("Client is not authorized.");
         var status = MediaEntryStatus.Current;
         var progress = TestObjects.Random.Next(100);
-        var startDate = DateOnly.FromDateTime(DateTime.Today);
+        var startDate = DateTime.Today;
         var data = await TestObjects.AniClient.SaveMediaEntryAsync(1, new MediaEntryMutation
         {
             Status = MediaEntryStatus.Current,
@@ -31,7 +31,7 @@ public class UserMutationsTests
         Assert.IsTrue(
             data.Status == status &&
             data.Progress == progress &&
-            data.StartDate.ToDateOnly() == startDate
+            data.StartDate.ToDateTime() == startDate
         );
     }
 

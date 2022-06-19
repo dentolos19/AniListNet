@@ -9,8 +9,8 @@ public class MediaEntryMutation
     public float? Score { get; set; }
     public int? Progress { get; set; }
     public int? VolumeProgress { get; set; }
-    public DateOnly? StartDate { get; set; }
-    public DateOnly? CompleteDate { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? CompleteDate { get; set; }
 
     public MediaEntryMutation(MediaEntry? entry = null)
     {
@@ -20,8 +20,8 @@ public class MediaEntryMutation
         Score = entry.Score;
         Progress = entry.Progress;
         VolumeProgress = entry.VolumeProgress;
-        StartDate = entry.StartDate.ToDateOnly();
-        CompleteDate = entry.CompleteDate.ToDateOnly();
+        StartDate = entry.StartDate.ToDateTime();
+        CompleteDate = entry.CompleteDate.ToDateTime();
     }
 
 }

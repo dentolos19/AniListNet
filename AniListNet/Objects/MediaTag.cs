@@ -5,12 +5,12 @@ namespace AniListNet.Objects;
 public class MediaTag
 {
 
-    [JsonProperty("id")] public int Id { get; private init; }
-    [JsonProperty("name")] public string Name { get; private init; }
-    [JsonProperty("description")] public string Description { get; private init; }
-    [JsonProperty("category")] public string Category { get; private init; }
-    [JsonProperty("isGeneralSpoiler")] public bool IsGeneralSpoiler { get; private init; }
-    [JsonProperty("isMediaSpoiler")] public bool IsMediaSpoiler { get; private init; }
-    [JsonProperty("isAdult")] public bool IsAdult { get; private init; }
+    [JsonProperty("id")] public int Id { get; private set; }
+    [JsonProperty("name")] public string Name { get; private set; }
+    [JsonProperty("description")] public string Description { get; private set; }
+    [JsonProperty("category")] public string Category { get; private set; }
+    [JsonProperty("isGeneralSpoiler")] public bool IsGeneralSpoiler { get; private set; }
+    [JsonProperty("isMediaSpoiler")] public bool IsMediaSpoiler { get; private set; }
+    [JsonProperty("isAdult")] public bool IsAdult { get; private set; }
 
 }

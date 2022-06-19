@@ -5,12 +5,12 @@ namespace AniListNet.Objects;
 public class Name
 {
 
-    [JsonProperty("first")] public string FirstName { get; private init; }
-    [JsonProperty("middle")] public string? MiddleName { get; private init; }
-    [JsonProperty("last")] public string? LastName { get; private init; }
-    [JsonProperty("full")] public string FullName { get; private init; }
-    [JsonProperty("native")] public string NativeName { get; private init; }
-    [JsonProperty("alternative")] public string[] AlternativeNames { get; private init; }
-    [JsonProperty("userPreferred")] public string PreferredName { get; private init; }
+    [JsonProperty("first")] public string FirstName { get; private set; }
+    [JsonProperty("middle")] public string? MiddleName { get; private set; }
+    [JsonProperty("last")] public string? LastName { get; private set; }
+    [JsonProperty("full")] public string FullName { get; private set; }
+    [JsonProperty("native")] public string NativeName { get; private set; }
+    [JsonProperty("alternative")] public string[] AlternativeNames { get; private set; }
+    [JsonProperty("userPreferred")] public string PreferredName { get; private set; }
 
 }

@@ -5,7 +5,7 @@ namespace AniListNet.Objects;
 public class Image
 {
 
-    [JsonProperty("large")] public Uri LargeImageUrl { get; private init; }
-    [JsonProperty("medium")] public Uri MediumImageUrl { get; private init; }
+    [JsonProperty("large")] public Uri LargeImageUrl { get; private set; }
+    [JsonProperty("medium")] public Uri MediumImageUrl { get; private set; }
 
 }

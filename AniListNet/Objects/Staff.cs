@@ -5,25 +5,25 @@ namespace AniListNet.Objects;
 public class Staff
 {
 
-    [JsonProperty("languageV2")] public string Language { get; private init; }
-    [JsonProperty("primaryOccupations")] public string[] PrimaryOccupations { get; private init; }
-    [JsonProperty("dateOfDeath")] public Date DateOfDeath { get; private init; }
-    [JsonProperty("yearsActive")] public int[] YearsActive { get; private init; }
-    [JsonProperty("homeTown")] public string? HomeTown { get; private init; }
+    [JsonProperty("languageV2")] public string Language { get; private set; }
+    [JsonProperty("primaryOccupations")] public string[] PrimaryOccupations { get; private set; }
+    [JsonProperty("dateOfDeath")] public Date DateOfDeath { get; private set; }
+    [JsonProperty("yearsActive")] public int[] YearsActive { get; private set; }
+    [JsonProperty("homeTown")] public string? HomeTown { get; private set; }
 
     /* below is properties copied from Character */
 
-    [JsonProperty("id")] public int Id { get; private init; }
-    [JsonProperty("name")] public Name Name { get; private init; } // but this one is changed from CharacterName to Name
-    [JsonProperty("image")] public Image Image { get; private init; }
-    [JsonProperty("description")] public string Description { get; private init; }
-    [JsonProperty("gender")] public string? Gender { get; private init; }
-    [JsonProperty("dateOfBirth")] public Date DateOfBirth { get; private init; }
-    [JsonProperty("age")] public string? Age { get; private init; }
-    [JsonProperty("favourites")] public int Favorites { get; private init; }
+    [JsonProperty("id")] public int Id { get; private set; }
+    [JsonProperty("name")] public Name Name { get; private set; } // but this one is changed from CharacterName to Name
+    [JsonProperty("image")] public Image Image { get; private set; }
+    [JsonProperty("description")] public string Description { get; private set; }
+    [JsonProperty("gender")] public string? Gender { get; private set; }
+    [JsonProperty("dateOfBirth")] public Date DateOfBirth { get; private set; }
+    [JsonProperty("age")] public string? Age { get; private set; }
+    [JsonProperty("favourites")] public int Favorites { get; private set; }
 
     /* below is properties specific for the authenticated user */
 
-    [JsonProperty("isFavourite")] public bool IsFavorite { get; private init; }
+    [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
 
 }
