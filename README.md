@@ -1,10 +1,10 @@
 # <img src=".github/icon.png" width="32"/> AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/AniListNet)
 
-A simple .NET API wrapper for [AniList](https://anilist.co)/[AniChart](https://anichart.net)!
+A simple .NET API wrapper for [AniList](https://anilist.co)!
 
 This project is designed to bring you a simpler way to access and interact with the AniList API. For more information about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anilist-apiv2-docs).
 
-> **Note**: This was a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
+> **Note**: This was formerly a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
 
 ## Usage
 
@@ -37,7 +37,7 @@ For more examples for using this library, visit the [usages wiki](https://github
 
 - [X] Has search query functions
   - [X] `SearchMediaAsync`: searches for Anime & Manga (supports filtering)
-  - [X] `SearchCharacterAsync`
+  - [X] `SearchCharacterAsync`: searches for characters (supports filtering)
   - [X] `SearchStaffAsync`
   - [X] `SearchStudioAsync`
   - [X] `SearchUserAsync`
@@ -50,16 +50,6 @@ For more examples for using this library, visit the [usages wiki](https://github
   - [X] `GetStaffAsync`
   - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
-- [X] Has user-only mutation functions
-  - [X] `TryAuthenticateAsync`: authenticate with user's access token
-  - [X] `GetAuthenticatedUserAsync`
-  - [X] `SaveMediaEntryAsync`
-  - [X] `DeleteMediaEntryAsync`
-  - [X] `ToggleFollowUserAsync`
-  - [X] `ToggleMediaFavoriteAsync`
-  - [X] `ToggleCharacterFavoriteAsync`
-  - [X] `ToggleStaffFavoriteAsync`
-  - [X] `ToggleStudioFavoriteAsync`
 - [X] Has media-specific data query functions
   - [X] `GetMediaRelationsAsync`
   - [X] `GetMediaCharactersAsync`
@@ -73,3 +63,18 @@ For more examples for using this library, visit the [usages wiki](https://github
   - [X] `GetUserFollowingsAsync`
   - [X] `GetUserEntriesAsync`
   - [X] `GetUserEntryCollectionAsync`
+  - [X] `GetUserAnimeFavoritesAsync`
+  - [X] `GetUserMangaFavoritesAsync`
+  - [X] `GetUserCharacterFavoritesAsync`
+  - [X] `GetUserStaffFavoritesAsync`
+  - [X] `GetUserStudioFavoritesAsync`
+- [X] Has user-only mutation functions
+  - [X] `TryAuthenticateAsync`: authenticate with user's access token
+  - [X] `GetAuthenticatedUserAsync`
+  - [X] `SaveMediaEntryAsync`
+  - [X] `DeleteMediaEntryAsync`
+  - [X] `ToggleFollowUserAsync`
+  - [X] `ToggleMediaFavoriteAsync`
+  - [X] `ToggleCharacterFavoriteAsync`
+  - [X] `ToggleStaffFavoriteAsync`
+  - [X] `ToggleStudioFavoriteAsync`

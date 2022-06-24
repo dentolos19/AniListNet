@@ -38,4 +38,44 @@ public class UserTests
         Assert.Pass();
     }
 
+    [Test]
+    public async Task GetUserAnimeFavoritesTest()
+    {
+        var data = await TestObjects.AniClient.GetUserAnimeFavoritesAsync(5114158);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task GetUserMangaFavoritesTest()
+    {
+        var data = await TestObjects.AniClient.GetUserMangaFavoritesAsync(5114158);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task GetUserCharactersFavoritesTest()
+    {
+        var data = await TestObjects.AniClient.GetUserCharacterFavoritesAsync(5114158);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task GetUserStaffFavoritesTest()
+    {
+        var data = await TestObjects.AniClient.GetUserStaffFavoritesAsync(5114158);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task GetUserStudiosFavoritesTest()
+    {
+        var data = await TestObjects.AniClient.GetUserStudioFavoritesAsync(5114158);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
 }

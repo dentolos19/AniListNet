@@ -86,4 +86,63 @@ public partial class AniClient
         return response["MediaListCollection"].ToObject<MediaEntryCollection>();
     }
 
+    public Task<AniPagination<Media>> GetUserAnimeFavoritesAsync(int id, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        return GetUserFavoritesAsync<Media>(id, "anime", options);
+    }
+
+    public Task<AniPagination<Media>> GetUserMangaFavoritesAsync(int id, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        return GetUserFavoritesAsync<Media>(id, "manga", options);
+    }
+
+    public Task<AniPagination<Character>> GetUserCharacterFavoritesAsync(int id, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        return GetUserFavoritesAsync<Character>(id, "characters", options);
+    }
+
+    public Task<AniPagination<Staff>> GetUserStaffFavoritesAsync(int id, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        return GetUserFavoritesAsync<Staff>(id, "staff", options);
+    }
+
+    public Task<AniPagination<Studio>> GetUserStudioFavoritesAsync(int id, AniPaginationOptions? options = null)
+    {
+        options ??= new AniPaginationOptions();
+        return GetUserFavoritesAsync<Studio>(id, "studios", options);
+    }
+
+    /* below is methods that is privately used */
+
+    private async Task<AniPagination<T>> GetUserFavoritesAsync<T>(int id, string type, AniPaginationOptions options)
+    {
+        var selections = new GqlSelection("User", new GqlSelection[]
+        {
+            new("favourites", new GqlSelection[]
+            {
+                new(type, new GqlSelection[]
+                {
+                    new("pageInfo", typeof(PageInfo).ToSelections()),
+                    new("nodes", typeof(T).ToSelections())
+                }, new GqlParameter[]
+                {
+                    new("page", options.PageIndex),
+                    new("perPage", options.PageSize)
+                })
+            })
+        }, new GqlParameter[]
+        {
+            new("id", id)
+        });
+        var response = await PostRequestAsync(selections);
+        return new AniPagination<T>(
+            response["User"]["favourites"][type]["pageInfo"].ToObject<PageInfo>(),
+            response["User"]["favourites"][type]["nodes"].ToObject<T[]>()
+        );
+    }
+
 }
