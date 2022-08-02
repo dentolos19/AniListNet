@@ -46,7 +46,7 @@ public class MediaTests
     }
 
     [Test]
-    public async Task GetMediaEntryTest() // TODO: need improvement
+    public async Task GetMediaEntryTest() // TODO: needs improvement
     {
         var data = await TestObjects.AniClient.GetMediaEntryAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));

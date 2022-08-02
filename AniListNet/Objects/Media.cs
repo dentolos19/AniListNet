@@ -38,5 +38,6 @@ public class Media
     /* below is properties specific for the authenticated user */
 
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
+    [JsonProperty("mediaListEntry")] public MediaEntrySub? Entry { get; private set; }
 
 }
