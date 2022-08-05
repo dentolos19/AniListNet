@@ -17,21 +17,22 @@ public class SearchMediaFilter
     public IDictionary<string, bool> Genres { get; set; } = new Dictionary<string, bool>();
     public IDictionary<int, bool> Tags { get; set; } = new Dictionary<int, bool>();
     public MediaSort Sort { get; set; } = MediaSort.Relevance;
+    public bool SortDescending { get; set; } = true;
 
     internal IEnumerable<GqlParameter> ToParameters()
     {
-        var parameters = new List<GqlParameter> { new("sort", Sort) };
-        if (Season != null)
+        var parameters = new List<GqlParameter>();
+        if (Season.HasValue)
             parameters.AddRange(new GqlParameter[]
             {
                 new("season", Season),
                 new("seasonYear", SeasonYear)
             });
-        if (Type != null)
+        if (Type.HasValue)
             parameters.Add(new GqlParameter("type", Type));
-        if (IsAdult != null)
+        if (IsAdult.HasValue)
             parameters.Add(new GqlParameter("isAdult", IsAdult));
-        if (OnList != null)
+        if (OnList.HasValue)
             parameters.Add(new GqlParameter("onList", OnList));
         if (!string.IsNullOrEmpty(Query))
             parameters.Add(new GqlParameter("search", Query));
@@ -67,6 +68,7 @@ public class SearchMediaFilter
             if (excludedItems is { Length: > 0 })
                 parameters.Add(new GqlParameter("tag_not_in", excludedItems));
         }
+        parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending && Sort != MediaSort.Relevance ? "_DESC" : string.Empty)));
         return parameters;
     }
 

@@ -17,7 +17,7 @@ public partial class AniClient
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
                 new("edges", typeof(MediaEdge).ToSelections())
-            }, filter.ToParameters().Concat(options.ToParameters()).ToList())
+            }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
@@ -39,7 +39,7 @@ public partial class AniClient
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
                 new("edges", typeof(MediaEdge).ToSelections())
-            }, filter.ToParameters().Concat(options.ToParameters()).ToList())
+            }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
@@ -61,7 +61,7 @@ public partial class AniClient
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
                 new("edges", typeof(MediaEdge).ToSelections())
-            }, filter.ToParameters().Concat(options.ToParameters()).ToList())
+            }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
@@ -73,7 +73,7 @@ public partial class AniClient
         );
     }
 
-    public async Task<AniPagination<CharacterEdge>> GetStaffVoicedCharactersAsync(int id, AniPaginationOptions? options = null)
+    public async Task<AniPagination<CharacterEdge>> GetStaffVoicedCharactersAsync(int id, CharacterSort sort = CharacterSort.Relevance, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Staff", new GqlSelection[]
@@ -84,8 +84,8 @@ public partial class AniClient
                 new("edges", typeof(CharacterEdge).ToSelections())
             }, new GqlParameter[]
             {
-                new("sort", "$ROLE")
-            }.Concat(options.ToParameters()).ToList())
+                new("sort", sort)
+            }.Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
@@ -107,7 +107,7 @@ public partial class AniClient
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
                 new("edges", typeof(MediaEdge).ToSelections())
-            }, filter.ToParameters().Concat(options.ToParameters()).ToList())
+            }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)

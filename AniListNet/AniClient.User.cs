@@ -1,5 +1,6 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 
@@ -16,11 +17,7 @@ public partial class AniClient
             {
                 new("userId", id)
             })
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<User>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
@@ -38,11 +35,7 @@ public partial class AniClient
             {
                 new("userId", id)
             })
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<User>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
@@ -50,8 +43,9 @@ public partial class AniClient
         );
     }
 
-    public async Task<AniPagination<MediaEntry>> GetUserEntriesAsync(int id, AniPaginationOptions? options = null)
+    public async Task<AniPagination<MediaEntry>> GetUserEntriesAsync(int id, MediaEntryFilter? filter = null, AniPaginationOptions? options = null)
     {
+        filter ??= new MediaEntryFilter();
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
@@ -59,12 +53,8 @@ public partial class AniClient
             new("mediaList", typeof(MediaEntry).ToSelections(), new GqlParameter[]
             {
                 new("userId", id)
-            })
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+            }.Concat(filter.ToParameters()))
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaEntry>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
@@ -128,11 +118,7 @@ public partial class AniClient
                 {
                     new("pageInfo", typeof(PageInfo).ToSelections()),
                     new("nodes", typeof(T).ToSelections())
-                }, new GqlParameter[]
-                {
-                    new("page", options.PageIndex),
-                    new("perPage", options.PageSize)
-                })
+                }, options.ToParameters())
             })
         }, new GqlParameter[]
         {

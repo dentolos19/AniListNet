@@ -38,11 +38,7 @@ public partial class AniClient
             {
                 new("notYetAired", true)
             })
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaSchedule>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),

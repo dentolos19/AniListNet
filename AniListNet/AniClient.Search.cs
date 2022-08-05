@@ -14,11 +14,7 @@ public partial class AniClient
         {
             new("pageInfo", typeof(PageInfo).ToSelections()),
             new("media", typeof(Media).ToSelections(), filter.ToParameters().ToArray())
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Media>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
@@ -33,11 +29,7 @@ public partial class AniClient
         {
             new("pageInfo", typeof(PageInfo).ToSelections()),
             new("characters", typeof(Character).ToSelections(), filter.ToParameters().ToArray())
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Character>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
@@ -55,11 +47,7 @@ public partial class AniClient
             {
                 new("search", query)
             })
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Staff>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
@@ -77,11 +65,7 @@ public partial class AniClient
             {
                 new("search", query)
             })
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Studio>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
@@ -99,11 +83,7 @@ public partial class AniClient
             {
                 new("search", query)
             })
-        }, new GqlParameter[]
-        {
-            new("page", options.PageIndex),
-            new("perPage", options.PageSize)
-        });
+        }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<User>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),

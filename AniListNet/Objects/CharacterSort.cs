@@ -2,13 +2,11 @@
 
 namespace AniListNet.Objects;
 
-public enum MediaSort
+public enum CharacterSort
 {
 
+    [EnumMember(Value = "ROLE")] Role,
     [EnumMember(Value = "SEARCH_MATCH")] Relevance,
-    [EnumMember(Value = "SCORE")] Score,
-    [EnumMember(Value = "POPULARITY")] Popularity,
-    [EnumMember(Value = "TRENDING")] Trending,
     [EnumMember(Value = "FAVOURITES")] Favorites
 
 }

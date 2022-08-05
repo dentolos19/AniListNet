@@ -46,10 +46,8 @@ public partial class AniClient
                 new("edges", typeof(CharacterEdge).ToSelections())
             }, new GqlParameter[]
             {
-                new("sort", "$ROLE"),
-                new("page", options.PageIndex),
-                new("perPage", options.PageSize)
-            })
+                new("sort", "$ROLE") // TODO: use CharacterRole
+            }.Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
@@ -70,11 +68,7 @@ public partial class AniClient
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
                 new("edges", typeof(StaffEdge).ToSelections())
-            }, new GqlParameter[]
-            {
-                new("page", options.PageIndex),
-                new("perPage", options.PageSize)
-            })
+            }, options.ToParameters())
         }, new GqlParameter[]
         {
             new("id", id)

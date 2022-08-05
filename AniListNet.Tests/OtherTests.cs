@@ -1,14 +1,20 @@
-﻿using NUnit.Framework;
+﻿using AniListNet.Objects;
+using AniListNet.Parameters;
+using NUnit.Framework;
 
 namespace AniListNet.Tests;
 
-public class GetMediaTests
+public class OtherTests
 {
 
     [Test]
     public async Task GetCharacterMediaTest()
     {
-        var data = await TestObjects.AniClient.GetCharacterMediaAsync(1);
+        var data = await TestObjects.AniClient.GetCharacterMediaAsync(1, new GetMediaFilter
+        {
+            Type = MediaType.Anime,
+            Sort = MediaSort.Favorites
+        });
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }

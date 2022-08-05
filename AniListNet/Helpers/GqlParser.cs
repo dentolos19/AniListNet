@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -75,12 +74,7 @@ internal static class GqlParser
             null => "null",
             string @string => @string.StartsWith("$") ? @string.TrimStart('$') : $"\"{@string}\"",
             bool @bool => @bool ? "true" : "false",
-            Enum @enum => ((Func<string>)(() =>
-            {
-                var field = @enum.GetType().GetField(@enum.ToString());
-                var attribute = field?.GetCustomAttribute<EnumMemberAttribute>();
-                return attribute?.Value ?? @enum.ToString();
-            }))(),
+            Enum @enum => HelperUtilities.GetEnumMemberValue(@enum),
             IEnumerable<GqlParameter> parameters => ((Func<string>)(() =>
             {
                 var stringBuilder = new StringBuilder();
