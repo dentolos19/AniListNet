@@ -1,4 +1,6 @@
-﻿namespace AniListNet;
+﻿using AniListNet.Helpers;
+
+namespace AniListNet;
 
 public class AniPaginationOptions
 {
@@ -10,6 +12,15 @@ public class AniPaginationOptions
     {
         PageIndex = pageIndex;
         PageSize = pageSize;
+    }
+
+    internal IEnumerable<GqlParameter> ToParameters()
+    {
+        return new GqlParameter[]
+        {
+            new("page", PageIndex),
+            new("perPage", PageSize)
+        };
     }
 
 }

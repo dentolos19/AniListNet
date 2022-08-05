@@ -35,6 +35,8 @@ For more examples for using this library, visit the [usages wiki](https://github
 
 ## Features
 
+> **Note**: This library does not fully implements the API, so some features might be missing.
+
 - [X] Has search query functions
   - [X] `SearchMediaAsync`: searches for Anime & Manga (supports filtering)
   - [X] `SearchCharacterAsync`: searches for characters (supports filtering)
@@ -50,14 +52,18 @@ For more examples for using this library, visit the [usages wiki](https://github
   - [X] `GetStaffAsync`
   - [X] `GetStudioAsync`
   - [X] `GetUserAsync`
+- [X] Has specific data query functions
+  - [X] `GetCharacterMediaAsync`
+  - [X] `GetStaffMediaAsync`
+  - [X] `GetStaffProductionMediaAsync`
+  - [X] `GetStaffVoicedMediaAsync`
+  - [X] `GetStaffVoicedCharactersAsync`
+  - [X] `GetStudioMediaAsync`
 - [X] Has media-specific data query functions
   - [X] `GetMediaRelationsAsync`
   - [X] `GetMediaCharactersAsync`
   - [X] `GetMediaStaffAsync`
   - [X] `GetMediaStudiosAsync`
-- [ ] Has character-specific data query functions (TODO)
-- [ ] Has staff-specific data query functions (TODO)
-- [ ] Has studio-specific data query functions (TODO)
 - [X] Has user-specific data query functions
   - [X] `GetUserFollowersAsync`
   - [X] `GetUserFollowingsAsync`
