@@ -19,14 +19,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Content Include="Resources\Icon.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
 	</ItemGroup>
 
 </Project>

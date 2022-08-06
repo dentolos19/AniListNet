@@ -7,7 +7,7 @@ namespace AniListNet;
 public partial class AniClient
 {
 
-    public async Task<AniPagination<MediaEdge>> GetCharacterMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
+    public async Task<AniPagination<MediaCharacterEdge>> GetCharacterMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
     {
         filter ??= new GetMediaFilter();
         options ??= new AniPaginationOptions();
@@ -16,20 +16,20 @@ public partial class AniClient
             new("media", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaEdge).ToSelections())
+                new("edges", typeof(MediaCharacterEdge).ToSelections())
             }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
         });
         var response = await PostRequestAsync(selections);
-        return new AniPagination<MediaEdge>(
+        return new AniPagination<MediaCharacterEdge>(
             response["Character"]["media"]["pageInfo"].ToObject<PageInfo>(),
-            response["Character"]["media"]["edges"].ToObject<MediaEdge[]>()
+            response["Character"]["media"]["edges"].ToObject<MediaCharacterEdge[]>()
         );
     }
 
-    public async Task<AniPagination<MediaEdge>> GetStaffProductionMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
+    public async Task<AniPagination<MediaStaffEdge>> GetStaffProductionMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
     {
         filter ??= new GetMediaFilter();
         options ??= new AniPaginationOptions();
@@ -38,20 +38,20 @@ public partial class AniClient
             new("staffMedia", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaEdge).ToSelections())
+                new("edges", typeof(MediaStaffEdge).ToSelections())
             }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
         });
         var response = await PostRequestAsync(selections);
-        return new AniPagination<MediaEdge>(
+        return new AniPagination<MediaStaffEdge>(
             response["Staff"]["staffMedia"]["pageInfo"].ToObject<PageInfo>(),
-            response["Staff"]["staffMedia"]["edges"].ToObject<MediaEdge[]>()
+            response["Staff"]["staffMedia"]["edges"].ToObject<MediaStaffEdge[]>()
         );
     }
 
-    public async Task<AniPagination<MediaEdge>> GetStaffVoicedMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
+    public async Task<AniPagination<MediaStaffEdge>> GetStaffVoicedMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
     {
         filter ??= new GetMediaFilter();
         options ??= new AniPaginationOptions();
@@ -60,16 +60,16 @@ public partial class AniClient
             new("characterMedia", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaEdge).ToSelections())
+                new("edges", typeof(MediaStaffEdge).ToSelections())
             }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
         });
         var response = await PostRequestAsync(selections);
-        return new AniPagination<MediaEdge>(
+        return new AniPagination<MediaStaffEdge>(
             response["Staff"]["characterMedia"]["pageInfo"].ToObject<PageInfo>(),
-            response["Staff"]["characterMedia"]["edges"].ToObject<MediaEdge[]>()
+            response["Staff"]["characterMedia"]["edges"].ToObject<MediaStaffEdge[]>()
         );
     }
 
@@ -97,7 +97,7 @@ public partial class AniClient
         );
     }
 
-    public async Task<AniPagination<MediaEdge>> GetStudioMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
+    public async Task<AniPagination<MediaStudioEdge>> GetStudioMediaAsync(int id, GetMediaFilter? filter = null, AniPaginationOptions? options = null)
     {
         filter ??= new GetMediaFilter();
         options ??= new AniPaginationOptions();
@@ -106,16 +106,16 @@ public partial class AniClient
             new("media", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaEdge).ToSelections())
+                new("edges", typeof(MediaStudioEdge).ToSelections())
             }, filter.ToParameters().Concat(options.ToParameters()))
         }, new GqlParameter[]
         {
             new("id", id)
         });
         var response = await PostRequestAsync(selections);
-        return new AniPagination<MediaEdge>(
+        return new AniPagination<MediaStudioEdge>(
             response["Studio"]["media"]["pageInfo"].ToObject<PageInfo>(),
-            response["Studio"]["media"]["edges"].ToObject<MediaEdge[]>()
+            response["Studio"]["media"]["edges"].ToObject<MediaStudioEdge[]>()
         );
     }
 

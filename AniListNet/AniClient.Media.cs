@@ -19,20 +19,20 @@ public partial class AniClient
         return response["Media"]["tags"].ToObject<MediaTag[]>();
     }
 
-    public async Task<MediaEdge[]> GetMediaRelationsAsync(int id)
+    public async Task<MediaRelationEdge[]> GetMediaRelationsAsync(int id)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
             new("relations", new GqlSelection[]
             {
-                new("edges", typeof(MediaEdge).ToSelections())
+                new("edges", typeof(MediaRelationEdge).ToSelections())
             })
         }, new GqlParameter[]
         {
             new("id", id)
         });
         var response = await PostRequestAsync(selections);
-        return response["Media"]["relations"]["edges"].ToObject<MediaEdge[]>();
+        return response["Media"]["relations"]["edges"].ToObject<MediaRelationEdge[]>();
     }
 
     public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int id, AniPaginationOptions? options = null)
