@@ -1,5 +1,6 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 
@@ -28,16 +29,14 @@ public partial class AniClient
         return response["Media"].ToObject<Media>();
     }
 
-    public async Task<AniPagination<MediaSchedule>> GetMediaSchedulesAsync(AniPaginationOptions? options = null)
+    public async Task<AniPagination<MediaSchedule>> GetMediaSchedulesAsync(MediaScheduleFilter? filter = null, AniPaginationOptions? options = null)
     {
+        filter ??= new MediaScheduleFilter();
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
             new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("airingSchedules", typeof(MediaSchedule).ToSelections(), new GqlParameter[]
-            {
-                new("notYetAired", true)
-            })
+            new("airingSchedules", typeof(MediaSchedule).ToSelections(), filter.ToParameters())
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaSchedule>(

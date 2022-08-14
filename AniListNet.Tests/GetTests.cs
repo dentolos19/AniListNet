@@ -1,3 +1,4 @@
+using AniListNet.Parameters;
 using NUnit.Framework;
 
 namespace AniListNet.Tests;
@@ -33,7 +34,11 @@ public class GetTests
     [Test]
     public async Task GetMediaSchedulesTest()
     {
-        var data = await TestObjects.AniClient.GetMediaSchedulesAsync(new AniPaginationOptions(2, 10));
+        var data = await TestObjects.AniClient.GetMediaSchedulesAsync(new MediaScheduleFilter
+        {
+            StartBetweenTime = DateTime.Now,
+            EndBetweenTime = DateTime.Now.AddDays(28)
+        }, new AniPaginationOptions(2, 100));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }

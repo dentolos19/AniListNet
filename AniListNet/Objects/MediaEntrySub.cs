@@ -1,12 +1,11 @@
-﻿using AniListNet.Objects.Internal;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
 public class MediaEntrySub
 {
 
-    [JsonProperty("media")] private readonly MediaEntrySubMedia _media;
+    [JsonProperty("media")] private readonly Media _media;
 
     [JsonProperty("id")] public int Id { get; private set; }
     [JsonProperty("status")] public MediaEntryStatus Status { get; private set; }
@@ -18,5 +17,14 @@ public class MediaEntrySub
 
     public int? MaxProgress => _media.Episodes ?? _media.Chapters;
     public int? MaxVolumeProgress => _media.Volumes;
+
+    private class Media
+    {
+
+        [JsonProperty("episodes")] public int? Episodes { get; private set; }
+        [JsonProperty("chapters")] public int? Chapters { get; private set; }
+        [JsonProperty("volumes")] public int? Volumes { get; private set; }
+
+    }
 
 }
