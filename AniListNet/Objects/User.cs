@@ -10,6 +10,7 @@ public class User
     [JsonProperty("about")] public string? About { get; private set; }
     [JsonProperty("avatar")] public Image Avatar { get; private set; }
     [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
+    [JsonProperty("options")] public UserOptions Options { get; private set; }
 
     /* below is properties specific for the authenticated user */
 

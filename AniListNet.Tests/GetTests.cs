@@ -36,8 +36,8 @@ public class GetTests
     {
         var data = await TestObjects.AniClient.GetMediaSchedulesAsync(new MediaScheduleFilter
         {
-            StartBetweenTime = DateTime.Now,
-            EndBetweenTime = DateTime.Now.AddDays(28)
+            StartedAfterDate = DateTime.Now,
+            EndedBeforeDate = DateTime.Now.AddMonths(1)
         }, new AniPaginationOptions(2, 100));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
