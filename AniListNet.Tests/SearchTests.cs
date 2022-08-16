@@ -21,7 +21,7 @@ public class SearchTests
     }
 
     [Test]
-    public async Task SearchAnimeMediaFormatTest()
+    public async Task SearchMediaFormatTest()
     {
         var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
         {
