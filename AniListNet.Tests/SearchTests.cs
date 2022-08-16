@@ -21,6 +21,24 @@ public class SearchTests
     }
 
     [Test]
+    public async Task SearchAnimeMediaFormatTest()
+    {
+        var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
+        {
+            Query = "demon slayer",
+            Sort = MediaSort.Popularity,
+            Type = MediaType.Anime,
+            Format = new Dictionary<MediaFormat, bool>{
+                {MediaFormat.TV, true},
+                {MediaFormat.TVShort, true},
+                {MediaFormat.Special, true},
+            }
+        }, new AniPaginationOptions(1, 5));
+        Console.WriteLine(ObjectDumper.Dump(results));
+        Assert.IsTrue(results.Data.Any(item => item.Type == MediaType.Anime));
+    }
+
+    [Test]
     public async Task SearchMangaMediaTest()
     {
         var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
