@@ -10,7 +10,7 @@ public class AniPagination<TData>
     public bool HasNextPage { get; }
     public TData[] Data { get; }
 
-    public AniPagination(PageInfo pageInfo, TData[] data)
+    internal AniPagination(PageInfo pageInfo, TData[] data)
     {
         CurrentPageIndex = pageInfo.CurrentPageIndex;
         LastPageIndex = pageInfo.LastPageIndex;

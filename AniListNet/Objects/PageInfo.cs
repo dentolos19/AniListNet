@@ -2,7 +2,7 @@
 
 namespace AniListNet.Objects;
 
-public class PageInfo
+internal class PageInfo
 {
 
     [JsonProperty("currentPage")] public int CurrentPageIndex { get; private set; }

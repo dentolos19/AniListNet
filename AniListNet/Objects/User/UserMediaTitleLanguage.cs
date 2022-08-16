@@ -2,7 +2,7 @@
 
 namespace AniListNet.Objects;
 
-public enum UserTitleLanguage
+public enum UserMediaTitleLanguage
 {
 
     [EnumMember(Value = "ROMAJI")] Romaji,

@@ -23,7 +23,7 @@ public class Media
     [JsonProperty("chapters")] public int? Chapters { get; private set; }
     [JsonProperty("volumes")] public int? Volumes { get; private set; }
     [JsonProperty("source")] [GqlParameter("version", 3)] public MediaSource? Source { get; private set; }
-    [JsonProperty("coverImage")] public Cover Cover { get; private set; }
+    [JsonProperty("coverImage")] public MediaCover Cover { get; private set; }
     [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
     [JsonProperty("genres")] public string[] Genres { get; private set; }
     [JsonProperty("synonyms")] public string[] Synonyms { get; private set; }

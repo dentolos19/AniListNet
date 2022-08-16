@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
-public class Cover : Image
+public class MediaCover : Image
 {
 
     [JsonProperty("color")] private readonly string? _color;
