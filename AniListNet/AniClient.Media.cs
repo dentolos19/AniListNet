@@ -6,20 +6,20 @@ namespace AniListNet;
 public partial class AniClient
 {
 
-    public async Task<MediaTag[]> GetMediaTagsAsync(int id)
+    public async Task<MediaTag[]> GetMediaTagsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
             new("tags", typeof(MediaTag).ToSelections())
         }, new GqlParameter[]
         {
-            new("id", id)
+            new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
         return response["Media"]["tags"].ToObject<MediaTag[]>();
     }
 
-    public async Task<MediaRelationEdge[]> GetMediaRelationsAsync(int id)
+    public async Task<MediaRelationEdge[]> GetMediaRelationsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
@@ -29,15 +29,15 @@ public partial class AniClient
             })
         }, new GqlParameter[]
         {
-            new("id", id)
+            new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
         return response["Media"]["relations"]["edges"].ToObject<MediaRelationEdge[]>();
     }
 
-    public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int id, AniPaginationOptions? options = null)
+    public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
-        options ??= new AniPaginationOptions();
+        paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
             new("characters", new GqlSelection[]
@@ -46,11 +46,11 @@ public partial class AniClient
                 new("edges", typeof(CharacterEdge).ToSelections())
             }, new GqlParameter[]
             {
-                new("sort", "$ROLE") // TODO: use CharacterRole
-            }.Concat(options.ToParameters()))
+                new("sort", CharacterSort.Role)
+            }.Concat(paginationOptions.ToParameters()))
         }, new GqlParameter[]
         {
-            new("id", id)
+            new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<CharacterEdge>(
@@ -59,19 +59,19 @@ public partial class AniClient
         );
     }
 
-    public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int id, AniPaginationOptions? options = null)
+    public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
-        options ??= new AniPaginationOptions();
+        paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
             new("staff", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
                 new("edges", typeof(StaffEdge).ToSelections())
-            }, options.ToParameters())
+            }, paginationOptions.ToParameters())
         }, new GqlParameter[]
         {
-            new("id", id)
+            new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<StaffEdge>(
@@ -80,7 +80,7 @@ public partial class AniClient
         );
     }
 
-    public async Task<StudioEdge[]> GetMediaStudiosAsync(int id)
+    public async Task<StudioEdge[]> GetMediaStudiosAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
@@ -90,7 +90,7 @@ public partial class AniClient
             })
         }, new GqlParameter[]
         {
-            new("id", id)
+            new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
@@ -98,14 +98,14 @@ public partial class AniClient
 
     /* below is properties specific for the authenticated user */
 
-    public async Task<MediaEntry?> GetMediaEntryAsync(int id)
+    public async Task<MediaEntry?> GetMediaEntryAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
             new("mediaListEntry", typeof(MediaEntry).ToSelections())
         }, new GqlParameter[]
         {
-            new("id", id)
+            new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
         return response["Media"]["mediaListEntry"].ToObject<MediaEntry?>();

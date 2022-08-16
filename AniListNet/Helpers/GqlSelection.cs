@@ -3,9 +3,9 @@
 internal class GqlSelection
 {
 
-    public string Name { get; }
-    public IList<GqlSelection>? Selections { get; }
-    public IList<GqlParameter>? Parameters { get; }
+    public string Name { get; set; }
+    public IList<GqlSelection>? Selections { get; set; }
+    public IList<GqlParameter>? Parameters { get; set; }
 
     public GqlSelection(string name, IEnumerable<GqlSelection>? selections = null, IEnumerable<GqlParameter>? parameters = null)
     {

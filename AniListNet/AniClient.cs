@@ -31,4 +31,20 @@ public partial class AniClient
         return json["data"];
     }
 
+    private async Task<JToken> GetSingleDataAsync(params GqlSelection[] path)
+    {
+        var selection = path[^1];
+        for (var index = path.Length - 2; index >= 0; index--)
+        {
+            var newSelection = path[index];
+            newSelection.Selections ??= new List<GqlSelection>();
+            newSelection.Selections.Add(selection);
+            selection = newSelection;
+        }
+        var token = await PostRequestAsync(selection);
+        foreach (var item in path)
+            token = token[item.Name];
+        return token;
+    }
+
 }

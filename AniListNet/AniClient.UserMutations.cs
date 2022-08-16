@@ -33,66 +33,90 @@ public partial class AniClient
         return response["Viewer"].ToObject<User>();
     }
 
-    public async Task<MediaEntry> SaveMediaEntryAsync(int id, MediaEntryMutation mutation)
+    public async Task<MediaEntry> SaveMediaEntryAsync(int mediaId, MediaEntryMutation mutation)
     {
-        var parameters = new List<GqlParameter> { new("mediaId", id) }.Concat(mutation.ToParameters());
+        var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
         var selections = new GqlSelection("SaveMediaListEntry", typeof(MediaEntry).ToSelections(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
         return response["SaveMediaListEntry"].ToObject<MediaEntry>();
     }
 
-    public async Task<bool> DeleteMediaEntryAsync(int id)
+    public async Task<bool> DeleteMediaEntryAsync(int mediaId)
     {
         var selections = new GqlSelection("DeleteMediaListEntry", new GqlSelection[]
         {
             new("deleted")
         }, new GqlParameter[]
         {
-            new("id", id)
+            new("id", mediaId)
         });
         var response = await PostRequestAsync(selections, true);
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
 
-    public async Task<bool> ToggleFollowUserAsync(int id)
+    public async Task<bool> ToggleFollowUserAsync(int mediaId)
     {
         var selections = new GqlSelection("ToggleFollow", new GqlSelection[]
         {
             new("isFollowing")
         }, new GqlParameter[]
         {
-            new("userId", id)
+            new("userId", mediaId)
         });
         var response = await PostRequestAsync(selections, true);
         return response["ToggleFollow"]["isFollowing"].ToObject<bool>();
     }
 
-    public async Task<bool> ToggleMediaFavoriteAsync(int id, MediaType type)
+    public async Task<bool> ToggleMediaFavoriteAsync(int mediaId, MediaType type)
     {
         await ToggleFavoriteAsync(type switch
         {
             MediaType.Anime => "animeId",
             MediaType.Manga => "mangaId"
-        }, id);
-        return (await GetMediaAsync(id)).IsFavorite; // TODO: can be updated to improve performance
+        }, mediaId);
+        return (await GetSingleDataAsync(
+            new GqlSelection("Media", default, new GqlParameter[]
+            {
+                new("id", mediaId)
+            }),
+            new GqlSelection("isFavourite")
+        )).ToObject<bool>();
     }
 
-    public async Task<bool> ToggleCharacterFavoriteAsync(int id)
+    public async Task<bool> ToggleCharacterFavoriteAsync(int characterId)
     {
-        await ToggleFavoriteAsync("characterId", id);
-        return (await GetCharacterAsync(id)).IsFavorite; // TODO: can be updated to improve performance
+        await ToggleFavoriteAsync("characterId", characterId);
+        return (await GetSingleDataAsync(
+            new GqlSelection("Character", default, new GqlParameter[]
+            {
+                new("id", characterId)
+            }),
+            new GqlSelection("isFavourite")
+        )).ToObject<bool>();
     }
 
-    public async Task<bool> ToggleStaffFavoriteAsync(int id)
+    public async Task<bool> ToggleStaffFavoriteAsync(int staffId)
     {
-        await ToggleFavoriteAsync("staffId", id);
-        return (await GetStaffAsync(id)).IsFavorite; // TODO: can be updated to improve performance
+        await ToggleFavoriteAsync("staffId", staffId);
+        return (await GetSingleDataAsync(
+            new GqlSelection("Staff", default, new GqlParameter[]
+            {
+                new("id", staffId)
+            }),
+            new GqlSelection("isFavourite")
+        )).ToObject<bool>();
     }
 
-    public async Task<bool> ToggleStudioFavoriteAsync(int id)
+    public async Task<bool> ToggleStudioFavoriteAsync(int studioId)
     {
-        await ToggleFavoriteAsync("studioId", id);
-        return (await GetStudioAsync(id)).IsFavorite; // TODO: can be updated to improve performance
+        await ToggleFavoriteAsync("studioId", studioId);
+        return (await GetSingleDataAsync(
+            new GqlSelection("Studio", default, new GqlParameter[]
+            {
+                new("id", studioId)
+            }),
+            new GqlSelection("isFavourite")
+        )).ToObject<bool>();
     }
 
     /* below is methods that is privately used */
