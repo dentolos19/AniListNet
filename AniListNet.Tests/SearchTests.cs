@@ -34,6 +34,31 @@ public class SearchTests
     }
 
     [Test]
+    public async Task SearchMediaByFormatTest()
+    {
+        var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter
+        {
+            Query = "demon slayer",
+            Sort = MediaSort.Popularity,
+            Type = MediaType.Anime,
+            Format = new Dictionary<MediaFormat, bool>
+            {
+                { MediaFormat.TV, true },
+                { MediaFormat.TVShort, true },
+                { MediaFormat.Special, true },
+                { MediaFormat.Movie, false }
+            }
+        }, new AniPaginationOptions(1, 5));
+        Console.WriteLine(ObjectDumper.Dump(results));
+        Assert.IsTrue(results.Data.Any(item => item.Format is
+            (MediaFormat.TV or
+            MediaFormat.TVShort or
+            MediaFormat.Special) and not
+            MediaFormat.Movie
+        ));
+    }
+
+    [Test]
     public async Task SearchMediaBySeasonTest()
     {
         var results = await TestObjects.AniClient.SearchMediaAsync(new SearchMediaFilter

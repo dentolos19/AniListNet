@@ -95,7 +95,7 @@ internal static class GqlParser
                 stringBuilder.Append('[');
                 foreach (var item in enumerable)
                 {
-                    stringBuilder.Append(stringBuilder.Length > 1 ? string.Empty : ",");
+                    stringBuilder.Append(stringBuilder.Length <= 1 ? string.Empty : ",");
                     stringBuilder.Append(ParseObjectString(item));
                 }
                 stringBuilder.Append(']');
