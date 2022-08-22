@@ -34,7 +34,7 @@ public class GetTests
     [Test]
     public async Task GetMediaSchedulesTest()
     {
-        var data = await TestObjects.AniClient.GetMediaSchedulesAsync(new MediaScheduleFilter
+        var data = await TestObjects.AniClient.GetMediaSchedulesAsync(new MediaSchedulesFilter
         {
             StartedAfterDate = DateTime.Now,
             EndedBeforeDate = DateTime.Now.AddMonths(1)

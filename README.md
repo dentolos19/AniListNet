@@ -17,20 +17,30 @@ Install the library in your project.
 
 ```cs
 using AniListNet;
+using AniListNet.Objects;
+using AniListNet.Parameters;
 
+// simple class that fulfils all your needs
 var client = new AniClient();
 
-Console.WriteLine("Search results for \"one piece\"");
-var results = await client.SearchMediaAsync("one piece"); // searches for the term "one piece"
-foreach (var item in results.Data)
-    Console.WriteLine($"  {item.Format}: {item.Title.PreferredTitle}");
-Console.WriteLine();
+// simple authentication with AniList
+await client.TryAuthenticateAsync("<AUTH_TOKEN>");
 
-var firstResult = results.Data.First();
-Console.WriteLine($"Characters of the first result: {firstResult.Title.PreferredTitle} ({firstResult.Format})");
-var characters = await client.GetMediaCharactersAsync(firstResult.Id); // gets character list of the first result
-foreach (var character in characters.Data)
-    Console.WriteLine($"  {character.Role}: {character.Character.Name.FullName}");
+var results = await client.SearchMediaAsync(new SearchMediaFilter
+{
+   Query = "one piece",
+   Type = MediaType.Anime,
+   Sort = MediaSort.Popularity,
+   Format = new Dictionary<MediaFormat, bool>
+   {
+      { MediaFormat.TV, true }, // set to only search for TV shows and movies
+      { MediaFormat.Movie, true },
+      { MediaFormat.TVShort, false } // set to not show TV shorts
+   }
+});
+
+foreach (var result in results.Data) // prints all results into console
+   Console.WriteLine(result.Title.EnglishTitle);
 ```
 
 For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages)
@@ -50,7 +60,7 @@ or check out the [unit tests](./AniListNet.Tests).
     - [X] `GetGenreCollectionAsync`: gets all supported genres (e.g. Action, Fantasy, Romance)
     - [X] `GetTagCollectionAsync`: gets all supported tags (e.g. Male Protagonist, Heterosexual, Cultivation)
     - [X] `GetMediaAsync`
-    - [X] `GetMediaSchedulesAsync`
+    - [X] `GetMediaSchedulesAsync`: supports filtering
     - [X] `GetCharacterAsync`
     - [X] `GetStaffAsync`
     - [X] `GetStudioAsync`
@@ -80,6 +90,7 @@ or check out the [unit tests](./AniListNet.Tests).
 - [X] Has user-only mutation functions
     - [X] `TryAuthenticateAsync`: authenticate with user's access token
     - [X] `GetAuthenticatedUserAsync`
+    - [X] `UpdateUserOptionsAsync`
     - [X] `SaveMediaEntryAsync`
     - [X] `DeleteMediaEntryAsync`
     - [X] `ToggleFollowUserAsync`

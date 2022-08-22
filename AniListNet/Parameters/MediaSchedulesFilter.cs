@@ -3,7 +3,7 @@ using AniListNet.Objects;
 
 namespace AniListNet.Parameters;
 
-public class MediaScheduleFilter
+public class MediaSchedulesFilter
 {
 
     public int? MediaId { get; set; }

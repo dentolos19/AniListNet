@@ -29,9 +29,9 @@ public partial class AniClient
         return response["Media"].ToObject<Media>();
     }
 
-    public async Task<AniPagination<MediaSchedule>> GetMediaSchedulesAsync(MediaScheduleFilter? filter = null, AniPaginationOptions? paginationOptions = null)
+    public async Task<AniPagination<MediaSchedule>> GetMediaSchedulesAsync(MediaSchedulesFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
-        filter ??= new MediaScheduleFilter();
+        filter ??= new MediaSchedulesFilter();
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
