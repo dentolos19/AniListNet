@@ -33,9 +33,11 @@ public partial class AniClient
         return response["Viewer"].ToObject<User>();
     }
 
-    public Task UpdateUserOptionsAsync(UserOptionsMutation mutation)
+    public async Task<User> UpdateUserOptionsAsync(UserOptionsMutation mutation)
     {
-        return Task.CompletedTask; // TODO: add functionality
+        var selections = new GqlSelection("UpdateUser", typeof(User).ToSelections(), mutation.ToParameters());
+        var response = await PostRequestAsync(selections, true);
+        return response["UpdateUser"].ToObject<User>();
     }
 
     public async Task<MediaEntry> SaveMediaEntryAsync(int mediaId, MediaEntryMutation mutation)
