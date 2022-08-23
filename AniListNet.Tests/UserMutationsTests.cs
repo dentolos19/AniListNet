@@ -14,6 +14,22 @@ public class UserMutationsTests
     }
 
     [Test]
+    public async Task UpdateUserOptionsTest() // TODO: needs more mutations
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var user = await TestObjects.AniClient.GetAuthenticatedUserAsync();
+        var displayAdultContent = !user.Options.DisplayAdultContent;
+        user = await TestObjects.AniClient.UpdateUserOptionsAsync(new UserOptionsMutation
+        {
+            DisplayAdultContent = displayAdultContent
+        });
+        Assert.IsTrue(
+            user.Options.DisplayAdultContent == displayAdultContent
+        );
+    }
+
+    [Test]
     public async Task SaveMediaEntryTest()
     {
         if (!TestObjects.AniClient.IsAuthenticated)
