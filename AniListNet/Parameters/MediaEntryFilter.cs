@@ -7,7 +7,7 @@ public class MediaEntryFilter
 {
 
     public MediaType? Type { get; set; }
-    public MediaStatus? Status { get; set; }
+    public MediaEntryStatus? Status { get; set; }
     public MediaEntrySort Sort { get; set; } = MediaEntrySort.LastUpdated;
     public bool SortDescending { get; set; } = true;
 
