@@ -12,7 +12,7 @@ public class User
     [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
     [JsonProperty("options")] public UserOptions Options { get; private set; }
 
-    /* below is properties specific for the authenticated user */
+    /* below are properties specific for the authenticated user */
 
     [JsonProperty("isFollowing")] public bool IsFollowing { get; private set; }
     [JsonProperty("isFollower")] public bool IsFollower { get; private set; }

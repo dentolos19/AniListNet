@@ -35,7 +35,7 @@ public class Media
 
     public TimeSpan? Duration => _duration.HasValue ? new TimeSpan(0, _duration.Value, 0) : null;
 
-    /* below is properties specific for the authenticated user */
+    /* below are properties specific for the authenticated user */
 
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
     [JsonProperty("mediaListEntry")] public MediaEntrySub? Entry { get; private set; }

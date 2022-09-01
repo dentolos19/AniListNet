@@ -11,7 +11,7 @@ public class Staff
     [JsonProperty("yearsActive")] public int[] YearsActive { get; private set; }
     [JsonProperty("homeTown")] public string? HomeTown { get; private set; }
 
-    /* below is properties copied from Character */
+    /* below are properties copied from Character */
 
     [JsonProperty("id")] public int Id { get; private set; }
     [JsonProperty("name")] public Name Name { get; private set; } // but this one is changed from CharacterName to Name
@@ -22,7 +22,7 @@ public class Staff
     [JsonProperty("age")] public string? Age { get; private set; }
     [JsonProperty("favourites")] public int Favorites { get; private set; }
 
-    /* below is properties specific for the authenticated user */
+    /* below are properties specific for the authenticated user */
 
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
 

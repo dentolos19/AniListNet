@@ -14,7 +14,7 @@ public class Character
     [JsonProperty("age")] public string? Age { get; private set; }
     [JsonProperty("favourites")] public int Favorites { get; private set; }
 
-    /* below is properties specific for the authenticated user */
+    /* below are properties specific for the authenticated user */
 
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
 

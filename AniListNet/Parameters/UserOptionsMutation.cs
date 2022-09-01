@@ -21,7 +21,7 @@ public class UserOptionsMutation
         if (ProfileColor.HasValue)
             parameters.Add(new GqlParameter("profileColor", ProfileColor));
         if (StaffNameLanguage.HasValue)
-          parameters.Add(new GqlParameter("staffNameLanguage", StaffNameLanguage));
+            parameters.Add(new GqlParameter("staffNameLanguage", StaffNameLanguage));
         return parameters;
     }
 
