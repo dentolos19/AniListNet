@@ -67,7 +67,7 @@ internal static class GqlParser
         return stringBuilder.ToString();
     }
 
-    private static string? ParseObjectString(object? value)
+    private static string ParseObjectString(object? value)
     {
         return value switch
         {
