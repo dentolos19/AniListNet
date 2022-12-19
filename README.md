@@ -1,14 +1,12 @@
-# <img src=".github/icon.png" width="32"/> AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/AniListNet)
+# <img src=".github/icon.png" width="48px"/> AniList.NET [![](https://img.shields.io/nuget/v/AniListNet?label=NuGet&logo=nuget&style=flat-square)](https://nuget.org/packages/AniListNet)
 
 A simple .NET API wrapper for [AniList](https://anilist.co)!
 
-This project is designed to bring you a simpler way to access and interact with the AniList API. For more information
-about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anilist-apiv2-docs).
+This project is designed to bring you a simpler way to access and interact with the AniList API. For more information about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anilist-apiv2-docs).
 
-> **Note**: This was formerly a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a
-> fully-fledged project!
+> **Note**: This was formerly a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
 
-## Usage
+## ⚒️ Usage
 
 Install the library in your project.
 
@@ -43,10 +41,9 @@ foreach (var result in results.Data) // prints all results into console
    Console.WriteLine(result.Title.EnglishTitle);
 ```
 
-For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages)
-or check out the [unit tests](./AniListNet.Tests).
+For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages) or check out the [unit tests](./AniListNet.Tests).
 
-## Features
+## ⚙️ Features
 
 > **Note**: This library does not fully implements the API, so some features might be missing.
 
