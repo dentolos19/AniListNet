@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using System.Net.Http.Headers;
+using System.Text;
 using AniListNet.Helpers;
+using AniListNet.Objects;
 using Newtonsoft.Json.Linq;
 
 namespace AniListNet;
@@ -10,7 +12,25 @@ public partial class AniClient
     private readonly Uri _url = new("https://graphql.anilist.co");
     private readonly HttpClient _client = new();
 
+    public bool IsAuthenticated { get; private set; }
+
     public event EventHandler<AniRateEventArgs>? RateChanged;
+
+    public async Task<bool> TryAuthenticateAsync(string token)
+    {
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        try
+        {
+            _ = await GetAuthenticatedUserAsync();
+            IsAuthenticated = true;
+        }
+        catch
+        {
+            _client.DefaultRequestHeaders.Authorization = null;
+            IsAuthenticated = false;
+        }
+        return IsAuthenticated;
+    }
 
     private async Task<JToken> PostRequestAsync(GqlSelection selection, bool isMutation = false)
     {

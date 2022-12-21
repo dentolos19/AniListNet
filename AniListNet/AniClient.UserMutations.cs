@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using AniListNet.Helpers;
+﻿using AniListNet.Helpers;
 using AniListNet.Objects;
 using AniListNet.Parameters;
 
@@ -7,24 +6,6 @@ namespace AniListNet;
 
 public partial class AniClient
 {
-
-    public bool IsAuthenticated { get; private set; }
-
-    public async Task<bool> TryAuthenticateAsync(string token)
-    {
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        try
-        {
-            _ = await GetAuthenticatedUserAsync();
-            IsAuthenticated = true;
-        }
-        catch
-        {
-            _client.DefaultRequestHeaders.Authorization = null;
-            IsAuthenticated = false;
-        }
-        return IsAuthenticated;
-    }
 
     public async Task<User> GetAuthenticatedUserAsync()
     {
