@@ -6,7 +6,7 @@ public class Staff
 {
 
     [JsonProperty("languageV2")] public string Language { get; private set; }
-    [JsonProperty("primaryOccupations")] public IReadOnlyList<string> PrimaryOccupations { get; private set; }
+    [JsonProperty("primaryOccupations")] public string[] PrimaryOccupations { get; private set; }
     [JsonProperty("dateOfDeath")] public Date DateOfDeath { get; private set; }
     [JsonProperty("yearsActive")] public int[] YearsActive { get; private set; }
     [JsonProperty("homeTown")] public string? HomeTown { get; private set; }
