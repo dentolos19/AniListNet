@@ -7,13 +7,13 @@ namespace AniListNet;
 public partial class AniClient
 {
 
-    public async Task<IReadOnlyList<string>> GetGenreCollectionAsync()
+    public async Task<string[]> GetGenreCollectionAsync()
     {
         var response = await PostRequestAsync(new GqlSelection("GenreCollection"));
         return response["GenreCollection"].ToObject<string[]>();
     }
 
-    public async Task<IReadOnlyList<MediaTag>> GetTagCollectionAsync()
+    public async Task<MediaTag[]> GetTagCollectionAsync()
     {
         var response = await PostRequestAsync(new GqlSelection("MediaTagCollection", typeof(MediaTag).ToSelections()));
         return response["MediaTagCollection"].ToObject<MediaTag[]>();

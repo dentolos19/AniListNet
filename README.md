@@ -2,9 +2,11 @@
 
 A simple .NET API wrapper for [AniList](https://anilist.co)!
 
-This project is designed to bring you a simpler way to access and interact with the AniList API. For more information about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anilist-apiv2-docs).
+This project is designed to bring you a simpler way to access and interact with the AniList API. For more information
+about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anilist-apiv2-docs).
 
-> **Note**: This was formerly a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a fully-fledged project!
+> **Note**: This was formerly a side project of [Otakulore](https://github.com/dentolos19/Otakulore), now it's a
+> fully-fledged project!
 
 ## ⚒️ Usage
 
@@ -41,7 +43,8 @@ foreach (var result in results.Data) // prints all results into console
    Console.WriteLine(result.Title.EnglishTitle);
 ```
 
-For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages) or check out the [unit tests](./AniListNet.Tests).
+For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages)
+or check out the [unit tests](./AniListNet.Tests).
 
 ## ⚙️ Features
 
@@ -95,3 +98,12 @@ For more examples for using this library, visit the [usages wiki](https://github
     - [X] `ToggleCharacterFavoriteAsync`
     - [X] `ToggleStaffFavoriteAsync`
     - [X] `ToggleStudioFavoriteAsync`
+
+## 🔨 Todo
+
+- [ ] Add query functions for notification data
+- [ ] Add query/mutations functions for user activities
+- [ ] Add query/mutations functions for forums
+- [ ] Add more options for filtering
+- [ ] Add more data for `User`
+- [ ] Use generics instead of arrays

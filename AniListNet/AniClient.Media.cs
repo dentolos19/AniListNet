@@ -6,7 +6,7 @@ namespace AniListNet;
 public partial class AniClient
 {
 
-    public async Task<IReadOnlyList<MediaTag>> GetMediaTagsAsync(int mediaId)
+    public async Task<MediaTag[]> GetMediaTagsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
@@ -19,7 +19,7 @@ public partial class AniClient
         return response["Media"]["tags"].ToObject<MediaTag[]>();
     }
 
-    public async Task<IReadOnlyList<MediaRelationEdge>> GetMediaRelationsAsync(int mediaId)
+    public async Task<MediaRelationEdge[]> GetMediaRelationsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
@@ -80,7 +80,7 @@ public partial class AniClient
         );
     }
 
-    public async Task<IReadOnlyList<StudioEdge>> GetMediaStudiosAsync(int mediaId)
+    public async Task<StudioEdge[]> GetMediaStudiosAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
         {

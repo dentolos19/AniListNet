@@ -31,8 +31,8 @@ public class Media
 
     [JsonProperty("coverImage")] public MediaCover Cover { get; private set; }
     [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
-    [JsonProperty("genres")] public IReadOnlyList<string> Genres { get; private set; }
-    [JsonProperty("synonyms")] public IReadOnlyList<string> Synonyms { get; private set; }
+    [JsonProperty("genres")] public string[] Genres { get; private set; }
+    [JsonProperty("synonyms")] public string[] Synonyms { get; private set; }
     [JsonProperty("averageScore")] public int? AverageScore { get; private set; }
     [JsonProperty("meanScore")] public int? MeanScore { get; private set; }
     [JsonProperty("popularity")] public int Popularity { get; private set; }
