@@ -11,9 +11,9 @@ public class AniPagination<TData>
 
     public int LastPageIndex { get; }
     public bool HasNextPage { get; }
-    public TData[] Data { get; }
+    public IReadOnlyList<TData> Data { get; }
 
-    public AniPagination(PageInfo pageInfo, TData[] data)
+    internal AniPagination(PageInfo pageInfo, TData[] data)
     {
         TotalCount = pageInfo.TotalCount;
         PerPageCount = pageInfo.PerPageCount;

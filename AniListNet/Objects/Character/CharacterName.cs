@@ -5,6 +5,6 @@ namespace AniListNet.Objects;
 public class CharacterName : Name
 {
 
-    [JsonProperty("alternativeSpoiler")] public string[] AlternativeSpoilerNames { get; private set; }
+    [JsonProperty("alternativeSpoiler")] public IReadOnlyList<string> AlternativeSpoilerNames { get; private set; }
 
 }

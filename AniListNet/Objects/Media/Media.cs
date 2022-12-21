@@ -13,7 +13,10 @@ public class Media
     [JsonProperty("title")] public MediaTitle Title { get; private set; }
     [JsonProperty("type")] public MediaType Type { get; private set; }
     [JsonProperty("format")] public MediaFormat? Format { get; private set; }
-    [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus Status { get; private set; }
+
+    [JsonProperty("status")] [GqlParameter("version", 2)]
+    public MediaStatus Status { get; private set; }
+
     [JsonProperty("description")] public string? Description { get; private set; }
     [JsonProperty("startDate")] public Date StartDate { get; private set; }
     [JsonProperty("endDate")] public Date EndDate { get; private set; }
@@ -22,11 +25,14 @@ public class Media
     [JsonProperty("episodes")] public int? Episodes { get; private set; }
     [JsonProperty("chapters")] public int? Chapters { get; private set; }
     [JsonProperty("volumes")] public int? Volumes { get; private set; }
-    [JsonProperty("source")] [GqlParameter("version", 3)] public MediaSource? Source { get; private set; }
+
+    [JsonProperty("source")] [GqlParameter("version", 3)]
+    public MediaSource? Source { get; private set; }
+
     [JsonProperty("coverImage")] public MediaCover Cover { get; private set; }
     [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
-    [JsonProperty("genres")] public string[] Genres { get; private set; }
-    [JsonProperty("synonyms")] public string[] Synonyms { get; private set; }
+    [JsonProperty("genres")] public IReadOnlyList<string> Genres { get; private set; }
+    [JsonProperty("synonyms")] public IReadOnlyList<string> Synonyms { get; private set; }
     [JsonProperty("averageScore")] public int? AverageScore { get; private set; }
     [JsonProperty("meanScore")] public int? MeanScore { get; private set; }
     [JsonProperty("popularity")] public int Popularity { get; private set; }

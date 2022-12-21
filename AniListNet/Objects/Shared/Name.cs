@@ -10,7 +10,7 @@ public class Name
     [JsonProperty("last")] public string? LastName { get; private set; }
     [JsonProperty("full")] public string FullName { get; private set; }
     [JsonProperty("native")] public string NativeName { get; private set; }
-    [JsonProperty("alternative")] public string[] AlternativeNames { get; private set; }
+    [JsonProperty("alternative")] public IReadOnlyList<string> AlternativeNames { get; private set; }
     [JsonProperty("userPreferred")] public string PreferredName { get; private set; }
 
 }
