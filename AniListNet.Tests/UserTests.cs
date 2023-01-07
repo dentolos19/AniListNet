@@ -37,6 +37,13 @@ public class UserTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
+    [Test]
+    public async Task GetUserMediaListCollectionTest()
+    {
+        var data = await TestObjects.AniClient.GetUserMediaListCollection(1, MediaType.Anime);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
 
     [Test]
     public async Task GetUserAnimeFavoritesTest()
