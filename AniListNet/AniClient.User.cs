@@ -1,6 +1,7 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
 using AniListNet.Parameters;
+
 namespace AniListNet;
 
 public partial class AniClient
@@ -74,16 +75,15 @@ public partial class AniClient
         var response = await PostRequestAsync(selections);
         return response["MediaListCollection"].ToObject<MediaEntryCollection>();
     }
-    public async Task<MediaListCollection> GetUserMediaListCollection(int userId, MediaType type)
+
+    public async Task<MediaListCollection> GetUserListCollectionAsync(int userId, MediaType type)
     {
         var selections = new GqlSelection("MediaListCollection", typeof(MediaListCollection).ToSelections(), new GqlParameter[]
         {
             new("userId", userId),
-            new("type", type),
+            new("type", type)
         });
-        
         var response = await PostRequestAsync(selections);
-        
         return response["MediaListCollection"].ToObject<MediaListCollection>();
     }
 
