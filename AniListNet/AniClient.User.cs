@@ -76,6 +76,17 @@ public partial class AniClient
         return response["MediaListCollection"].ToObject<MediaEntryCollection>();
     }
 
+    public async Task<MediaListCollection> GetUserListCollectionAsync(int userId, MediaType type)
+    {
+        var selections = new GqlSelection("MediaListCollection", typeof(MediaListCollection).ToSelections(), new GqlParameter[]
+        {
+            new("userId", userId),
+            new("type", type)
+        });
+        var response = await PostRequestAsync(selections);
+        return response["MediaListCollection"].ToObject<MediaListCollection>();
+    }
+
     public Task<AniPagination<Media>> GetUserAnimeFavoritesAsync(int userId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();

@@ -39,6 +39,14 @@ public class UserTests
     }
 
     [Test]
+    public async Task GetUserListCollectionTest()
+    {
+        var data = await TestObjects.AniClient.GetUserListCollectionAsync(1, MediaType.Anime);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
     public async Task GetUserAnimeFavoritesTest()
     {
         var data = await TestObjects.AniClient.GetUserAnimeFavoritesAsync(5114158);
