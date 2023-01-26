@@ -1,8 +1,7 @@
-﻿using System.Net.Http.Headers;
-using System.Text;
-using AniListNet.Helpers;
-using AniListNet.Objects;
+﻿using AniListNet.Helpers;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace AniListNet;
 

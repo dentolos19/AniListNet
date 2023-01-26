@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json;
+using System.Collections;
 using System.Reflection;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace AniListNet.Helpers;
 
@@ -72,7 +72,7 @@ internal static class GqlParser
         return value switch
         {
             null => "null",
-            string @string => @string.StartsWith("$") ? @string.TrimStart('$') : $"\"{@string}\"",
+            string @string => @string.StartsWith('$') ? @string.TrimStart('$') : $"\"{@string}\"",
             bool @bool => @bool ? "true" : "false",
             Enum @enum => HelperUtilities.GetEnumMemberValue(@enum),
             IEnumerable<GqlParameter> parameters => ((Func<string>)(() =>
@@ -86,7 +86,7 @@ internal static class GqlParser
                     stringBuilder.Append(":");
                     stringBuilder.Append(ParseObjectString(parameter.Value));
                 }
-                stringBuilder.Append("}");
+                stringBuilder.Append('}');
                 return stringBuilder.ToString();
             }))(),
             IEnumerable enumerable => ((Func<string>)(() =>
