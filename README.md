@@ -81,6 +81,7 @@ or check out the [unit tests](./AniListNet.Tests).
   - [x] `GetUserFollowingsAsync`
   - [x] `GetUserEntriesAsync`
   - [x] `GetUserEntryCollectionAsync`
+  - [x] `GetUserListCollectionAsync`: similar to the previous function; but comes without its media entries
   - [x] `GetUserAnimeFavoritesAsync`
   - [x] `GetUserMangaFavoritesAsync`
   - [x] `GetUserCharacterFavoritesAsync`
@@ -101,7 +102,7 @@ or check out the [unit tests](./AniListNet.Tests).
 ## 🔨 Todo
 
 - [ ] Add query functions for notification data
-- [ ] Add query/mutations functions for user activities
+- [ ] Add query/mutations functions for user settings/activities
 - [ ] Add query/mutations functions for forums
 - [ ] Add more options for filtering
 - [ ] Add more data for `User`

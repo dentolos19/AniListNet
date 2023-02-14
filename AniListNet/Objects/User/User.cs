@@ -11,7 +11,8 @@ public class User
     [JsonProperty("avatar")] public Image Avatar { get; private set; }
     [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
     [JsonProperty("options")] public UserOptions Options { get; private set; }
-
+    [JsonProperty("siteUrl")] public Uri Url { get; private set; }
+    
     /* below are properties specific for the authenticated user */
 
     [JsonProperty("isFollowing")] public bool IsFollowing { get; private set; }
