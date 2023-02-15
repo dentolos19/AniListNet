@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public enum UserProfileColor
 {
-
     [EnumMember(Value = "blue")] Blue,
     [EnumMember(Value = "purple")] Purple,
     [EnumMember(Value = "pink")] Pink,
@@ -12,5 +11,4 @@ public enum UserProfileColor
     [EnumMember(Value = "red")] Red,
     [EnumMember(Value = "green")] Green,
     [EnumMember(Value = "gray")] Gray
-
 }

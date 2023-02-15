@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public enum MediaFormat
 {
-
     [EnumMember(Value = "TV")] TV,
     [EnumMember(Value = "TV_SHORT")] TVShort,
     [EnumMember(Value = "MOVIE")] Movie,
@@ -15,5 +14,4 @@ public enum MediaFormat
     [EnumMember(Value = "MANGA")] Manga,
     [EnumMember(Value = "NOVEL")] Novel,
     [EnumMember(Value = "ONE_SHOT")] OneShot
-
 }

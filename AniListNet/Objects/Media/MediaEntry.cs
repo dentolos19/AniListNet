@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public class MediaEntry
 {
-
     [JsonProperty("id")] public int Id { get; private set; }
     [JsonProperty("status")] public MediaEntryStatus Status { get; private set; }
     [JsonProperty("score")] public float Score { get; private set; }
@@ -16,5 +15,4 @@ public class MediaEntry
 
     public int? MaxProgress => Media.Episodes ?? Media.Chapters;
     public int? MaxVolumeProgress => Media.Volumes;
-
 }

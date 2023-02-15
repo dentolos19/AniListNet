@@ -5,7 +5,6 @@ namespace AniListNet.Tests;
 
 public class UserTests
 {
-
     [Test]
     public async Task GetUserFollowersTest()
     {
@@ -85,5 +84,4 @@ public class UserTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
-
 }

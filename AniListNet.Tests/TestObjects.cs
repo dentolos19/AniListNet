@@ -4,7 +4,6 @@ namespace AniListNet.Tests;
 
 public static class TestObjects
 {
-
     private static Random? _random;
     private static AniClient? _aniClient;
 
@@ -22,5 +21,4 @@ public static class TestObjects
             return _aniClient;
         }
     }
-
 }

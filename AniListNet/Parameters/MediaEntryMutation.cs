@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class MediaEntryMutation
 {
-
     public MediaEntryStatus? Status { get; set; }
     public float? Score { get; set; }
     public int? Progress { get; set; }
@@ -52,5 +51,4 @@ public class MediaEntryMutation
             }));
         return parameters;
     }
-
 }

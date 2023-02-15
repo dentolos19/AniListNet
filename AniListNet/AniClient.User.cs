@@ -6,7 +6,6 @@ namespace AniListNet;
 
 public partial class AniClient
 {
-
     public async Task<AniPagination<User>> GetUserFollowersAsync(int userId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
@@ -141,5 +140,4 @@ public partial class AniClient
             response["User"]["favourites"][type]["nodes"].ToObject<T[]>()
         );
     }
-
 }

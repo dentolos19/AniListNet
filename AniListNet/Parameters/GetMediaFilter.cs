@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class GetMediaFilter
 {
-
     public MediaType? Type { get; set; }
     public bool? OnList { get; set; }
     public MediaSort Sort { get; set; } = MediaSort.Popularity;
@@ -21,5 +20,4 @@ public class GetMediaFilter
         parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending && Sort != MediaSort.Relevance ? "_DESC" : string.Empty)));
         return parameters;
     }
-
 }

@@ -2,7 +2,6 @@
 
 public class AniRateEventArgs : EventArgs
 {
-
     public int RateLimit { get; }
     public int RateRemaining { get; }
 
@@ -11,5 +10,4 @@ public class AniRateEventArgs : EventArgs
         RateLimit = rateLimit;
         RateRemaining = rateRemaining;
     }
-
 }

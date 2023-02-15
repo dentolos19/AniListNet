@@ -5,7 +5,6 @@ namespace AniListNet.Objects;
 
 public class Character
 {
-
     [JsonProperty("id")] public int Id { get; private set; }
     [JsonProperty("name")] public CharacterName Name { get; private set; }
     [JsonProperty("image")] public Image Image { get; private set; }
@@ -18,5 +17,4 @@ public class Character
     /* below are properties specific for the authenticated user */
 
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
-
 }

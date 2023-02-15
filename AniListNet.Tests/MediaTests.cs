@@ -4,7 +4,6 @@ namespace AniListNet.Tests;
 
 public class MediaTests
 {
-
     [Test]
     public async Task GetMediaTagsAsync()
     {
@@ -52,5 +51,4 @@ public class MediaTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
-
 }

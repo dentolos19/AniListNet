@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public class MediaEntrySub
 {
-
     [JsonProperty("media")] private readonly Media _media;
 
     [JsonProperty("id")] public int Id { get; private set; }
@@ -20,11 +19,8 @@ public class MediaEntrySub
 
     private class Media
     {
-
         [JsonProperty("episodes")] public int? Episodes { get; private set; }
         [JsonProperty("chapters")] public int? Chapters { get; private set; }
         [JsonProperty("volumes")] public int? Volumes { get; private set; }
-
     }
-
 }

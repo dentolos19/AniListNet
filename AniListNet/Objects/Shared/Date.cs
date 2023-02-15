@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public class Date
 {
-
     [JsonProperty("year")] public int? Year { get; private set; }
     [JsonProperty("month")] public int? Month { get; private set; }
     [JsonProperty("day")] public int? Day { get; private set; }
@@ -15,5 +14,4 @@ public class Date
             return new DateTime(Year.Value, Month.Value, Day.Value);
         return null;
     }
-
 }

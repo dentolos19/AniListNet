@@ -5,7 +5,6 @@ namespace AniListNet.Tests;
 
 public class GetTests
 {
-
     [Test]
     public async Task GetGenreCollectionTest()
     {
@@ -78,5 +77,4 @@ public class GetTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.AreEqual(id, data.Id);
     }
-
 }

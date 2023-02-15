@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class UserOptionsMutation
 {
-
     public UserMediaTitleLanguage? MediaTitleLanguage { get; set; }
     public bool? DisplayAdultContent { get; set; }
     public UserProfileColor? ProfileColor { get; set; }
@@ -24,5 +23,4 @@ public class UserOptionsMutation
             parameters.Add(new GqlParameter("staffNameLanguage", StaffNameLanguage));
         return parameters;
     }
-
 }

@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class MediaSchedulesFilter
 {
-
     public int? MediaId { get; set; }
     public bool NotYetAired { get; set; } = true;
     public DateTime? StartedAfterDate { get; set; }
@@ -26,5 +25,4 @@ public class MediaSchedulesFilter
         parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending ? "_DESC" : string.Empty)));
         return parameters;
     }
-
 }

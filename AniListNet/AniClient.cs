@@ -1,15 +1,15 @@
-﻿using AniListNet.Helpers;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Text;
+using AniListNet.Helpers;
+using Newtonsoft.Json.Linq;
 
 namespace AniListNet;
 
 public partial class AniClient
 {
+    private readonly HttpClient _client = new();
 
     private readonly Uri _url = new("https://graphql.anilist.co");
-    private readonly HttpClient _client = new();
 
     public bool IsAuthenticated { get; private set; }
 
@@ -65,5 +65,4 @@ public partial class AniClient
             token = token[item.Name];
         return token;
     }
-
 }

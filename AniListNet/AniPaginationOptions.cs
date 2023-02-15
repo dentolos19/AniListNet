@@ -4,7 +4,6 @@ namespace AniListNet;
 
 public class AniPaginationOptions
 {
-
     public int PageIndex { get; }
     public int PageSize { get; }
 
@@ -22,5 +21,4 @@ public class AniPaginationOptions
             new("perPage", PageSize)
         };
     }
-
 }

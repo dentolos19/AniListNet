@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class SearchCharacterFilter
 {
-
     public bool? IsBirthday { get; set; }
     public string? Query { get; set; }
     public CharacterSort Sort { get; set; } = CharacterSort.Relevance;
@@ -21,5 +20,4 @@ public class SearchCharacterFilter
         parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending && Sort != CharacterSort.Relevance ? "_DESC" : string.Empty)));
         return parameters;
     }
-
 }

@@ -6,7 +6,6 @@ namespace AniListNet.Tests;
 
 public class SearchTests
 {
-
     [Test]
     public async Task SearchAnimeMediaTest()
     {
@@ -120,5 +119,4 @@ public class SearchTests
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
-
 }

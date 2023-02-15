@@ -4,7 +4,6 @@ namespace AniListNet;
 
 public class AniPagination<TData>
 {
-
     public int TotalCount { get; }
     public int PerPageCount { get; }
     public int CurrentPageIndex { get; }
@@ -21,5 +20,4 @@ public class AniPagination<TData>
         HasNextPage = pageInfo.HasNextPage;
         Data = data;
     }
-
 }

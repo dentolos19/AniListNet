@@ -2,7 +2,6 @@
 
 internal static class HelperExtensions
 {
-
     public static IList<GqlSelection> ToSelections(this Type type)
     {
         return GqlParser.ParseType(type);
@@ -17,5 +16,4 @@ internal static class HelperExtensions
             excludedItems.Select(item => item.Key).ToArray()
         );
     }
-
 }

@@ -1,13 +1,12 @@
-﻿using Newtonsoft.Json;
-using System.Collections;
+﻿using System.Collections;
 using System.Reflection;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace AniListNet.Helpers;
 
 internal static class GqlParser
 {
-
     public static string ParseSelections(GqlSelection selection)
     {
         return ParseSelections(new[] { selection });
@@ -104,5 +103,4 @@ internal static class GqlParser
             _ => value.ToString()
         };
     }
-
 }

@@ -6,7 +6,6 @@ namespace AniListNet;
 
 public partial class AniClient
 {
-
     public async Task<User> GetAuthenticatedUserAsync()
     {
         var selections = new GqlSelection("Viewer", GqlParser.ParseType(typeof(User)));
@@ -126,5 +125,4 @@ public partial class AniClient
         });
         _ = await PostRequestAsync(selections, true);
     }
-
 }

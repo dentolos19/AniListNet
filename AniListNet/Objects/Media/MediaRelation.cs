@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public enum MediaRelation
 {
-
     [EnumMember(Value = "ADAPTATION")] Adaption,
     [EnumMember(Value = "PREQUEL")] Prequel,
     [EnumMember(Value = "SEQUEL")] Sequel,
@@ -18,5 +17,4 @@ public enum MediaRelation
     [EnumMember(Value = "SOURCE")] Source, // v2
     [EnumMember(Value = "COMPILATION")] Compilation, // v2
     [EnumMember(Value = "CONTAINS")] Contains // v2
-
 }

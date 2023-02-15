@@ -6,7 +6,6 @@ namespace AniListNet;
 
 public partial class AniClient
 {
-
     public async Task<string[]> GetGenreCollectionAsync()
     {
         var response = await PostRequestAsync(new GqlSelection("GenreCollection"));
@@ -84,5 +83,4 @@ public partial class AniClient
         var response = await PostRequestAsync(selections);
         return response["User"].ToObject<User>();
     }
-
 }

@@ -6,7 +6,6 @@ namespace AniListNet;
 
 public partial class AniClient
 {
-
     public async Task<AniPagination<MediaCharacterEdge>> GetCharacterMediaAsync(int characterId, GetMediaFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new GetMediaFilter();
@@ -118,5 +117,4 @@ public partial class AniClient
             response["Studio"]["media"]["edges"].ToObject<MediaStudioEdge[]>()
         );
     }
-
 }

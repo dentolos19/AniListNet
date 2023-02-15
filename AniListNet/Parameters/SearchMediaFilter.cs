@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class SearchMediaFilter
 {
-
     public MediaSeason? Season { get; set; }
     public int SeasonYear { get; set; } = DateTime.Now.Year;
     public MediaType? Type { get; set; }
@@ -71,5 +70,4 @@ public class SearchMediaFilter
         parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending && Sort != MediaSort.Relevance ? "_DESC" : string.Empty)));
         return parameters;
     }
-
 }

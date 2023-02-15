@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public enum MediaSource
 {
-
     [EnumMember(Value = "ORIGINAL")] Original,
     [EnumMember(Value = "MANGA")] Manga,
     [EnumMember(Value = "LIGHT_NOVEL")] LightNovel,
@@ -20,5 +19,4 @@ public enum MediaSource
     [EnumMember(Value = "COMIC")] Comic, // v3
     [EnumMember(Value = "MULTIMEDIA_PROJECT")] MultimediaProject, // v3
     [EnumMember(Value = "PICTURE_BOOK")] PictureBook // v3
-
 }

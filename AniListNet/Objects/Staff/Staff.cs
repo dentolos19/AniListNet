@@ -4,7 +4,6 @@ namespace AniListNet.Objects;
 
 public class Staff
 {
-
     [JsonProperty("languageV2")] public string Language { get; private set; }
     [JsonProperty("primaryOccupations")] public string[] PrimaryOccupations { get; private set; }
     [JsonProperty("dateOfDeath")] public Date DateOfDeath { get; private set; }
@@ -25,5 +24,4 @@ public class Staff
     /* below are properties specific for the authenticated user */
 
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
-
 }

@@ -6,7 +6,6 @@ namespace AniListNet.Tests;
 
 public class OtherTests
 {
-
     [Test]
     public async Task GetCharacterMediaTest()
     {
@@ -50,5 +49,4 @@ public class OtherTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
-
 }

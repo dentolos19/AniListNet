@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class MediaEntryFilter
 {
-
     public MediaType? Type { get; set; }
     public MediaEntryStatus? Status { get; set; }
     public MediaEntrySort Sort { get; set; } = MediaEntrySort.LastUpdated;
@@ -21,5 +20,4 @@ public class MediaEntryFilter
         parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending ? "_DESC" : string.Empty)));
         return parameters;
     }
-
 }

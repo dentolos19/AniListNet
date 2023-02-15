@@ -2,7 +2,6 @@
 
 internal class GqlParameter
 {
-
     public string Name { get; }
     public object? Value { get; }
 
@@ -11,5 +10,4 @@ internal class GqlParameter
         Name = name;
         Value = value;
     }
-
 }

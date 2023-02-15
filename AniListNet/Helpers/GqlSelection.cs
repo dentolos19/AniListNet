@@ -2,7 +2,6 @@
 
 internal class GqlSelection
 {
-
     public string Name { get; set; }
     public IList<GqlSelection>? Selections { get; set; }
     public IList<GqlParameter>? Parameters { get; set; }
@@ -18,5 +17,4 @@ internal class GqlSelection
     {
         return GqlParser.ParseSelections(this);
     }
-
 }

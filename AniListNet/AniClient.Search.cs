@@ -6,7 +6,6 @@ namespace AniListNet;
 
 public partial class AniClient
 {
-
     public async Task<AniPagination<Media>> SearchMediaAsync(SearchMediaFilter filter, AniPaginationOptions? options = null)
     {
         options ??= new AniPaginationOptions();
@@ -102,5 +101,4 @@ public partial class AniClient
     {
         return SearchCharacterAsync(new SearchCharacterFilter { Query = query }, options);
     }
-
 }

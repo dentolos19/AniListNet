@@ -5,7 +5,6 @@ namespace AniListNet.Objects;
 
 public class Media
 {
-
     [JsonProperty("duration")] private readonly int? _duration;
 
     [JsonProperty("id")] public int Id { get; private set; }
@@ -39,5 +38,4 @@ public class Media
 
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
     [JsonProperty("mediaListEntry")] public MediaEntrySub? Entry { get; private set; }
-
 }

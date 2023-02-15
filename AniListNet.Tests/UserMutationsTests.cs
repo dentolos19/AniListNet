@@ -6,7 +6,6 @@ namespace AniListNet.Tests;
 
 public class UserMutationsTests
 {
-
     [OneTimeSetUp]
     public async Task AuthorizationSetup()
     {
@@ -110,5 +109,4 @@ public class UserMutationsTests
         var studioFavorite = await TestObjects.AniClient.ToggleStudioFavoriteAsync(studio.Id);
         Assert.AreEqual(!studio.IsFavorite, studioFavorite);
     }
-
 }
