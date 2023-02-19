@@ -19,11 +19,13 @@ using AniListNet;
 using AniListNet.Objects;
 using AniListNet.Parameters;
 
-// simple class that fulfils all your needs
+// a simple class that fulfils all your needs
 var client = new AniClient();
 
-// simple authentication with AniList
-await client.TryAuthenticateAsync("<AUTH_TOKEN>");
+// easy authentication with AniList
+var isAuthenticated = await client.TryAuthenticateAsync("<AUTH_TOKEN>");
+if (!isAuthenticated)
+  throw new Exception("Unable to authenticate with AniList.");
 
 var results = await client.SearchMediaAsync(new SearchMediaFilter
 {
