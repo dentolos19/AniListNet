@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AniListNet", "AniListNet\AniListNet.csproj", "{E1542B17-C464-47AB-A617-CB93FAE42B1C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AniListNet.Tests", "AniListNet.Tests\AniListNet.Tests.csproj", "{F09DECFB-32AD-4613-A896-3F852D41BB3C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository Files", "Repository Files", "{20FACF1D-BE80-463A-955F-57A79F115024}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniListNet", "src\AniListNet\AniListNet.csproj", "{88559733-4145-42D0-AB55-DDE406D2A079}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniListNet.Tests", "src\AniListNet.Tests\AniListNet.Tests.csproj", "{04EE9930-C1AE-43C3-80D9-CCB7C4504037}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E1542B17-C464-47AB-A617-CB93FAE42B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E1542B17-C464-47AB-A617-CB93FAE42B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E1542B17-C464-47AB-A617-CB93FAE42B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E1542B17-C464-47AB-A617-CB93FAE42B1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F09DECFB-32AD-4613-A896-3F852D41BB3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F09DECFB-32AD-4613-A896-3F852D41BB3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F09DECFB-32AD-4613-A896-3F852D41BB3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F09DECFB-32AD-4613-A896-3F852D41BB3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88559733-4145-42D0-AB55-DDE406D2A079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88559733-4145-42D0-AB55-DDE406D2A079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88559733-4145-42D0-AB55-DDE406D2A079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88559733-4145-42D0-AB55-DDE406D2A079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04EE9930-C1AE-43C3-80D9-CCB7C4504037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04EE9930-C1AE-43C3-80D9-CCB7C4504037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04EE9930-C1AE-43C3-80D9-CCB7C4504037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04EE9930-C1AE-43C3-80D9-CCB7C4504037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
