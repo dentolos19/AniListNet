@@ -45,6 +45,14 @@ public class MediaTests
     }
 
     [Test]
+    public async Task GetMediaRecommendationTest()
+    {
+        var data = await TestObjects.AniClient.GetMediaRecommendationsAsync(1);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
     public async Task GetMediaEntryTest() // TODO: needs improvement
     {
         var data = await TestObjects.AniClient.GetMediaEntryAsync(1);

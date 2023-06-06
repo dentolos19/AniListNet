@@ -10,5 +10,9 @@ public enum UserProfileColor
     [EnumMember(Value = "orange")] Orange,
     [EnumMember(Value = "red")] Red,
     [EnumMember(Value = "green")] Green,
-    [EnumMember(Value = "gray")] Gray
+    [EnumMember(Value = "gray")] Gray,
+    /// <summary>
+    /// This is a catch for any custom colors
+    /// </summary>
+    [EnumMember(Value = "custom")] Custom
 }

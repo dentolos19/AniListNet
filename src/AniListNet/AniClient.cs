@@ -8,7 +8,6 @@ namespace AniListNet;
 public partial class AniClient
 {
     private readonly HttpClient _client = new();
-
     private readonly Uri _url = new("https://graphql.anilist.co");
 
     public bool IsAuthenticated { get; private set; }
