@@ -83,4 +83,5 @@ public partial class AniClient
         var response = await PostRequestAsync(selections);
         return response["User"].ToObject<User>();
     }
+    
 }
