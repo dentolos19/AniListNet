@@ -78,6 +78,7 @@ or check out the [unit tests](./AniListNet.Tests).
   - [x] `GetMediaCharactersAsync`
   - [x] `GetMediaStaffAsync`
   - [x] `GetMediaStudiosAsync`
+  - [x] `GetMediaRecommendationsAsync`
 - [x] Has user-specific data query functions
   - [x] `GetUserFollowersAsync`
   - [x] `GetUserFollowingsAsync`
@@ -103,6 +104,7 @@ or check out the [unit tests](./AniListNet.Tests).
 
 ## 🔨 Todo
 
+- [ ] Add documentation
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user settings/activities
 - [ ] Add query/mutations functions for forums
