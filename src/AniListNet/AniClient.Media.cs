@@ -1,6 +1,5 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
-using AniListNet.Objects.Recommendation;
 
 namespace AniListNet;
 
@@ -95,8 +94,8 @@ public partial class AniClient
         var response = await PostRequestAsync(selections);
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
     }
-    
-    public async Task<AniPagination<RecommendationEdge>> GetMediaRecommendationsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
+
+    public async Task<AniPagination<MediaRecommendationEdge>> GetMediaRecommendationsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Media", new GqlSelection[]
@@ -104,16 +103,16 @@ public partial class AniClient
             new("recommendations", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(RecommendationEdge).ToSelections())
+                new("edges", typeof(MediaRecommendationEdge).ToSelections())
             }, paginationOptions.ToParameters())
         }, new GqlParameter[]
         {
             new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
-        return new AniPagination<RecommendationEdge>(
+        return new AniPagination<MediaRecommendationEdge>(
             response["Media"]["recommendations"]["pageInfo"].ToObject<PageInfo>(),
-            response["Media"]["recommendations"]["edges"].ToObject<RecommendationEdge[]>()
+            response["Media"]["recommendations"]["edges"].ToObject<MediaRecommendationEdge[]>()
         );
     }
 

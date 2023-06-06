@@ -8,13 +8,11 @@ namespace AniListNet;
 public partial class AniClient
 {
     private readonly HttpClient _client = new();
-
     private readonly Uri _url = new("https://graphql.anilist.co");
 
     public bool IsAuthenticated { get; private set; }
 
     public event EventHandler<AniRateEventArgs>? RateChanged;
-    private int _rateLimit;
 
     public async Task<bool> TryAuthenticateAsync(string token)
     {
@@ -47,10 +45,7 @@ public partial class AniClient
         var rateLimitValidated = int.TryParse(rateLimitString, out var rateLimit);
         var rateRemainingValidated = int.TryParse(rateRemainingString, out var rateRemaining);
         if (rateLimitValidated && rateRemainingValidated)
-        {
-            _rateLimit = rateLimit;
             RateChanged?.Invoke(this, new AniRateEventArgs(rateLimit, rateRemaining));
-        }
         return json["data"];
     }
 

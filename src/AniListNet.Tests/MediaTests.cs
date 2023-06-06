@@ -43,7 +43,7 @@ public class MediaTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
-    
+
     [Test]
     public async Task GetMediaRecommendationTest()
     {
