@@ -1,5 +1,4 @@
-﻿using AniListNet.Helpers;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
@@ -7,7 +6,6 @@ public class UserOptions
 {
     [JsonProperty("titleLanguage")] public UserMediaTitleLanguage MediaTitleLanguage { get; set; }
     [JsonProperty("displayAdultContent")] public bool DisplayAdultContent { get; set; }
-    [JsonConverter(typeof(ProfileColorConverter))]
-    [JsonProperty("profileColor")] public UserProfileColor ProfileColor { get; set; }
+    // [JsonProperty("profileColor")] public UserProfileColor ProfileColor { get; set; } // TODO: to be fixed
     [JsonProperty("staffNameLanguage")] public UserStaffNameLanguage StaffNameLanguage { get; set; }
 }
