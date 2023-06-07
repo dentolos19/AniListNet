@@ -49,7 +49,7 @@ or check out the [unit tests](./AniListNet.Tests).
 
 ## ⚙️ Features
 
-> **Note**: This library does not fully implements the API, so some features might be missing.
+> **Note**: This library does not fully implement the API, so some features might be missing.
 
 - [x] Has search query functions
   - [x] `SearchMediaAsync`: searches for Anime & Manga (supports filtering)
@@ -84,7 +84,7 @@ or check out the [unit tests](./AniListNet.Tests).
   - [x] `GetUserFollowingsAsync`
   - [x] `GetUserEntriesAsync`
   - [x] `GetUserEntryCollectionAsync`
-  - [x] `GetUserListCollectionAsync`: similar to the previous function; but comes without its media entries
+  - [x] `GetUserListCollectionAsync`: similar to `GetUserEntryCollectionAsync`, but comes without its media entries
   - [x] `GetUserAnimeFavoritesAsync`
   - [x] `GetUserMangaFavoritesAsync`
   - [x] `GetUserCharacterFavoritesAsync`

@@ -1,4 +1,4 @@
-﻿namespace AniListNet.Helpers;
+namespace AniListNet.Helpers;
 
 internal static class HelperExtensions
 {
