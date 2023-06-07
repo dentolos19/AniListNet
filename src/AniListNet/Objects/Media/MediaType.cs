@@ -5,11 +5,11 @@ namespace AniListNet.Objects;
 public enum MediaType
 {
     /// <summary>
-    /// Japanese Anime
+    /// Japanese Anime.
     /// </summary>
     [EnumMember(Value = "ANIME")] Anime,
     /// <summary>
-    /// Asian comic
+    /// Asian comic.
     /// </summary>
     [EnumMember(Value = "MANGA")] Manga
 }

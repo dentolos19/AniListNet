@@ -6,19 +6,19 @@ namespace AniListNet.Objects;
 public class Character
 {
     /// <summary>
-    /// The id of the character
+    /// The id of the character.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>
-    /// The names of the character
+    /// The names of the character.
     /// </summary>
     [JsonProperty("name")] public CharacterName Name { get; private set; }
     /// <summary>
-    /// Character image
+    /// Character image.
     /// </summary>
     [JsonProperty("image")] public Image Image { get; private set; }
     /// <summary>
-    /// A general description of the character
+    /// A general description of the character.
     /// </summary>
     /// <remarks>In Markdown format</remarks>
     [JsonProperty("description")] [GqlParameter("asHtml", false)] public string? Description { get; private set; }
@@ -27,7 +27,7 @@ public class Character
     /// </summary>
     [JsonProperty("gender")] public string? Gender { get; private set; }
     /// <summary>
-    /// The character's birth date
+    /// The character's birth date.
     /// </summary>
     [JsonProperty("dateOfBirth")] public Date DateOfBirth { get; private set; }
     /// <summary>
@@ -35,13 +35,13 @@ public class Character
     /// </summary>
     [JsonProperty("age")] public string? Age { get; private set; }
     /// <summary>
-    /// The amount of user's who have favourited the character
+    /// The amount of user's who have favorite the character.
     /// </summary>
     [JsonProperty("favourites")] public int Favorites { get; private set; }
     /// <summary>
-    /// The url for the character page on the AniList website
+    /// The url for the character page on the AniList website.
     /// </summary>
-    [JsonProperty("siteUrl")] public string SiteUrl { get; private set; }
+    [JsonProperty("siteUrl")] public Uri Url { get; private set; }
 
     /* below are properties specific for the authenticated user */
 
@@ -50,7 +50,7 @@ public class Character
     /// </summary>
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
     /// <summary>
-    /// If the character is blocked from being added to favourites
+    /// If the character is blocked from being added to favorites.
     /// </summary>
     [JsonProperty("isFavouriteBlocked")] public bool IsFavoriteBlocked { get; set; }
 }

@@ -133,16 +133,16 @@ public class Media
     [JsonProperty("isAdult")] public bool IsAdult { get; private set; }
     
     /// <summary>
-    /// If the media is officially licensed or a self-published doujin release
+    /// If the media is officially licensed or a self-published doujin release.
     /// </summary>
     [JsonProperty("isLicensed")] public bool IsLicensed { get; private set; }
 
     /// <summary>
-    /// When the media's data was last updated
+    /// When the media's data was last updated.
     /// </summary>
     [JsonProperty("updatedAt")] private readonly int _updatedAt;
     /// <summary>
-    /// When the media's data was last updated
+    /// When the media's data was last updated.
     /// </summary>
     public DateTime UpdatedAt => DateTimeOffset.FromUnixTimeSeconds(_updatedAt).DateTime;
     

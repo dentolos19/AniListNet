@@ -5,30 +5,31 @@ namespace AniListNet.Objects;
 public class UserOptions
 {
     /// <summary>
-    /// The language the user wants to see media titles in
+    /// The language the user wants to see media titles in.
     /// </summary>
     [JsonProperty("titleLanguage")] public UserMediaTitleLanguage MediaTitleLanguage { get; set; }
     /// <summary>
-    /// Whether the user has enabled viewing of 18+ content
+    /// Whether the user has enabled viewing of 18+ content.
     /// </summary>
     [JsonProperty("displayAdultContent")] public bool DisplayAdultContent { get; set; }
     /// <summary>
-    /// Whether the user receives notifications when a show they are watching aires
+    /// Whether the user receives notifications when a show they are watching aires.
     /// </summary>
     [JsonProperty("airingNotifications")] public bool ReceiveAiringNotifications { get; set; }
     /// <summary>
-    /// Profile highlight color (blue, purple, pink, orange, red, green, gray, or a hex value)
+    /// Profile highlight color (blue, purple, pink, orange, red, green, gray, or a hex value).
     /// </summary>
     [JsonProperty("profileColor")] public string ProfileColor { get; set; }
     /// <summary>
-    /// The language the user wants to see staff and character names in
+    /// The language the user wants to see staff and character names in.
     /// </summary>
     [JsonProperty("staffNameLanguage")] public UserStaffNameLanguage StaffNameLanguage { get; set; }
     
     /* below are properties specific for the authenticated user */
     
     /// <summary>
-    /// The user's timezone offset (Auth user only)
+    /// The user's timezone offset.
     /// </summary>
+    /// <remarks>Authenticated User only</remarks>
     [JsonProperty("timezone")] public string? Timezone { get; set; }
 }
