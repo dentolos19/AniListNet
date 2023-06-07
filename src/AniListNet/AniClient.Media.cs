@@ -115,6 +115,27 @@ public partial class AniClient
             response["Media"]["recommendations"]["edges"].ToObject<MediaRecommendationEdge[]>()
         );
     }
+    
+    public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
+    {
+        paginationOptions ??= new AniPaginationOptions();
+        var selections = new GqlSelection("Media", new GqlSelection[]
+        {
+            new("reviews", new GqlSelection[]
+            {
+                new("pageInfo", typeof(PageInfo).ToSelections()),
+                new("edges", typeof(MediaReviewEdge).ToSelections())
+            }, paginationOptions.ToParameters())
+        }, new GqlParameter[]
+        {
+            new("id", mediaId)
+        });
+        var response = await PostRequestAsync(selections);
+        return new AniPagination<MediaReviewEdge>(
+            response["Media"]["reviews"]["pageInfo"].ToObject<PageInfo>(),
+            response["Media"]["reviews"]["edges"].ToObject<MediaReviewEdge[]>()
+        );
+    }
 
     /* below is properties specific for the authenticated user */
 
