@@ -1,14 +1,12 @@
-﻿using System.Runtime.Serialization;
+﻿namespace AniListNet.Objects;
 
-namespace AniListNet.Objects;
-
-public enum UserProfileColor
+public static class UserProfileColor
 {
-    [EnumMember(Value = "blue")] Blue,
-    [EnumMember(Value = "purple")] Purple,
-    [EnumMember(Value = "pink")] Pink,
-    [EnumMember(Value = "orange")] Orange,
-    [EnumMember(Value = "red")] Red,
-    [EnumMember(Value = "green")] Green,
-    [EnumMember(Value = "gray")] Gray
+    public const string Blue = "blue";
+    public const string Purple = "purple";
+    public const string Pink = "pink";
+    public const string Orange = "orange";
+    public const string Red = "red";
+    public const string Green = "green";
+    public const string Gray = "gray";
 }

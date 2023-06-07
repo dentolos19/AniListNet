@@ -17,10 +17,9 @@ public class UserOptions
     /// </summary>
     [JsonProperty("airingNotifications")] public bool ReceiveAiringNotifications { get; set; }
     /// <summary>
-    /// Profile highlight color (blue, purple, pink, orange, red, green, gray)
+    /// Profile highlight color (blue, purple, pink, orange, red, green, gray, or a hex value)
     /// </summary>
-    /// <remarks>Some users may have non standard colors and will default to Custom</remarks>
-    [JsonProperty("profileColor")] public UserProfileColor ProfileColor { get; set; }
+    [JsonProperty("profileColor")] public string ProfileColor { get; set; }
     /// <summary>
     /// The language the user wants to see staff and character names in
     /// </summary>
