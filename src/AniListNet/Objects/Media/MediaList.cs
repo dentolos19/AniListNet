@@ -2,6 +2,9 @@ using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
+/// <summary>
+/// List group of anime or manga entries
+/// </summary>
 public class MediaList
 {
     [JsonProperty("name")] public string Name { get; private set; }

@@ -104,7 +104,6 @@ or check out the [unit tests](./AniListNet.Tests).
 
 ## 🔨 Todo
 
-- [ ] Add documentation
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user settings/activities
 - [ ] Add query/mutations functions for forums
