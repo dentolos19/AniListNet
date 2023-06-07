@@ -116,6 +116,12 @@ public partial class AniClient
         );
     }
     
+    /// <summary>
+    /// Gets Reviews associated with a given Media.
+    /// </summary>
+    /// <param name="mediaId"></param>
+    /// <param name="paginationOptions"></param>
+    /// <returns></returns>
     public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
