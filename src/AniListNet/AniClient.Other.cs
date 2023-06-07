@@ -6,6 +6,9 @@ namespace AniListNet;
 
 public partial class AniClient
 {
+    /// <summary>
+    /// Gets the media that the character was cast in.
+    /// </summary>
     public async Task<AniPagination<MediaCharacterEdge>> GetCharacterMediaAsync(int characterId, GetMediaFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new GetMediaFilter();
@@ -28,6 +31,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets the media that the staff was involved in.
+    /// </summary>
     public async Task<AniPagination<MediaStaffEdge>> GetStaffProductionMediaAsync(int staffId, GetMediaFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new GetMediaFilter();
@@ -50,6 +56,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets the media that the staff voiced in.
+    /// </summary>
     public async Task<AniPagination<MediaStaffEdge>> GetStaffVoicedMediaAsync(int staffId, GetMediaFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new GetMediaFilter();
@@ -72,6 +81,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets the characters that the staff voiced for.
+    /// </summary>
     public async Task<AniPagination<CharacterEdge>> GetStaffVoicedCharactersAsync(int staffId, CharacterSort sort = CharacterSort.Relevance, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
@@ -96,6 +108,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets the media that the studio produced.
+    /// </summary>
     public async Task<AniPagination<MediaStudioEdge>> GetStudioMediaAsync(int studioId, GetMediaFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new GetMediaFilter();
