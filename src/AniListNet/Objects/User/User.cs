@@ -4,16 +4,47 @@ namespace AniListNet.Objects;
 
 public class User
 {
+    /// <summary>
+    /// The id of the user
+    /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
+    /// <summary>
+    /// The name of the user
+    /// </summary>
     [JsonProperty("name")] public string Name { get; private set; }
+    /// <summary>
+    /// The bio written by user (Markdown)
+    /// </summary>
     [JsonProperty("about")] public string? About { get; private set; }
+    /// <summary>
+    /// The user's avatar images
+    /// </summary>
     [JsonProperty("avatar")] public Image Avatar { get; private set; }
+    /// <summary>
+    /// The user's banner images
+    /// </summary>
     [JsonProperty("bannerImage")] public Uri? BannerImageUrl { get; private set; }
+    /// <summary>
+    /// The user's general options
+    /// </summary>
     [JsonProperty("options")] public UserOptions Options { get; private set; }
+    /// <summary>
+    /// The url for the user page on the AniList website
+    /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
 
     /* below are properties specific for the authenticated user */
 
+    /// <summary>
+    /// If the authenticated user if following this user
+    /// </summary>
     [JsonProperty("isFollowing")] public bool IsFollowing { get; private set; }
+    /// <summary>
+    /// If this user if following the authenticated user
+    /// </summary>
     [JsonProperty("isFollower")] public bool IsFollower { get; private set; }
+    /// <summary>
+    /// If the user is blocked by the authenticated user
+    /// </summary>
+    [JsonProperty("isBlocked")] public bool IsBlocked { get; private set; }
 }
