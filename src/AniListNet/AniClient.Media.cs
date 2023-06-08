@@ -1,5 +1,6 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 
@@ -113,6 +114,35 @@ public partial class AniClient
         return new AniPagination<MediaRecommendationEdge>(
             response["Media"]["recommendations"]["pageInfo"].ToObject<PageInfo>(),
             response["Media"]["recommendations"]["edges"].ToObject<MediaRecommendationEdge[]>()
+        );
+    }
+    
+    /// <summary>
+    /// Gets Reviews associated with a given Media.
+    /// </summary>
+    /// <param name="mediaId"></param>
+    /// <param name="filter"></param>
+    /// <param name="paginationOptions"></param>
+    /// <returns></returns>
+    public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, MediaReviewFilter? filter = null, AniPaginationOptions? paginationOptions = null)
+    {
+        filter ??= new MediaReviewFilter();
+        paginationOptions ??= new AniPaginationOptions();
+        var selections = new GqlSelection("Media", new GqlSelection[]
+        {
+            new("reviews", new GqlSelection[]
+            {
+                new("pageInfo", typeof(PageInfo).ToSelections()),
+                new("edges", typeof(MediaReviewEdge).ToSelections(), filter.ToParameters().ToArray())
+            }, paginationOptions.ToParameters())
+        }, new GqlParameter[]
+        {
+            new("id", mediaId)
+        });
+        var response = await PostRequestAsync(selections);
+        return new AniPagination<MediaReviewEdge>(
+            response["Media"]["reviews"]["pageInfo"].ToObject<PageInfo>(),
+            response["Media"]["reviews"]["edges"].ToObject<MediaReviewEdge[]>()
         );
     }
 

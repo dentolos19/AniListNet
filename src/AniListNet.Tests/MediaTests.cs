@@ -51,6 +51,14 @@ public class MediaTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
+    
+    [Test]
+    public async Task GetMediaReviewTest()
+    {
+        var data = await TestObjects.AniClient.GetMediaReviewsAsync(1);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
 
     [Test]
     public async Task GetMediaEntryTest() // TODO: needs improvement
