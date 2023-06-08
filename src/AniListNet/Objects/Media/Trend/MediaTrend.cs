@@ -10,7 +10,7 @@ public class MediaTrend
     [JsonProperty("date")] public int _date { get; set; }
     
     /// <summary>
-    /// The id of the tag.
+    /// The ID of the tag.
     /// </summary>
     [JsonProperty("mediaId")] public int MediaId { get; set; }
     /// <summary>

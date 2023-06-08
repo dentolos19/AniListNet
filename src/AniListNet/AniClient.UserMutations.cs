@@ -52,7 +52,7 @@ public partial class AniClient
         var response = await PostRequestAsync(selections, true);
         return response["SaveReview"].ToObject<MediaReview>();
     }
-    
+
     /// <summary>
     /// Delete a review for a given ID.
     /// </summary>
@@ -78,6 +78,17 @@ public partial class AniClient
         var selections = new GqlSelection("RateReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
         return response["RateReview"].ToObject<MediaReview>();
+    }
+    
+    /// <summary>
+    /// Save a recommendation on a Media entry.
+    /// </summary>
+    public async Task<MediaRecommendation> SaveMediaRecommendationAsync(int mediaId, MediaRecommendationMutation mutation)
+    {
+        var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
+        var selections = new GqlSelection("SaveRecommendation", typeof(MediaRecommendation).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections, true);
+        return response["SaveRecommendation"].ToObject<MediaRecommendation>();
     }
 
     public async Task<bool> ToggleFollowUserAsync(int mediaId)
