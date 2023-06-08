@@ -143,4 +143,27 @@ public class UserMutationsTests
             data.IsPrivate
         );
     }
+
+    [Test]
+    public async Task DeleteMediaReviewAsyncTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var body = new string(Enumerable
+            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 2200)
+            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+        var summary = new string(Enumerable
+            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20)
+            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        {
+            Body = body,
+            Score = 1,
+            IsPrivate = true,
+            Summary = summary,
+            MediaId = 2,
+        });
+
+        Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
+    }
 }

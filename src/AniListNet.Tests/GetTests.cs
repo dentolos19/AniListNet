@@ -50,6 +50,15 @@ public class GetTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.AreEqual(id, data.Id);
     }
+    
+    [Test]
+    public async Task GetMediaReviewAsyncTest()
+    {
+        var id = 4148;
+        var data = await TestObjects.AniClient.GetMediaReviewAsync(id);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.AreEqual(id, data.Id);
+    }
 
     [Test]
     public async Task GetStaffTest()

@@ -54,6 +54,19 @@ public partial class AniClient
         var response = await PostRequestAsync(selections, true);
         return response["SaveReview"].ToObject<MediaReview>();
     }
+    
+    public async Task<bool> DeleteMediaReviewAsync(int reviewId)
+    {
+        var selections = new GqlSelection("DeleteReview", new GqlSelection[]
+        {
+            new("deleted")
+        }, new GqlParameter[]
+        {
+            new("id", reviewId)
+        });
+        var response = await PostRequestAsync(selections, true);
+        return response["DeleteReview"]["deleted"].ToObject<bool>();
+    }
 
     public async Task<bool> ToggleFollowUserAsync(int mediaId)
     {
