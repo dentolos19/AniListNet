@@ -1,10 +1,14 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 
 public partial class AniClient
 {
+    /// <summary>
+    /// Gets tags associated with the given media ID.
+    /// </summary>
     public async Task<MediaTag[]> GetMediaTagsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
@@ -18,6 +22,9 @@ public partial class AniClient
         return response["Media"]["tags"].ToObject<MediaTag[]>();
     }
 
+    /// <summary>
+    /// Gets relations associated with the given media ID.
+    /// </summary>
     public async Task<MediaRelationEdge[]> GetMediaRelationsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
@@ -34,6 +41,9 @@ public partial class AniClient
         return response["Media"]["relations"]["edges"].ToObject<MediaRelationEdge[]>();
     }
 
+    /// <summary>
+    /// Gets characters associated with the given media ID.
+    /// </summary>
     public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
@@ -58,6 +68,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets staff associated with the given media ID.
+    /// </summary>
     public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
@@ -79,6 +92,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets studios associated with the given media ID.
+    /// </summary>
     public async Task<StudioEdge[]> GetMediaStudiosAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
@@ -95,6 +111,9 @@ public partial class AniClient
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
     }
 
+    /// <summary>
+    /// Gets recommendations associated with the given media ID.
+    /// </summary>
     public async Task<AniPagination<MediaRecommendationEdge>> GetMediaRecommendationsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
@@ -115,22 +134,20 @@ public partial class AniClient
             response["Media"]["recommendations"]["edges"].ToObject<MediaRecommendationEdge[]>()
         );
     }
-    
+
     /// <summary>
-    /// Gets Reviews associated with a given Media.
+    /// Gets reviews associated with the given media ID.
     /// </summary>
-    /// <param name="mediaId"></param>
-    /// <param name="paginationOptions"></param>
-    /// <returns></returns>
-    public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
+    public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, MediaReviewFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
+        filter ??= new MediaReviewFilter();
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
             new("reviews", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaReviewEdge).ToSelections())
+                new("edges", typeof(MediaReviewEdge).ToSelections(), filter.ToParameters().ToArray())
             }, paginationOptions.ToParameters())
         }, new GqlParameter[]
         {
@@ -143,7 +160,7 @@ public partial class AniClient
         );
     }
 
-    /* below is properties specific for the authenticated user */
+    /* below is properties only for the authenticated user */
 
     public async Task<MediaEntry?> GetMediaEntryAsync(int mediaId)
     {

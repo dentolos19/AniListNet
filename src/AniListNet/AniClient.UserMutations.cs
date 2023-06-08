@@ -133,7 +133,7 @@ public partial class AniClient
         )).ToObject<bool>();
     }
 
-    /* below is methods that is privately used */
+    /* below are methods made for private use */
 
     private async Task ToggleFavoriteAsync(string field, int id)
     {

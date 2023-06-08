@@ -116,7 +116,7 @@ public partial class AniClient
         return GetUserFavoritesAsync<Studio>(userId, "studios", paginationOptions);
     }
 
-    /* below is methods that is privately used */
+    /* below are methods made for private use */
 
     private async Task<AniPagination<T>> GetUserFavoritesAsync<T>(int userId, string type, AniPaginationOptions paginationOptions)
     {

@@ -51,60 +51,17 @@ or check out the [unit tests](./AniListNet.Tests).
 
 > **Note**: This library does not fully implement the API, so some features might be missing.
 
-- [x] Has search query functions
-  - [x] `SearchMediaAsync`: searches for Anime & Manga (supports filtering)
-  - [x] `SearchCharacterAsync`: searches for characters (supports filtering)
-  - [x] `SearchStaffAsync`
-  - [x] `SearchStudioAsync`
-  - [x] `SearchUserAsync`
-- [x] Has data query functions
-  - [x] `GetGenreCollectionAsync`: gets all supported genres (e.g. Action, Fantasy, Romance)
-  - [x] `GetTagCollectionAsync`: gets all supported tags (e.g. Male Protagonist, Heterosexual, Cultivation)
-  - [x] `GetMediaAsync`
-  - [x] `GetMediaSchedulesAsync`: supports filtering
-  - [x] `GetCharacterAsync`
-  - [x] `GetStaffAsync`
-  - [x] `GetStudioAsync`
-  - [x] `GetUserAsync`
-- [x] Has specific data query functions
-  - [x] `GetCharacterMediaAsync`
-  - [x] `GetStaffMediaAsync`
-  - [x] `GetStaffProductionMediaAsync`
-  - [x] `GetStaffVoicedMediaAsync`
-  - [x] `GetStaffVoicedCharactersAsync`
-  - [x] `GetStudioMediaAsync`
-- [x] Has media-specific data query functions
-  - [x] `GetMediaRelationsAsync`
-  - [x] `GetMediaCharactersAsync`
-  - [x] `GetMediaStaffAsync`
-  - [x] `GetMediaStudiosAsync`
-  - [x] `GetMediaRecommendationsAsync`
-- [x] Has user-specific data query functions
-  - [x] `GetUserFollowersAsync`
-  - [x] `GetUserFollowingsAsync`
-  - [x] `GetUserEntriesAsync`
-  - [x] `GetUserEntryCollectionAsync`
-  - [x] `GetUserListCollectionAsync`: similar to `GetUserEntryCollectionAsync`, but comes without its media entries
-  - [x] `GetUserAnimeFavoritesAsync`
-  - [x] `GetUserMangaFavoritesAsync`
-  - [x] `GetUserCharacterFavoritesAsync`
-  - [x] `GetUserStaffFavoritesAsync`
-  - [x] `GetUserStudioFavoritesAsync`
-- [x] Has user-only mutation functions
-  - [x] `TryAuthenticateAsync`: authenticate with user's access token
-  - [x] `GetAuthenticatedUserAsync`
-  - [x] `UpdateUserOptionsAsync`
-  - [x] `SaveMediaEntryAsync`
-  - [x] `DeleteMediaEntryAsync`
-  - [x] `ToggleFollowUserAsync`
-  - [x] `ToggleMediaFavoriteAsync`
-  - [x] `ToggleCharacterFavoriteAsync`
-  - [x] `ToggleStaffFavoriteAsync`
-  - [x] `ToggleStudioFavoriteAsync`
+- [x] Authenticate and login with AniList!
+- [x] Search for anime, manga, staff, studio and users! With filter support.
+- [x] Get intricate details about any anime or manga like relations, characters, staff, studios, and more!
+- [x] Get intricate details about any character or staff like which anime and manga they appeared in or worked on!
+- [x] Get user details like followers, entries, collections, and favorites!
+- [x] Update a user's followings, entries and favorites easily!
+
+See more features by visiting the [features wiki](https://github.com/dentolos19/AniListNet/wiki/Features).
 
 ## 🔨 Todo
 
-- [ ] Add documentation
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user settings/activities
 - [ ] Add query/mutations functions for forums

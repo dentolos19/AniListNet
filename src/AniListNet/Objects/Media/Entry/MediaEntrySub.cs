@@ -2,45 +2,52 @@
 
 namespace AniListNet.Objects;
 
-public class MediaEntry
+public class MediaEntrySub
 {
+    [JsonProperty("media")] private readonly Media _media;
+
     /// <summary>
     /// The ID of the list entry.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
-
     /// <summary>
     /// The watching/reading status.
     /// </summary>
     [JsonProperty("status")] public MediaEntryStatus Status { get; private set; }
-
     /// <summary>
     /// The score of the entry.
     /// </summary>
     [JsonProperty("score")] public float Score { get; private set; }
-
     /// <summary>
     /// The amount of episodes/chapters consumed by the user.
     /// </summary>
     [JsonProperty("progress")] public int Progress { get; private set; }
-
     /// <summary>
     /// The amount of volumes read by the user.
     /// </summary>
     [JsonProperty("progressVolumes")] public int? VolumeProgress { get; private set; }
-
     /// <summary>
     /// When the entry was started by the user.
     /// </summary>
     [JsonProperty("startedAt")] public Date StartDate { get; private set; }
-
     /// <summary>
     /// When the entry was completed by the user.
     /// </summary>
     [JsonProperty("completedAt")] public Date CompleteDate { get; private set; }
 
-    [JsonProperty("media")] public Media Media { get; private set; }
+    /// <summary>
+    /// The max possible progress.
+    /// </summary>
+    public int? MaxProgress => _media.Episodes ?? _media.Chapters;
+    /// <summary>
+    /// The max possible volume progress.
+    /// </summary>
+    public int? MaxVolumeProgress => _media.Volumes;
 
-    public int? MaxProgress => Media.Episodes ?? Media.Chapters;
-    public int? MaxVolumeProgress => Media.Volumes;
+    private class Media
+    {
+        [JsonProperty("episodes")] public int? Episodes { get; private set; }
+        [JsonProperty("chapters")] public int? Chapters { get; private set; }
+        [JsonProperty("volumes")] public int? Volumes { get; private set; }
+    }
 }
