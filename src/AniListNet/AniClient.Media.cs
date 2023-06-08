@@ -1,5 +1,6 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 
@@ -120,17 +121,19 @@ public partial class AniClient
     /// Gets Reviews associated with a given Media.
     /// </summary>
     /// <param name="mediaId"></param>
+    /// <param name="filter"></param>
     /// <param name="paginationOptions"></param>
     /// <returns></returns>
-    public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
+    public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, MediaReviewFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
+        filter ??= new MediaReviewFilter();
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Media", new GqlSelection[]
         {
             new("reviews", new GqlSelection[]
             {
                 new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaReviewEdge).ToSelections())
+                new("edges", typeof(MediaReviewEdge).ToSelections(), filter.ToParameters().ToArray())
             }, paginationOptions.ToParameters())
         }, new GqlParameter[]
         {
