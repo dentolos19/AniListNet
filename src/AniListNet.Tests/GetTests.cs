@@ -40,6 +40,15 @@ public class GetTests
         }, new AniPaginationOptions(2, 100));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
+    } 
+    
+    [Test]
+    public async Task GetTrendingMediaAsyncTest()
+    {
+        var data = await TestObjects.AniClient.GetTrendingMediaAsync(new MediaTrendFilter(),
+            new AniPaginationOptions(2, 100));
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
     }
 
     [Test]
