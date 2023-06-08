@@ -8,5 +8,9 @@ public enum MediaSort
     [EnumMember(Value = "SCORE")] Score,
     [EnumMember(Value = "POPULARITY")] Popularity,
     [EnumMember(Value = "TRENDING")] Trending,
-    [EnumMember(Value = "FAVOURITES")] Favorites
+    [EnumMember(Value = "FAVOURITES")] Favorites,
+    [EnumMember(Value = "TYPE")] Type,
+    [EnumMember(Value = "FORMAT")] Format,
+    [EnumMember(Value = "STATUS")] Status,
+    // TODO: Update with more sort options: https://anilist.github.io/ApiV2-GraphQL-Docs/
 }
