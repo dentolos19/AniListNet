@@ -21,4 +21,11 @@ public static class TestObjects
             return _aniClient;
         }
     }
+
+    public static string RandomString(int length)
+    {
+        return new string(Enumerable
+            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", length)
+            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+    }
 }

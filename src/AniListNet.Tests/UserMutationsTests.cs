@@ -15,7 +15,7 @@ public class UserMutationsTests
         Env.Load();
 
         var userToken = Environment.GetEnvironmentVariable("AniListToken");
-        _ = await TestObjects.AniClient.TryAuthenticateAsync(userToken);
+        _ = await TestObjects.AniClient.TryAuthenticateAsync(userToken!);
     }
 
     [Test]
@@ -121,12 +121,8 @@ public class UserMutationsTests
     {
         if (!TestObjects.AniClient.IsAuthenticated)
             Assert.Fail("Client is not authorized.");
-        var body = new string(Enumerable
-            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 2200)
-            .Select(s => s[new Random().Next(s.Length)]).ToArray());
-        var summary = new string(Enumerable
-            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20)
-            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+        var body = TestObjects.RandomString(2200);
+        var summary = TestObjects.RandomString(20);
         var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
         {
             Body = body,
@@ -149,12 +145,8 @@ public class UserMutationsTests
     {
         if (!TestObjects.AniClient.IsAuthenticated)
             Assert.Fail("Client is not authorized.");
-        var body = new string(Enumerable
-            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 2200)
-            .Select(s => s[new Random().Next(s.Length)]).ToArray());
-        var summary = new string(Enumerable
-            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20)
-            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+        var body = TestObjects.RandomString(2200);
+        var summary = TestObjects.RandomString(20);
         var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
         {
             Body = body,
@@ -163,6 +155,29 @@ public class UserMutationsTests
             Summary = summary,
             MediaId = 2,
         });
+
+        Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
+    }
+    
+    [Test]
+    public async Task RateMediaReviewAsyncTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var body = TestObjects.RandomString(2200);
+        var summary = TestObjects.RandomString(20);
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        {
+            Body = body,
+            Score = 1,
+            IsPrivate = true,
+            Summary = summary,
+            MediaId = 2,
+        });
+        
+        // Rate the review
+        var newData = await TestObjects.AniClient.RateMediaReviewAsync(data.Id, MediaReviewRating.DownVote);
+        Assert.AreEqual(MediaReviewRating.DownVote, newData.UserRating);
 
         Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
     }
