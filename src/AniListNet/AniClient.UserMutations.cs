@@ -40,6 +40,20 @@ public partial class AniClient
         var response = await PostRequestAsync(selections, true);
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
+    
+    /// <summary>
+    /// Create or update a review
+    /// </summary>
+    /// <param name="mediaId"></param>
+    /// <param name="mutation"></param>
+    /// <returns></returns>
+    public async Task<MediaReview> SaveMediaReviewAsync(int mediaId, MediaReviewMutation mutation)
+    {
+        var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
+        var selections = new GqlSelection("SaveReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections, true);
+        return response["SaveMediaListEntry"].ToObject<MediaReview>();
+    }
 
     public async Task<bool> ToggleFollowUserAsync(int mediaId)
     {

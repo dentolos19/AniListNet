@@ -9,7 +9,7 @@ public class UserMutationsTests
     [OneTimeSetUp]
     public async Task AuthorizationSetup()
     {
-        _ = await TestObjects.AniClient.TryAuthenticateAsync("<INSERT TOKEN HERE>");
+        _ = await TestObjects.AniClient.TryAuthenticateAsync("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImViNDhjMGRiZTUwN2ZjZWZhZjVhZDEyMjg1OTBhZDBhNGQ2ODEwM2MyMmE5OGUxMjZjOTgwMmNkZGQyNTBmMzEyYWMwZjY2NGFlMjMzYTgyIn0.eyJhdWQiOiIxMjgwOSIsImp0aSI6ImViNDhjMGRiZTUwN2ZjZWZhZjVhZDEyMjg1OTBhZDBhNGQ2ODEwM2MyMmE5OGUxMjZjOTgwMmNkZGQyNTBmMzEyYWMwZjY2NGFlMjMzYTgyIiwiaWF0IjoxNjg1NDc1NTA5LCJuYmYiOjE2ODU0NzU1MDksImV4cCI6MTcxNzA5NzkwOSwic3ViIjoiNjI5MzU3NiIsInNjb3BlcyI6W119.ubHr0nE-N25EwnBEuCOgb5YLJVf03ErZKK5wBWS52VBROHiT33JTuoJ4NiREYFqXuVNeG5IaBq6wdoHT9Avk6NU631hNiLiA2OLKF6n2U1KI5p3fEMkiSKIbek8ERA9r6qhi93LlYZo_xBIQhIuaRjVIqQDdbYMEc6zzhBUx46DRB_fCilSy_e5n-nEy3osaG1VDfW6HV9tna9iholjkyj5YBsgzf9fQXYS2x-i_1DAIdrLCk7_5OrkJE0CoORdQYu95XWQv08dzEvcC5b8iNERlJdSFn5U9PspzPafNruhRyooGcuEE9MWgssACH02Q--PDMQJmPTLpc_QMBsf0pZLxdYR6ca6MFp2b3NmYxxl40ncvzbE16WuUstoqLJuG5h3dEC5OrWPEyOjhtiZiSu4TSV7m9cbAYXTSkwYOX1o4WrRLBQN4RQ5WQypS5BwLg0-709MzxPhatsr2QY-7dotVv3v2C_qfrraJHIltSgopEsMP-GXkzy9Pv6ZT3mKHg7Knfx-vCritT4JoZKIC3HDb0d8NmIg-Aq4pCJ_oWNV0XCuNBIrAJnsRMvl5jlbFcEUkyzZKBPtFat7C76CtaZ30kGxio8d1fdruZ-eavwsKj343FTBD6vlq19X7OD90OjAqP52GqBilAQwXaoKK73GwMljteRyPLzvWQSsvyo4");
     }
 
     [Test]
@@ -108,5 +108,27 @@ public class UserMutationsTests
         var studio = await TestObjects.AniClient.GetStudioAsync(1);
         var studioFavorite = await TestObjects.AniClient.ToggleStudioFavoriteAsync(studio.Id);
         Assert.AreEqual(!studio.IsFavorite, studioFavorite);
+    }
+    
+    [Test]
+    public async Task SaveMediaReviewTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        {
+            Body = "Test Review",
+            Score = 1,
+            IsPrivate = true,
+            Summary = "Nothing interesting",
+            MediaId = 1,
+        });
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.IsTrue(
+            data.Body == "Test Review" &&
+            data.Score == 1 &&
+            data.Summary == "Nothing interesting" &&
+            data.IsPrivate
+        );
     }
 }

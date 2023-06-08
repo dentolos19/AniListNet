@@ -48,6 +48,10 @@ public class MediaReview
     /// The url for the review page on the AniList website.
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
+    /// <summary>
+    /// If the review is only be visible to its creator.
+    /// </summary>
+    [JsonProperty("private")] public bool IsPrivate { get; private set; }
 
     [JsonProperty("createdAt")] private readonly int _createdAt;
     /// <summary>
