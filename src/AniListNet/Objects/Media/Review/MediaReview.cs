@@ -8,8 +8,11 @@ namespace AniListNet.Objects;
 /// </summary>
 public class MediaReview
 {
+    [JsonProperty("createdAt")] private readonly int _createdAt;
+    [JsonProperty("updatedAt")] private readonly int _updatedAt;
+
     /// <summary>
-    /// The id of the review.
+    /// The ID of the review.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>
@@ -48,25 +51,20 @@ public class MediaReview
     /// The url for the review page on the AniList website.
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
-
-    [JsonProperty("createdAt")] private readonly int _createdAt;
     /// <summary>
     /// The time of the thread creation.
     /// </summary>
     public DateTime CreatedAt => DateTimeOffset.FromUnixTimeSeconds(_createdAt).DateTime;
-    
-    [JsonProperty("updatedAt")] private readonly int _updatedAt;
     /// <summary>
     /// The time of the thread last update.
     /// </summary>
     public DateTime UpdatedAt => DateTimeOffset.FromUnixTimeSeconds(_updatedAt).DateTime;
 
-    
-    /* below are properties specific for the authenticated user */
-    
+    /* below are properties only for the authenticated user */
+
     /// <summary>
     /// The rating of the review by currently authenticated user.
     /// </summary>
     [JsonProperty("userRating")] public MediaReviewRating UserRating { get; private set; }
-    
+
 }
