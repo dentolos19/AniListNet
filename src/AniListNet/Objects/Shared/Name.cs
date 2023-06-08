@@ -24,9 +24,9 @@ public class Name
     /// Other names the character might be referred to as.
     /// </summary>
     [JsonProperty("alternative")] public string[] AlternativeNames { get; private set; }
-    
-    /* below are properties specific for the authenticated user */
-    
+
+    /* below are properties only for the authenticated user */
+
     /// <summary>
     /// The currently authenticated users preferred name language. Default romaji for non-authenticated.
     /// </summary>

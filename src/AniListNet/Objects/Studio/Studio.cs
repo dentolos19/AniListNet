@@ -5,7 +5,7 @@ namespace AniListNet.Objects;
 public class Studio
 {
     /// <summary>
-    /// The id of the studio.
+    /// The ID of the studio.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>
@@ -25,9 +25,10 @@ public class Studio
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
 
-    /* below are properties specific for the authenticated user */
+    /* below are properties only for the authenticated user */
+
     /// <summary>
-    /// If the studio is marked as favourite by the currently authenticated user.
+    /// If the studio is marked as favorite by the currently authenticated user.
     /// </summary>
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
 }

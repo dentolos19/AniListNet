@@ -32,45 +32,45 @@ public enum MediaSource
     /// Written works not published in volumes.
     /// </summary>
     /// <remarks>Version 2 only</remarks>
-    [EnumMember(Value = "NOVEL")] Novel, // v2
+    [EnumMember(Value = "NOVEL")] Novel,
     /// <summary>
     /// Self-published works.
     /// </summary>
     /// <remarks>Version 2 only</remarks>
-    [EnumMember(Value = "DOUJINSHI")] Doujinshi, // v2
+    [EnumMember(Value = "DOUJINSHI")] Doujinshi,
     /// <summary>
     /// Japanese Anime.
     /// </summary>
     /// <remarks>Version 2 only</remarks>
-    [EnumMember(Value = "ANIME")] Anime, // v2
+    [EnumMember(Value = "ANIME")] Anime,
     /// <summary>
     /// Written works published online.
     /// </summary>
     /// <remarks>Version 3 only</remarks>
-    [EnumMember(Value = "WEB_NOVEL")] WebNovel, // v3
+    [EnumMember(Value = "WEB_NOVEL")] WebNovel,
     /// <summary>
     /// Live action media such as movies or TV show.
     /// </summary>
     /// <remarks>Version 3 only</remarks>
-    [EnumMember(Value = "LIVE_ACTION")] LiveAction, // v3
+    [EnumMember(Value = "LIVE_ACTION")] LiveAction,
     /// <summary>
     /// Games excluding video games.
     /// </summary>
     /// <remarks>Version 3 only</remarks>
-    [EnumMember(Value = "GAME")] Game, // v3
+    [EnumMember(Value = "GAME")] Game,
     /// <summary>
     /// Comics excluding manga.
     /// </summary>
     /// <remarks>Version 3 only</remarks>
-    [EnumMember(Value = "COMIC")] Comic, // v3
+    [EnumMember(Value = "COMIC")] Comic,
     /// <summary>
     /// Multimedia project.
     /// </summary>
     /// <remarks>Version 3 only</remarks>
-    [EnumMember(Value = "MULTIMEDIA_PROJECT")] MultimediaProject, // v3
+    [EnumMember(Value = "MULTIMEDIA_PROJECT")] MultimediaProject,
     /// <summary>
     /// Picture book.
     /// </summary>
     /// <remarks>Version 3 only</remarks>
-    [EnumMember(Value = "PICTURE_BOOK")] PictureBook // v3
+    [EnumMember(Value = "PICTURE_BOOK")] PictureBook
 }

@@ -9,9 +9,7 @@ public class Image
     /// </summary>
     [JsonProperty("large")] public Uri LargeImageUrl { get; private set; }
     /// <summary>
-    /// /// <summary>
     /// The image of media at its medium size.
-    /// </summary>
     /// </summary>
     [JsonProperty("medium")] public Uri MediumImageUrl { get; private set; }
 }

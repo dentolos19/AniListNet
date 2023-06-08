@@ -5,7 +5,7 @@ namespace AniListNet.Objects;
 public class User
 {
     /// <summary>
-    /// The id of the user.
+    /// The ID of the user.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>
@@ -13,8 +13,9 @@ public class User
     /// </summary>
     [JsonProperty("name")] public string Name { get; private set; }
     /// <summary>
-    /// The bio written by user (Markdown).
+    /// The bio written by user.
     /// </summary>
+    /// <remarks>In markdown format.</remarks>
     [JsonProperty("about")] public string? About { get; private set; }
     /// <summary>
     /// The user's avatar images.
@@ -29,11 +30,11 @@ public class User
     /// </summary>
     [JsonProperty("options")] public UserOptions Options { get; private set; }
     /// <summary>
-    /// The url for the user page on the AniList website.
+    /// The URL for the user page on the AniList website.
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
 
-    /* below are properties specific for the authenticated user */
+    /* below are properties only for the authenticated user */
 
     /// <summary>
     /// If the authenticated user if following this user.

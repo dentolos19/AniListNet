@@ -17,19 +17,19 @@ public class UserOptions
     /// </summary>
     [JsonProperty("airingNotifications")] public bool ReceiveAiringNotifications { get; set; }
     /// <summary>
-    /// Profile highlight color (blue, purple, pink, orange, red, green, gray, or a hex value).
+    /// Profile highlight color.
     /// </summary>
+    /// <remarks>Possible values: blue, purple, pink, orange, red, green, gray, or a hex value.</remarks>
     [JsonProperty("profileColor")] public string ProfileColor { get; set; }
     /// <summary>
     /// The language the user wants to see staff and character names in.
     /// </summary>
     [JsonProperty("staffNameLanguage")] public UserStaffNameLanguage StaffNameLanguage { get; set; }
-    
-    /* below are properties specific for the authenticated user */
-    
+
+    /* below are properties only for the authenticated user */
+
     /// <summary>
     /// The user's timezone offset.
     /// </summary>
-    /// <remarks>Authenticated User only</remarks>
     [JsonProperty("timezone")] public string? Timezone { get; set; }
 }

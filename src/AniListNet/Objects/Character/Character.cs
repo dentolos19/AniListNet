@@ -6,7 +6,7 @@ namespace AniListNet.Objects;
 public class Character
 {
     /// <summary>
-    /// The id of the character.
+    /// The ID of the character.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>
@@ -14,13 +14,13 @@ public class Character
     /// </summary>
     [JsonProperty("name")] public CharacterName Name { get; private set; }
     /// <summary>
-    /// Character image.
+    /// The visual image of the character.
     /// </summary>
     [JsonProperty("image")] public Image Image { get; private set; }
     /// <summary>
     /// A general description of the character.
     /// </summary>
-    /// <remarks>In Markdown format</remarks>
+    /// <remarks>In markdown format.</remarks>
     [JsonProperty("description")] [GqlParameter("asHtml", false)] public string? Description { get; private set; }
     /// <summary>
     /// The character's gender. Usually Male, Female, or Non-binary but can be any string.
@@ -43,14 +43,16 @@ public class Character
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
 
-    /* below are properties specific for the authenticated user */
+    /* below are properties only for the authenticated user */
 
     /// <summary>
-    /// If the character is marked as favourite by the currently authenticated user
+    /// If the character is marked as favorite by the currently authenticated user.
     /// </summary>
+    /// <remarks>Requires user authentication with AniList!</remarks>
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
     /// <summary>
     /// If the character is blocked from being added to favorites.
     /// </summary>
+    /// <remarks>Requires user authentication with AniList!</remarks>
     [JsonProperty("isFavouriteBlocked")] public bool IsFavoriteBlocked { get; set; }
 }

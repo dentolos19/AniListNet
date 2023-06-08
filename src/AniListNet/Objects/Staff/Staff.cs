@@ -8,7 +8,7 @@ public class Staff
     /// <summary>
     /// The primary language of the staff member.
     /// </summary>
-    /// <remarks>Current values: Japanese, English, Korean, Italian, Spanish, Portuguese, French, German, Hebrew, Hungarian, Chinese, Arabic, Filipino, Catalan, Finnish, Turkish, Dutch, Swedish, Thai, Tagalog, Malaysian, Indonesian, Vietnamese, Nepali, Hindi, Urdu</remarks>
+    /// <remarks>Possible values: Japanese, English, Korean, Italian, Spanish, Portuguese, French, German, Hebrew, Hungarian, Chinese, Arabic, Filipino, Catalan, Finnish, Turkish, Dutch, Swedish, Thai, Tagalog, Malaysian, Indonesian, Vietnamese, Nepali, Hindi, or Urdu</remarks>
     [JsonProperty("languageV2")] public string Language { get; private set; }
     /// <summary>
     /// The person's primary occupations.
@@ -24,14 +24,14 @@ public class Staff
     /// </summary>
     [JsonProperty("homeTown")] public string? HomeTown { get; private set; }
     /// <summary>
-    /// The url for the staff page on the AniList website.
+    /// The URL for the staff page on the AniList website.
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
 
     /* below are properties copied from Character */
 
     /// <summary>
-    /// The id of the staff member.
+    /// The ID of the staff member.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>
@@ -39,7 +39,7 @@ public class Staff
     /// </summary>
     [JsonProperty("name")] public Name Name { get; private set; } // but this one is changed from CharacterName to Name
     /// <summary>
-    /// The staff images.
+    /// The visual image of the staff member.
     /// </summary>
     [JsonProperty("image")] public Image Image { get; private set; }
     /// <summary>
@@ -63,10 +63,10 @@ public class Staff
     /// </summary>
     [JsonProperty("favourites")] public int Favorites { get; private set; }
 
-    /* below are properties specific for the authenticated user */
+    /* below are properties only for the authenticated user */
 
     /// <summary>
-    /// If the staff member is marked as favourite by the currently authenticated user.
+    /// If the staff member is marked as favorite by the currently authenticated user.
     /// </summary>
     [JsonProperty("isFavourite")] public bool IsFavorite { get; private set; }
     /// <summary>

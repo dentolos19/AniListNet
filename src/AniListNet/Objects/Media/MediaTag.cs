@@ -8,7 +8,7 @@ namespace AniListNet.Objects;
 public class MediaTag
 {
     /// <summary>
-    /// The id of the tag.
+    /// The ID of the tag.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>

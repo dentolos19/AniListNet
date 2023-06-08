@@ -14,7 +14,7 @@ public class MediaSchedule
     [JsonProperty("airingAt")] private readonly int _airingAt;
 
     /// <summary>
-    /// The id of the airing schedule item.
+    /// The ID of the airing schedule item.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
     /// <summary>
