@@ -52,7 +52,7 @@ public partial class AniClient
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
         var selections = new GqlSelection("SaveReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
-        return response["SaveMediaListEntry"].ToObject<MediaReview>();
+        return response["SaveReview"].ToObject<MediaReview>();
     }
 
     public async Task<bool> ToggleFollowUserAsync(int mediaId)

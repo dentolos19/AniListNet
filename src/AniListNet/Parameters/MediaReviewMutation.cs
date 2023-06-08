@@ -8,7 +8,7 @@ public class MediaReviewMutation
     /// <summary>
     /// The review id, required for updating.
     /// </summary>
-    public int Id { get; set; }
+    public int? Id { get; set; }
     /// <summary>
     /// The id of the media the review is of.
     /// </summary>
@@ -42,7 +42,8 @@ public class MediaReviewMutation
     {
         var parameters = new List<GqlParameter>();
         parameters.Add(new GqlParameter("private", IsPrivate));
-        parameters.Add(new GqlParameter("id", Id));
+        if (Id.HasValue)
+            parameters.Add(new GqlParameter("id", Id));
         if (Score.HasValue)
             parameters.Add(new GqlParameter("score", Score.Value));
         if (!string.IsNullOrEmpty(Summary))

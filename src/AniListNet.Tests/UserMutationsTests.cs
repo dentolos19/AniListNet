@@ -115,19 +115,25 @@ public class UserMutationsTests
     {
         if (!TestObjects.AniClient.IsAuthenticated)
             Assert.Fail("Client is not authorized.");
+        var body = new string(Enumerable
+            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 2200)
+            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+        var summary = new string(Enumerable
+            .Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 20)
+            .Select(s => s[new Random().Next(s.Length)]).ToArray());
         var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
         {
-            Body = "Test Review",
+            Body = body,
             Score = 1,
             IsPrivate = true,
-            Summary = "Nothing interesting",
+            Summary = summary,
             MediaId = 1,
         });
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(
-            data.Body == "Test Review" &&
+            data.Body == body &&
             data.Score == 1 &&
-            data.Summary == "Nothing interesting" &&
+            data.Summary == summary &&
             data.IsPrivate
         );
     }
