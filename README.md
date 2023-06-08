@@ -56,9 +56,9 @@ or check out the [unit tests](./AniListNet.Tests).
 - [x] Get intricate details about any anime or manga like relations, characters, staff, studios, and more!
 - [x] Get intricate details about any character or staff like which anime and manga they appeared in or worked on!
 - [x] Get user details like followers, entries, collections, and favorites!
-- [x] Update and change user's followings, entries and favorites easily!
+- [x] Update a user's followings, entries and favorites easily!
 
-See more features by going to the [wiki page](https://github.com/dentolos19/AniListNet/wiki/Features).
+See more features by visiting the [features wiki](https://github.com/dentolos19/AniListNet/wiki/Features).
 
 ## 🔨 Todo
 

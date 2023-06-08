@@ -116,14 +116,10 @@ public partial class AniClient
             response["Media"]["recommendations"]["edges"].ToObject<MediaRecommendationEdge[]>()
         );
     }
-    
+
     /// <summary>
-    /// Gets Reviews associated with a given Media.
+    /// Gets reviews associated with the given media ID.
     /// </summary>
-    /// <param name="mediaId"></param>
-    /// <param name="filter"></param>
-    /// <param name="paginationOptions"></param>
-    /// <returns></returns>
     public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, MediaReviewFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new MediaReviewFilter();
@@ -146,7 +142,7 @@ public partial class AniClient
         );
     }
 
-    /* below is properties specific for the authenticated user */
+    /* below is properties only for the authenticated user */
 
     public async Task<MediaEntry?> GetMediaEntryAsync(int mediaId)
     {
