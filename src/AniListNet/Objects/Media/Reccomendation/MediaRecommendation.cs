@@ -25,10 +25,11 @@ public class MediaRecommendation
     /// </summary>
     [JsonProperty("user")] public User User { get; private set; }
 
-    /* below are properties specific for the authenticated user */
+    /* below are properties only for the authenticated user */
 
     /// <summary>
     /// The rating of the recommendation by currently authenticated user.
     /// </summary>
+    /// <remarks>Requires user authentication with AniList!</remarks>
     [JsonProperty("userRating")] public MediaRecommendationRating UserRating { get; private set; }
 }
