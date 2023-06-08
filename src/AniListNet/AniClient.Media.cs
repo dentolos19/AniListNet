@@ -6,6 +6,9 @@ namespace AniListNet;
 
 public partial class AniClient
 {
+    /// <summary>
+    /// Gets tags associated with the given media ID.
+    /// </summary>
     public async Task<MediaTag[]> GetMediaTagsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
@@ -19,6 +22,9 @@ public partial class AniClient
         return response["Media"]["tags"].ToObject<MediaTag[]>();
     }
 
+    /// <summary>
+    /// Gets relations associated with the given media ID.
+    /// </summary>
     public async Task<MediaRelationEdge[]> GetMediaRelationsAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
@@ -35,6 +41,9 @@ public partial class AniClient
         return response["Media"]["relations"]["edges"].ToObject<MediaRelationEdge[]>();
     }
 
+    /// <summary>
+    /// Gets characters associated with the given media ID.
+    /// </summary>
     public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
@@ -59,6 +68,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets staff associated with the given media ID.
+    /// </summary>
     public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
@@ -80,6 +92,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets studios associated with the given media ID.
+    /// </summary>
     public async Task<StudioEdge[]> GetMediaStudiosAsync(int mediaId)
     {
         var selections = new GqlSelection("Media", new GqlSelection[]
@@ -96,6 +111,9 @@ public partial class AniClient
         return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
     }
 
+    /// <summary>
+    /// Gets recommendations associated with the given media ID.
+    /// </summary>
     public async Task<AniPagination<MediaRecommendationEdge>> GetMediaRecommendationsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
