@@ -5,94 +5,95 @@ namespace AniListNet.Tests;
 
 public class GetTests
 {
+    private readonly AniClient _client = new();
+
     [Test]
     public async Task GetGenreCollectionTest()
     {
-        var data = await TestObjects.AniClient.GetGenreCollectionAsync();
+        var data = await _client.GetGenreCollectionAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.That(data, Is.Not.Empty);
     }
 
     [Test]
     public async Task GetTagCollectionTest()
     {
-        var data = await TestObjects.AniClient.GetTagCollectionAsync();
+        var data = await _client.GetTagCollectionAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.That(data, Is.Not.Empty);
     }
 
     [Test]
-    public async Task GetMediaTest()
+    [TestCase(1)]
+    public async Task GetMediaTest(int id)
     {
-        var id = 1;
-        var data = await TestObjects.AniClient.GetMediaAsync(id);
+        var data = await _client.GetMediaAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.AreEqual(id, data.Id);
+        Assert.That(data.Id, Is.EqualTo(id));
     }
 
     [Test]
-    public async Task GetMediaReviewTest()
+    [TestCase(4148)]
+    public async Task GetMediaReviewTest(int id)
     {
-        var id = 4148;
-        var data = await TestObjects.AniClient.GetMediaReviewAsync(id);
+        var data = await _client.GetMediaReviewAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.AreEqual(id, data.Id);
+        Assert.That(data.Id, Is.EqualTo(id));
     }
 
     [Test]
     public async Task GetMediaSchedulesTest()
     {
-        var data = await TestObjects.AniClient.GetMediaSchedulesAsync(new MediaSchedulesFilter
+        var data = await _client.GetMediaSchedulesAsync(new MediaSchedulesFilter
         {
             StartedAfterDate = DateTime.Now,
             EndedBeforeDate = DateTime.Now.AddMonths(1)
-        }, new AniPaginationOptions(2, 100));
+        });
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.That(data, Is.Not.Empty);
     }
 
     [Test]
     public async Task GetTrendingMediaTest()
     {
-        var data = await TestObjects.AniClient.GetTrendingMediaAsync(new MediaTrendFilter(),
-            new AniPaginationOptions(2, 100));
+        var data = await _client.GetTrendingMediaAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.That(data, Is.Not.Empty);
     }
 
     [Test]
-    public async Task GetCharacterTest()
+    [TestCase(1)]
+    public async Task GetCharacterTest(int id)
     {
-        var id = 1;
-        var data = await TestObjects.AniClient.GetCharacterAsync(id);
+        var data = await _client.GetCharacterAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.AreEqual(id, data.Id);
+        Assert.That(data.Id, Is.EqualTo(id));
     }
 
     [Test]
-    public async Task GetStaffTest()
+    [TestCase(95269)]
+    public async Task GetStaffTest(int id)
     {
-        var id = 95269;
-        var data = await TestObjects.AniClient.GetStaffAsync(id);
+        var data = await _client.GetStaffAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.AreEqual(id, data.Id);
+        Assert.That(data.Id, Is.EqualTo(id));
     }
 
     [Test]
-    public async Task GetStudioTest()
+    [TestCase(1)]
+    public async Task GetStudioTest(int id)
     {
-        var id = 1;
-        var data = await TestObjects.AniClient.GetStudioAsync(id);
+        var data = await _client.GetStudioAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.AreEqual(id, data.Id);
+        Assert.That(data.Id, Is.EqualTo(id));
     }
 
     [Test]
-    public async Task GetUserTest()
+    [TestCase(5114158)]
+    public async Task GetUserTest(int id)
     {
-        var id = 5114158;
-        var data = await TestObjects.AniClient.GetUserAsync(id);
+        var data = await _client.GetUserAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.AreEqual(id, data.Id);
+        Assert.That(data.Id, Is.EqualTo(id));
     }
 }
