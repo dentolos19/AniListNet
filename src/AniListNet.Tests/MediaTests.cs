@@ -53,7 +53,7 @@ public class MediaTests
     }
 
     [Test]
-    public async Task GetMediaReviewTest()
+    public async Task GetMediaReviewsTest()
     {
         var data = await TestObjects.AniClient.GetMediaReviewsAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));

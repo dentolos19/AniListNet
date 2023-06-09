@@ -38,6 +38,17 @@ public partial class AniClient
     }
 
     /// <summary>
+    /// Gets the review with the given ID.
+    /// </summary>
+    public async Task<MediaReview> GetMediaReviewAsync(int reviewId)
+    {
+        var parameters = new List<GqlParameter> { new("id", reviewId) };
+        var selections = new GqlSelection("Review", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections);
+        return response["Review"].ToObject<MediaReview>();
+    }
+
+    /// <summary>
     /// Gets collection of media schedules.
     /// </summary>
     public async Task<AniPagination<MediaSchedule>> GetMediaSchedulesAsync(MediaSchedulesFilter? filter = null, AniPaginationOptions? paginationOptions = null)
@@ -73,17 +84,6 @@ public partial class AniClient
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
             response["Page"]["mediaTrends"].ToObject<MediaTrend[]>()
         );
-    }
-
-    /// <summary>
-    /// Gets the Review with the given ID.
-    /// </summary>
-    public async Task<MediaReview> GetMediaReviewAsync(int reviewId)
-    {
-        var parameters = new List<GqlParameter> { new("id", reviewId) };
-        var selections = new GqlSelection("Review", typeof(MediaReview).ToSelections(), parameters.ToArray());
-        var response = await PostRequestAsync(selections);
-        return response["Review"].ToObject<MediaReview>();
     }
 
     /// <summary>

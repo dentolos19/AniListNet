@@ -10,10 +10,8 @@ public class UserMutationsTests
     [OneTimeSetUp]
     public async Task AuthorizationSetup()
     {
-        // Load the AniListToken from .env file
         Directory.SetCurrentDirectory(Path.Join(Directory.GetCurrentDirectory(), "../../../"));
-        Env.Load();
-
+        Env.Load(); // loads variables from .env file
         var userToken = Environment.GetEnvironmentVariable("AniListToken");
         _ = await TestObjects.AniClient.TryAuthenticateAsync(userToken!);
     }
@@ -66,57 +64,7 @@ public class UserMutationsTests
         Assert.IsTrue(isDeleted);
     }
 
-    [Test]
-    public async Task ToggleFollowUserAsync()
-    {
-        if (!TestObjects.AniClient.IsAuthenticated)
-            Assert.Fail("Client is not authorized");
-        var user = await TestObjects.AniClient.GetUserAsync(5114158);
-        var userFollowed = await TestObjects.AniClient.ToggleFollowUserAsync(user.Id);
-        Assert.AreEqual(!user.IsFollowing, userFollowed);
-    }
-
-    [Test]
-    public async Task ToggleMediaFavoriteTest()
-    {
-        if (!TestObjects.AniClient.IsAuthenticated)
-            Assert.Fail("Client is not authorized.");
-        var media = await TestObjects.AniClient.GetMediaAsync(1);
-        var mediaFavorite = await TestObjects.AniClient.ToggleMediaFavoriteAsync(media.Id, media.Type);
-        Assert.AreEqual(!media.IsFavorite, mediaFavorite);
-    }
-
-    [Test]
-    public async Task ToggleCharacterFavoriteTest()
-    {
-        if (!TestObjects.AniClient.IsAuthenticated)
-            Assert.Fail("Client is not authorized.");
-        var character = await TestObjects.AniClient.GetCharacterAsync(1);
-        var characterFavorite = await TestObjects.AniClient.ToggleCharacterFavoriteAsync(character.Id);
-        Assert.AreEqual(!character.IsFavorite, characterFavorite);
-    }
-
-    [Test]
-    public async Task ToggleStaffFavoriteTest()
-    {
-        if (!TestObjects.AniClient.IsAuthenticated)
-            Assert.Fail("Client is not authorized.");
-        var staff = await TestObjects.AniClient.GetStaffAsync(95269);
-        var staffFavorite = await TestObjects.AniClient.ToggleStaffFavoriteAsync(staff.Id);
-        Assert.AreEqual(!staff.IsFavorite, staffFavorite);
-    }
-
-    [Test]
-    public async Task ToggleStudioFavoriteTest()
-    {
-        if (!TestObjects.AniClient.IsAuthenticated)
-            Assert.Fail("Client is not authorized.");
-        var studio = await TestObjects.AniClient.GetStudioAsync(1);
-        var studioFavorite = await TestObjects.AniClient.ToggleStudioFavoriteAsync(studio.Id);
-        Assert.AreEqual(!studio.IsFavorite, studioFavorite);
-    }
-
-    [Test]
+     [Test]
     public async Task SaveMediaReviewTest()
     {
         if (!TestObjects.AniClient.IsAuthenticated)
@@ -178,7 +126,6 @@ public class UserMutationsTests
         // Rate the review
         var newData = await TestObjects.AniClient.RateMediaReviewAsync(data.Id, MediaReviewRating.DownVote);
         Assert.AreEqual(MediaReviewRating.DownVote, newData.UserRating);
-
         Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
     }
 
@@ -192,14 +139,62 @@ public class UserMutationsTests
             Rating = MediaRecommendationRating.RateUp,
             MediaRecommendationId = 30012
         });
-
         Assert.AreEqual(MediaRecommendationRating.RateUp, data.UserRating);
-
         data = await TestObjects.AniClient.SaveMediaRecommendationAsync(30013, new MediaRecommendationMutation
         {
             Rating = MediaRecommendationRating.NoRating,
             MediaRecommendationId = 30012
         });
         Assert.AreEqual(MediaRecommendationRating.NoRating, data.UserRating);
+    }
+
+    [Test]
+    public async Task ToggleFollowUserAsync()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized");
+        var user = await TestObjects.AniClient.GetUserAsync(5114158);
+        var userFollowed = await TestObjects.AniClient.ToggleFollowUserAsync(user.Id);
+        Assert.AreEqual(!user.IsFollowing, userFollowed);
+    }
+
+    [Test]
+    public async Task ToggleMediaFavoriteTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var media = await TestObjects.AniClient.GetMediaAsync(1);
+        var mediaFavorite = await TestObjects.AniClient.ToggleMediaFavoriteAsync(media.Id, media.Type);
+        Assert.AreEqual(!media.IsFavorite, mediaFavorite);
+    }
+
+    [Test]
+    public async Task ToggleCharacterFavoriteTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var character = await TestObjects.AniClient.GetCharacterAsync(1);
+        var characterFavorite = await TestObjects.AniClient.ToggleCharacterFavoriteAsync(character.Id);
+        Assert.AreEqual(!character.IsFavorite, characterFavorite);
+    }
+
+    [Test]
+    public async Task ToggleStaffFavoriteTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var staff = await TestObjects.AniClient.GetStaffAsync(95269);
+        var staffFavorite = await TestObjects.AniClient.ToggleStaffFavoriteAsync(staff.Id);
+        Assert.AreEqual(!staff.IsFavorite, staffFavorite);
+    }
+
+    [Test]
+    public async Task ToggleStudioFavoriteTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var studio = await TestObjects.AniClient.GetStudioAsync(1);
+        var studioFavorite = await TestObjects.AniClient.ToggleStudioFavoriteAsync(studio.Id);
+        Assert.AreEqual(!studio.IsFavorite, studioFavorite);
     }
 }

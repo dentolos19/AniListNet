@@ -31,6 +31,15 @@ public class GetTests
     }
 
     [Test]
+    public async Task GetMediaReviewTest()
+    {
+        var id = 4148;
+        var data = await TestObjects.AniClient.GetMediaReviewAsync(id);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.AreEqual(id, data.Id);
+    }
+
+    [Test]
     public async Task GetMediaSchedulesTest()
     {
         var data = await TestObjects.AniClient.GetMediaSchedulesAsync(new MediaSchedulesFilter
@@ -43,7 +52,7 @@ public class GetTests
     }
 
     [Test]
-    public async Task GetTrendingMediaAsyncTest()
+    public async Task GetTrendingMediaTest()
     {
         var data = await TestObjects.AniClient.GetTrendingMediaAsync(new MediaTrendFilter(),
             new AniPaginationOptions(2, 100));
@@ -56,15 +65,6 @@ public class GetTests
     {
         var id = 1;
         var data = await TestObjects.AniClient.GetCharacterAsync(id);
-        Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.AreEqual(id, data.Id);
-    }
-
-    [Test]
-    public async Task GetMediaReviewAsyncTest()
-    {
-        var id = 4148;
-        var data = await TestObjects.AniClient.GetMediaReviewAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.AreEqual(id, data.Id);
     }
