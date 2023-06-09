@@ -12,18 +12,6 @@ public class MediaEntryMutation
     public DateTime? StartDate { get; set; }
     public DateTime? CompleteDate { get; set; }
 
-    public MediaEntryMutation(MediaEntry? entry = null)
-    {
-        if (entry == null)
-            return;
-        Status = entry.Status;
-        Score = entry.Score;
-        Progress = entry.Progress;
-        VolumeProgress = entry.VolumeProgress;
-        StartDate = entry.StartDate.ToDateTime();
-        CompleteDate = entry.CompleteDate.ToDateTime();
-    }
-
     internal IEnumerable<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();

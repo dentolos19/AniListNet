@@ -106,7 +106,6 @@ public class UserMutationsTests
         var summary = GenerateRandomString(20);
         var data = await _client.SaveMediaReviewAsync(1, new MediaReviewMutation
         {
-            MediaId = 2,
             Body = body,
             Summary = summary,
             Score = 3,
@@ -125,8 +124,7 @@ public class UserMutationsTests
             Body = GenerateRandomString(2200),
             Score = 1,
             IsPrivate = true,
-            Summary = GenerateRandomString(20),
-            MediaId = 2
+            Summary = GenerateRandomString(20)
         });
         var newData = await _client.RateMediaReviewAsync(data.Id, MediaReviewRating.DownVote);
         Assert.Multiple(async () =>

@@ -15,14 +15,6 @@ public class MediaRecommendationMutation
     /// </summary>
     public MediaRecommendationRating Rating { get; set; } = MediaRecommendationRating.NoRating;
 
-
-    public MediaRecommendationMutation(MediaRecommendation? recommendation = null)
-    {
-        if (recommendation == null)
-            return;
-        MediaRecommendationId = recommendation.Media.Id;
-    }
-
     internal IEnumerable<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>

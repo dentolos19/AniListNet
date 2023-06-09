@@ -11,7 +11,6 @@
 		<Description>A simple .NET API wrapper for AniList!</Description>
 		<Version>1.4.0</Version>
 		<Authors>Dennise Catolos</Authors>
-
 		<PackageIcon>Icon.png</PackageIcon>
 		<PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
 

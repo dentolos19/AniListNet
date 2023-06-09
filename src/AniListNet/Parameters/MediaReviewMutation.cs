@@ -11,11 +11,6 @@ public class MediaReviewMutation
     public int? Id { get; set; }
 
     /// <summary>
-    /// The ID of the media the review is of.
-    /// </summary>
-    public int MediaId { get; set; }
-
-    /// <summary>
     /// The main review text. Min: 2200 characters.
     /// </summary>
     public string? Body { get; set; }
@@ -32,21 +27,9 @@ public class MediaReviewMutation
     /// </summary>
     public bool IsPrivate { get; set; }
 
-    public MediaReviewMutation(MediaReview? mediaReview = null)
-    {
-        if (mediaReview == null)
-            return;
-        MediaId = mediaReview.Media.Id;
-        Body = mediaReview.Body;
-        Summary = mediaReview.Summary;
-        Score = mediaReview.Score;
-        IsPrivate = mediaReview.IsPrivate;
-    }
-
     internal IEnumerable<GqlParameter> ToParameters()
     {
-        var parameters = new List<GqlParameter>();
-        parameters.Add(new GqlParameter("private", IsPrivate));
+        var parameters = new List<GqlParameter> { new("private", IsPrivate) };
         if (Id.HasValue)
             parameters.Add(new GqlParameter("id", Id));
         if (Score.HasValue)

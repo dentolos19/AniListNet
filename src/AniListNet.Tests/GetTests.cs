@@ -58,7 +58,7 @@ public class GetTests
     {
         var data = await _client.GetTrendingMediaAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.That(data, Is.Not.Empty);
+        Assert.That(data.Data, Is.Not.Empty);
     }
 
     [Test]
