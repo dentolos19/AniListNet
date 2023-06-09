@@ -1,4 +1,4 @@
-﻿using AniListNet.Helpers;
+using AniListNet.Helpers;
 using AniListNet.Objects;
 using AniListNet.Parameters;
 
@@ -55,7 +55,23 @@ public partial class AniClient
             response["Page"]["airingSchedules"].ToObject<MediaSchedule[]>()
         );
     }
-
+    
+    public async Task<AniPagination<MediaTrend>> GetTrendingMediaAsync(MediaTrendFilter? filter = null, AniPaginationOptions? paginationOptions = null)
+    {
+        filter ??= new MediaTrendFilter();
+        paginationOptions ??= new AniPaginationOptions();
+        var selections = new GqlSelection("Page", new GqlSelection[]
+        {
+            new("pageInfo", typeof(PageInfo).ToSelections()),
+            new("mediaTrends", typeof(MediaTrend).ToSelections(), filter.ToParameters())
+        }, paginationOptions.ToParameters());
+        var response = await PostRequestAsync(selections);
+        return new AniPagination<MediaTrend>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["mediaTrends"].ToObject<MediaTrend[]>()
+        );
+    }
+    
     /// <summary>
     /// Gets the Review with the given ID.
     /// </summary>
