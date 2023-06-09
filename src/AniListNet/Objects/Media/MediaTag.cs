@@ -30,7 +30,7 @@ public class MediaTag
     /// <summary>
     /// The relevance ranking of the tag out of the 100 for this media.
     /// </summary>
-    [JsonProperty("rank")] public int Rank { get; private set; }
+    [JsonProperty("rank")] public int? Rank { get; private set; }
 
     /// <summary>
     /// If the tag could be a spoiler for any media.
