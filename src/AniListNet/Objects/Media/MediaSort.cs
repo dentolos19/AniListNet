@@ -22,7 +22,5 @@ public enum MediaSort
     [EnumMember(Value = "VOLUMES")] Volumes,
     [EnumMember(Value = "UPDATED_AT")] UpdatedAt,
     [EnumMember(Value = "SEARCH_MATCH")] Relevance,
-    [EnumMember(Value = "FAVOURITES")] Favorites,
-    
-    
+    [EnumMember(Value = "FAVOURITES")] Favorites
 }

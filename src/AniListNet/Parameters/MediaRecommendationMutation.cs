@@ -9,11 +9,12 @@ public class MediaRecommendationMutation
     /// The ID of the media to recommend
     /// </summary>
     public int MediaRecommendationId { get; set; }
+
     /// <summary>
     /// The rating to give the recommendation.
     /// </summary>
     public MediaRecommendationRating Rating { get; set; } = MediaRecommendationRating.NoRating;
-    
+
 
     public MediaRecommendationMutation(MediaRecommendation? recommendation = null)
     {
@@ -26,8 +27,8 @@ public class MediaRecommendationMutation
     {
         var parameters = new List<GqlParameter>
         {
-            new ("mediaRecommendationId", MediaRecommendationId),
-            new ("rating", Rating)
+            new("mediaRecommendationId", MediaRecommendationId),
+            new("rating", Rating)
         };
         return parameters;
     }

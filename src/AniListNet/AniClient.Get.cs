@@ -55,7 +55,7 @@ public partial class AniClient
             response["Page"]["airingSchedules"].ToObject<MediaSchedule[]>()
         );
     }
-    
+
     public async Task<AniPagination<MediaTrend>> GetTrendingMediaAsync(MediaTrendFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new MediaTrendFilter();
@@ -71,7 +71,7 @@ public partial class AniClient
             response["Page"]["mediaTrends"].ToObject<MediaTrend[]>()
         );
     }
-    
+
     /// <summary>
     /// Gets the Review with the given ID.
     /// </summary>
@@ -134,5 +134,4 @@ public partial class AniClient
         var response = await PostRequestAsync(selections);
         return response["User"].ToObject<User>();
     }
-
 }

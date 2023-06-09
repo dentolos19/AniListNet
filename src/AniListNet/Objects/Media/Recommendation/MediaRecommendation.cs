@@ -8,18 +8,22 @@ public class MediaRecommendation
     /// The ID of the recommendation.
     /// </summary>
     [JsonProperty("id")] public int Id { get; private set; }
+
     /// <summary>
     /// Users rating of the recommendation.
     /// </summary>
     [JsonProperty("rating")] public int Rating { get; private set; }
+
     /// <summary>
     /// The media the recommendation is from.
     /// </summary>
     [JsonProperty("media")] public Media Media { get; private set; }
+
     /// <summary>
     /// The recommended media.
     /// </summary>
     [JsonProperty("mediaRecommendation")] public Media Recommendation { get; private set; }
+
     /// <summary>
     /// The user that first created the recommendation.
     /// </summary>

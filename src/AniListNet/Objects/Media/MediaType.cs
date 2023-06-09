@@ -8,6 +8,7 @@ public enum MediaType
     /// Japanese Anime.
     /// </summary>
     [EnumMember(Value = "ANIME")] Anime,
+
     /// <summary>
     /// Asian comic.
     /// </summary>

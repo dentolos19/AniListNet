@@ -13,7 +13,7 @@ public class MediaTrendFilter
     public bool Releasing { get; set; }
     public MediaTrendSort Sort { get; set; } = MediaTrendSort.Popularity;
     public bool SortDescending { get; set; } = true;
-    
+
     internal IEnumerable<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
@@ -29,7 +29,7 @@ public class MediaTrendFilter
             parameters.Add(new GqlParameter("releasing", Releasing));
         if (Date.HasValue)
             parameters.Add(new GqlParameter("date", new DateTimeOffset(Date.Value).ToUnixTimeSeconds()));
-        
+
         parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending ? "_DESC" : string.Empty)));
         return parameters;
     }

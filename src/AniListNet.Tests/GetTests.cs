@@ -40,8 +40,8 @@ public class GetTests
         }, new AniPaginationOptions(2, 100));
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
-    } 
-    
+    }
+
     [Test]
     public async Task GetTrendingMediaAsyncTest()
     {
@@ -59,7 +59,7 @@ public class GetTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.AreEqual(id, data.Id);
     }
-    
+
     [Test]
     public async Task GetMediaReviewAsyncTest()
     {

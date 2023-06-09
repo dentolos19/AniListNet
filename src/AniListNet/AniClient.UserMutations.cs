@@ -78,7 +78,7 @@ public partial class AniClient
         var response = await PostRequestAsync(selections, true);
         return response["RateReview"].ToObject<MediaReview>();
     }
-    
+
     /// <summary>
     /// Save a recommendation on a Media entry.
     /// </summary>

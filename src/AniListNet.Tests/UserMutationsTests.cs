@@ -115,7 +115,7 @@ public class UserMutationsTests
         var studioFavorite = await TestObjects.AniClient.ToggleStudioFavoriteAsync(studio.Id);
         Assert.AreEqual(!studio.IsFavorite, studioFavorite);
     }
-    
+
     [Test]
     public async Task SaveMediaReviewTest()
     {
@@ -123,13 +123,13 @@ public class UserMutationsTests
             Assert.Fail("Client is not authorized.");
         var body = TestObjects.RandomString(2200);
         var summary = TestObjects.RandomString(20);
-        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation
         {
             Body = body,
             Score = 1,
             IsPrivate = true,
             Summary = summary,
-            MediaId = 1,
+            MediaId = 1
         });
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.IsTrue(
@@ -147,18 +147,18 @@ public class UserMutationsTests
             Assert.Fail("Client is not authorized.");
         var body = TestObjects.RandomString(2200);
         var summary = TestObjects.RandomString(20);
-        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation
         {
             Body = body,
             Score = 1,
             IsPrivate = true,
             Summary = summary,
-            MediaId = 2,
+            MediaId = 2
         });
 
         Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
     }
-    
+
     [Test]
     public async Task RateMediaReviewAsyncTest()
     {
@@ -166,36 +166,36 @@ public class UserMutationsTests
             Assert.Fail("Client is not authorized.");
         var body = TestObjects.RandomString(2200);
         var summary = TestObjects.RandomString(20);
-        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation
         {
             Body = body,
             Score = 1,
             IsPrivate = true,
             Summary = summary,
-            MediaId = 2,
+            MediaId = 2
         });
-        
+
         // Rate the review
         var newData = await TestObjects.AniClient.RateMediaReviewAsync(data.Id, MediaReviewRating.DownVote);
         Assert.AreEqual(MediaReviewRating.DownVote, newData.UserRating);
 
         Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
     }
-    
+
     [Test]
     public async Task SaveMediaRecommendationAsyncTest()
     {
         if (!TestObjects.AniClient.IsAuthenticated)
             Assert.Fail("Client is not authorized.");
-        var data = await TestObjects.AniClient.SaveMediaRecommendationAsync(30013, new MediaRecommendationMutation()
+        var data = await TestObjects.AniClient.SaveMediaRecommendationAsync(30013, new MediaRecommendationMutation
         {
             Rating = MediaRecommendationRating.RateUp,
             MediaRecommendationId = 30012
         });
-        
+
         Assert.AreEqual(MediaRecommendationRating.RateUp, data.UserRating);
 
-        data = await TestObjects.AniClient.SaveMediaRecommendationAsync(30013, new MediaRecommendationMutation()
+        data = await TestObjects.AniClient.SaveMediaRecommendationAsync(30013, new MediaRecommendationMutation
         {
             Rating = MediaRecommendationRating.NoRating,
             MediaRecommendationId = 30012

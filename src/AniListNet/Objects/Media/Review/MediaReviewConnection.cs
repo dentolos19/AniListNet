@@ -2,7 +2,6 @@
 
 namespace AniListNet.Objects;
 
-
 public class MediaReviewConnection
 {
     [JsonProperty("edges")] public MediaReviewEdge[] Edges { get; private set; }

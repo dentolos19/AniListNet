@@ -9,19 +9,24 @@ public class MediaReviewMutation
     /// The review ID, required for updating.
     /// </summary>
     public int? Id { get; set; }
+
     /// <summary>
-    /// The id of the media the review is of.
+    /// The ID of the media the review is of.
     /// </summary>
     public int MediaId { get; set; }
+
     /// <summary>
     /// The main review text. Min: 2200 characters.
     /// </summary>
     public string? Body { get; set; }
+
     /// <summary>
     /// A short summary/preview of the review. Min: 20, Max: 120 characters.
     /// </summary>
     public string? Summary { get; set; }
+
     public int? Score { get; set; }
+
     /// <summary>
     /// If the review should only be visible to its creator
     /// </summary>
