@@ -34,6 +34,7 @@ public class MediaReview
     /// <summary>
     /// The main review body text.
     /// </summary>
+    /// <remarks>In markdown format.</remarks>
     [JsonProperty("body")] [GqlParameter("asHtml", false)] public string Body { get; private set; }
     /// <summary>
     /// The total user rating of the review.

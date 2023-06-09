@@ -55,11 +55,10 @@ public partial class AniClient
             response["Page"]["airingSchedules"].ToObject<MediaSchedule[]>()
         );
     }
-    
+
     /// <summary>
     /// Gets the Review with the given ID.
     /// </summary>
-    /// <returns></returns>
     public async Task<MediaReview> GetMediaReviewAsync(int reviewId)
     {
         var parameters = new List<GqlParameter> { new("id", reviewId) };

@@ -6,7 +6,7 @@ namespace AniListNet.Parameters;
 public class MediaReviewMutation
 {
     /// <summary>
-    /// The review id, required for updating.
+    /// The review ID, required for updating.
     /// </summary>
     public int? Id { get; set; }
     /// <summary>
@@ -14,11 +14,11 @@ public class MediaReviewMutation
     /// </summary>
     public int MediaId { get; set; }
     /// <summary>
-    /// The main review text. Min:2200 characters.
+    /// The main review text. Min: 2200 characters.
     /// </summary>
     public string? Body { get; set; }
     /// <summary>
-    /// A short summary/preview of the review. Min:20, Max:120 characters
+    /// A short summary/preview of the review. Min: 20, Max: 120 characters.
     /// </summary>
     public string? Summary { get; set; }
     public int? Score { get; set; }

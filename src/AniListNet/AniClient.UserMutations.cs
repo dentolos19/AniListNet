@@ -40,11 +40,10 @@ public partial class AniClient
         var response = await PostRequestAsync(selections, true);
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
-    
+
     /// <summary>
     /// Create or update a review.
     /// </summary>
-    /// <returns></returns>
     public async Task<MediaReview> SaveMediaReviewAsync(int mediaId, MediaReviewMutation mutation)
     {
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
@@ -52,7 +51,7 @@ public partial class AniClient
         var response = await PostRequestAsync(selections, true);
         return response["SaveReview"].ToObject<MediaReview>();
     }
-    
+
     /// <summary>
     /// Delete a review for a given ID.
     /// </summary>
@@ -68,7 +67,7 @@ public partial class AniClient
         var response = await PostRequestAsync(selections, true);
         return response["DeleteReview"]["deleted"].ToObject<bool>();
     }
-    
+
     /// <summary>
     /// Rate a review.
     /// </summary>
