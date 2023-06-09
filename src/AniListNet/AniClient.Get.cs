@@ -56,6 +56,9 @@ public partial class AniClient
         );
     }
 
+    /// <summary>
+    /// Gets collection of trending media.
+    /// </summary>
     public async Task<AniPagination<MediaTrend>> GetTrendingMediaAsync(MediaTrendFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
         filter ??= new MediaTrendFilter();

@@ -69,7 +69,7 @@ public partial class AniClient
     }
 
     /// <summary>
-    /// Gets staff associated with the given media ID.
+    /// Gets staff members associated with the given media ID.
     /// </summary>
     public async Task<AniPagination<StaffEdge>> GetMediaStaffAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {

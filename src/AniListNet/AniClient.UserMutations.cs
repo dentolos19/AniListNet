@@ -20,6 +20,9 @@ public partial class AniClient
         return response["UpdateUser"].ToObject<User>();
     }
 
+    /// <summary>
+    /// Create or update a media entry.
+    /// </summary>
     public async Task<MediaEntry> SaveMediaEntryAsync(int mediaId, MediaEntryMutation mutation)
     {
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
@@ -28,6 +31,9 @@ public partial class AniClient
         return response["SaveMediaListEntry"].ToObject<MediaEntry>();
     }
 
+    /// <summary>
+    /// Delete a media entry.
+    /// </summary>
     public async Task<bool> DeleteMediaEntryAsync(int mediaId)
     {
         var selections = new GqlSelection("DeleteMediaListEntry", new GqlSelection[]
@@ -53,7 +59,7 @@ public partial class AniClient
     }
 
     /// <summary>
-    /// Delete a review for a given ID.
+    /// Delete a review.
     /// </summary>
     public async Task<bool> DeleteMediaReviewAsync(int reviewId)
     {
@@ -80,7 +86,7 @@ public partial class AniClient
     }
 
     /// <summary>
-    /// Save a recommendation on a Media entry.
+    /// Save a recommendation on a media.
     /// </summary>
     public async Task<MediaRecommendation> SaveMediaRecommendationAsync(int mediaId, MediaRecommendationMutation mutation)
     {
