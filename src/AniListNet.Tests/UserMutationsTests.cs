@@ -1,5 +1,6 @@
 ﻿using AniListNet.Objects;
 using AniListNet.Parameters;
+using DotNetEnv;
 using NUnit.Framework;
 
 namespace AniListNet.Tests;
@@ -9,7 +10,12 @@ public class UserMutationsTests
     [OneTimeSetUp]
     public async Task AuthorizationSetup()
     {
-        _ = await TestObjects.AniClient.TryAuthenticateAsync("<INSERT TOKEN HERE>");
+        // Load the AniListToken from .env file
+        Directory.SetCurrentDirectory(Path.Join(Directory.GetCurrentDirectory(), "../../../"));
+        Env.Load();
+
+        var userToken = Environment.GetEnvironmentVariable("AniListToken");
+        _ = await TestObjects.AniClient.TryAuthenticateAsync(userToken!);
     }
 
     [Test]
@@ -108,5 +114,71 @@ public class UserMutationsTests
         var studio = await TestObjects.AniClient.GetStudioAsync(1);
         var studioFavorite = await TestObjects.AniClient.ToggleStudioFavoriteAsync(studio.Id);
         Assert.AreEqual(!studio.IsFavorite, studioFavorite);
+    }
+    
+    [Test]
+    public async Task SaveMediaReviewTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var body = TestObjects.RandomString(2200);
+        var summary = TestObjects.RandomString(20);
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        {
+            Body = body,
+            Score = 1,
+            IsPrivate = true,
+            Summary = summary,
+            MediaId = 1,
+        });
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.IsTrue(
+            data.Body == body &&
+            data.Score == 1 &&
+            data.Summary == summary &&
+            data.IsPrivate
+        );
+    }
+
+    [Test]
+    public async Task DeleteMediaReviewAsyncTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var body = TestObjects.RandomString(2200);
+        var summary = TestObjects.RandomString(20);
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        {
+            Body = body,
+            Score = 1,
+            IsPrivate = true,
+            Summary = summary,
+            MediaId = 2,
+        });
+
+        Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
+    }
+    
+    [Test]
+    public async Task RateMediaReviewAsyncTest()
+    {
+        if (!TestObjects.AniClient.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var body = TestObjects.RandomString(2200);
+        var summary = TestObjects.RandomString(20);
+        var data = await TestObjects.AniClient.SaveMediaReviewAsync(1, new MediaReviewMutation()
+        {
+            Body = body,
+            Score = 1,
+            IsPrivate = true,
+            Summary = summary,
+            MediaId = 2,
+        });
+        
+        // Rate the review
+        var newData = await TestObjects.AniClient.RateMediaReviewAsync(data.Id, MediaReviewRating.DownVote);
+        Assert.AreEqual(MediaReviewRating.DownVote, newData.UserRating);
+
+        Assert.True(await TestObjects.AniClient.DeleteMediaReviewAsync(data.Id));
     }
 }

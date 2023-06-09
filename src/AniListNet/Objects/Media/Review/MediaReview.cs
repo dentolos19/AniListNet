@@ -34,6 +34,7 @@ public class MediaReview
     /// <summary>
     /// The main review body text.
     /// </summary>
+    /// <remarks>In markdown format.</remarks>
     [JsonProperty("body")] [GqlParameter("asHtml", false)] public string Body { get; private set; }
     /// <summary>
     /// The total user rating of the review.
@@ -51,6 +52,10 @@ public class MediaReview
     /// The url for the review page on the AniList website.
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
+    /// <summary>
+    /// If the review is only be visible to its creator.
+    /// </summary>
+    [JsonProperty("private")] public bool IsPrivate { get; private set; }
     /// <summary>
     /// The time of the thread creation.
     /// </summary>

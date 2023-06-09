@@ -41,6 +41,44 @@ public partial class AniClient
         return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
     }
 
+    /// <summary>
+    /// Create or update a review.
+    /// </summary>
+    public async Task<MediaReview> SaveMediaReviewAsync(int mediaId, MediaReviewMutation mutation)
+    {
+        var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
+        var selections = new GqlSelection("SaveReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections, true);
+        return response["SaveReview"].ToObject<MediaReview>();
+    }
+
+    /// <summary>
+    /// Delete a review for a given ID.
+    /// </summary>
+    public async Task<bool> DeleteMediaReviewAsync(int reviewId)
+    {
+        var selections = new GqlSelection("DeleteReview", new GqlSelection[]
+        {
+            new("deleted")
+        }, new GqlParameter[]
+        {
+            new("id", reviewId)
+        });
+        var response = await PostRequestAsync(selections, true);
+        return response["DeleteReview"]["deleted"].ToObject<bool>();
+    }
+
+    /// <summary>
+    /// Rate a review.
+    /// </summary>
+    public async Task<MediaReview> RateMediaReviewAsync(int reviewId, MediaReviewRating rating)
+    {
+        var parameters = new List<GqlParameter> { new("reviewId", reviewId), new("rating", rating) };
+        var selections = new GqlSelection("RateReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections, true);
+        return response["RateReview"].ToObject<MediaReview>();
+    }
+
     public async Task<bool> ToggleFollowUserAsync(int mediaId)
     {
         var selections = new GqlSelection("ToggleFollow", new GqlSelection[]

@@ -35,7 +35,6 @@ public class MediaReviewFilter
             parameters.Add(new GqlParameter("userId", UserId));
         if (MediaType.HasValue)
             parameters.Add(new GqlParameter("mediaType", MediaType));
-        
         parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending ? "_DESC" : string.Empty)));
         return parameters;
     }

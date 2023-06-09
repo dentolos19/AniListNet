@@ -57,6 +57,17 @@ public partial class AniClient
     }
 
     /// <summary>
+    /// Gets the Review with the given ID.
+    /// </summary>
+    public async Task<MediaReview> GetMediaReviewAsync(int reviewId)
+    {
+        var parameters = new List<GqlParameter> { new("id", reviewId) };
+        var selections = new GqlSelection("Review", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections);
+        return response["Review"].ToObject<MediaReview>();
+    }
+
+    /// <summary>
     /// Gets the character with the given ID.
     /// </summary>
     public async Task<Character> GetCharacterAsync(int characterId)
