@@ -112,6 +112,10 @@ public class Media
     /// </summary>
     [JsonProperty("isLicensed")] public bool IsLicensed { get; private set; }
     /// <summary>
+    /// The URL for the media page on the AniList website.
+    /// </summary>
+    [JsonProperty("siteUrl")] public Uri Url { get; private set; }
+    /// <summary>
     /// When the media's data was last updated.
     /// </summary>
     [JsonProperty("updatedAt")] private readonly int _updatedAt;
