@@ -50,7 +50,7 @@ public class GetTests
             EndedBeforeDate = DateTime.Now.AddMonths(1)
         });
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.That(data, Is.Not.Empty);
+        Assert.That(data.Data, Is.Not.Empty);
     }
 
     [Test]
