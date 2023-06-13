@@ -8,5 +8,5 @@ public enum MediaReviewSort
     [EnumMember(Value = "SCORE")] Score,
     [EnumMember(Value = "RATING")] Rating,
     [EnumMember(Value = "CREATED_AT")] CreatedAt,
-    [EnumMember(Value = "UPDATED_AT")] UpdatedAt,
+    [EnumMember(Value = "UPDATED_AT")] UpdatedAt
 }

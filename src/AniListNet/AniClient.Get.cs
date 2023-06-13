@@ -1,4 +1,4 @@
-﻿using AniListNet.Helpers;
+using AniListNet.Helpers;
 using AniListNet.Objects;
 using AniListNet.Parameters;
 
@@ -38,6 +38,17 @@ public partial class AniClient
     }
 
     /// <summary>
+    /// Gets the review with the given ID.
+    /// </summary>
+    public async Task<MediaReview> GetMediaReviewAsync(int reviewId)
+    {
+        var parameters = new List<GqlParameter> { new("id", reviewId) };
+        var selections = new GqlSelection("Review", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var response = await PostRequestAsync(selections);
+        return response["Review"].ToObject<MediaReview>();
+    }
+
+    /// <summary>
     /// Gets collection of media schedules.
     /// </summary>
     public async Task<AniPagination<MediaSchedule>> GetMediaSchedulesAsync(MediaSchedulesFilter? filter = null, AniPaginationOptions? paginationOptions = null)
@@ -53,6 +64,25 @@ public partial class AniClient
         return new AniPagination<MediaSchedule>(
             response["Page"]["pageInfo"].ToObject<PageInfo>(),
             response["Page"]["airingSchedules"].ToObject<MediaSchedule[]>()
+        );
+    }
+
+    /// <summary>
+    /// Gets collection of trending media.
+    /// </summary>
+    public async Task<AniPagination<MediaTrend>> GetTrendingMediaAsync(MediaTrendFilter? filter = null, AniPaginationOptions? paginationOptions = null)
+    {
+        filter ??= new MediaTrendFilter();
+        paginationOptions ??= new AniPaginationOptions();
+        var selections = new GqlSelection("Page", new GqlSelection[]
+        {
+            new("pageInfo", typeof(PageInfo).ToSelections()),
+            new("mediaTrends", typeof(MediaTrend).ToSelections(), filter.ToParameters())
+        }, paginationOptions.ToParameters());
+        var response = await PostRequestAsync(selections);
+        return new AniPagination<MediaTrend>(
+            response["Page"]["pageInfo"].ToObject<PageInfo>(),
+            response["Page"]["mediaTrends"].ToObject<MediaTrend[]>()
         );
     }
 
@@ -107,5 +137,4 @@ public partial class AniClient
         var response = await PostRequestAsync(selections);
         return response["User"].ToObject<User>();
     }
-
 }

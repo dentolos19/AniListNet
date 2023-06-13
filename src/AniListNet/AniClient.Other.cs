@@ -7,7 +7,7 @@ namespace AniListNet;
 public partial class AniClient
 {
     /// <summary>
-    /// Gets the media that the character was cast in.
+    /// Gets the media that the character was part of.
     /// </summary>
     public async Task<AniPagination<MediaCharacterEdge>> GetCharacterMediaAsync(int characterId, GetMediaFilter? filter = null, AniPaginationOptions? paginationOptions = null)
     {
