@@ -35,12 +35,13 @@ public class Media
 
     /// <summary>
     /// The current releasing status of the media.
-    /// </summary>2
+    /// </summary>
     [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus? Status { get; private set; }
 
     /// <summary>
     /// Short description of the media's story and characters.
     /// </summary>
+    /// <remarks>In markdown format.</remarks>
     [JsonProperty("description")] [GqlParameter("asHtml", false)] public string? Description { get; private set; }
 
     /// <summary>

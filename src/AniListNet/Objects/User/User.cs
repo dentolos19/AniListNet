@@ -36,6 +36,11 @@ public class User
     [JsonProperty("options")] public UserOptions Options { get; private set; }
 
     /// <summary>
+    /// The user's media list options.
+    /// </summary>
+    [JsonProperty("listOptions")] public UserListOptions ListOptions { get; private set; }
+
+    /// <summary>
     /// The URL for the user page on the AniList website.
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
