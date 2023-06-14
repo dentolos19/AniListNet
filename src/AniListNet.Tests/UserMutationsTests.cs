@@ -16,6 +16,12 @@ public class UserMutationsTests
         return new string(Enumerable.Repeat(characters, length).Select(@string => @string[_random.Next(@string.Length)]).ToArray());
     }
 
+    private TEnum GetRandomEnum<TEnum>()
+    {
+        var values = Enum.GetValues(typeof(TEnum));
+        return (TEnum)values.GetValue(_random.Next(values.Length));
+    }
+
     [OneTimeSetUp]
     public async Task AuthorizationSetup()
     {
@@ -28,17 +34,35 @@ public class UserMutationsTests
     }
 
     [Test]
-    public async Task UpdateUserOptionsTest() // TODO: needs more mutations
+    public async Task GetAuthenticatedUserTest()
+    {
+        var data = await _client.GetAuthenticatedUserAsync();
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task UpdateUserOptionsTest()
     {
         if (!_client.IsAuthenticated)
             Assert.Fail("Client is not authorized.");
         var user = await _client.GetAuthenticatedUserAsync();
-        var displayAdultContent = !user.Options.DisplayAdultContent;
-        user = await _client.UpdateUserOptionsAsync(new UserOptionsMutation
+        var userMutation = new UserOptionsMutation
         {
-            DisplayAdultContent = displayAdultContent
+            MediaTitleLanguage = GetRandomEnum<UserMediaTitleLanguage>(),
+            DisplayAdultContent = !user.Options.DisplayAdultContent,
+            ScoreFormat = GetRandomEnum<UserScoreFormat>(),
+            StaffNameLanguage = GetRandomEnum<UserStaffNameLanguage>()
+        };
+        user = await _client.UpdateUserOptionsAsync(userMutation);
+        Console.WriteLine(user.Dump());
+        Assert.Multiple(() =>
+        {
+            Assert.That(user.Options.MediaTitleLanguage, Is.EqualTo(userMutation.MediaTitleLanguage));
+            Assert.That(user.Options.DisplayAdultContent, Is.EqualTo(userMutation.DisplayAdultContent));
+            Assert.That(user.ListOptions.ScoreFormat, Is.EqualTo(userMutation.ScoreFormat));
+            // Assert.That(user.Options.StaffNameLanguage, Is.EqualTo(userMutation.StaffNameLanguage));
         });
-        Assert.That(user.Options.DisplayAdultContent, Is.EqualTo(displayAdultContent));
     }
 
     [Test]

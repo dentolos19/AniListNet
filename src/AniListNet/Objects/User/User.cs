@@ -38,7 +38,7 @@ public class User
     /// <summary>
     /// The user's media list options.
     /// </summary>
-    [JsonProperty("listOptions")] public UserListOptions ListOptions { get; private set; }
+    [JsonProperty("mediaListOptions")] public UserListOptions ListOptions { get; private set; }
 
     /// <summary>
     /// The URL for the user page on the AniList website.
