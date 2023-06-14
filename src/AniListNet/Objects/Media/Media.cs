@@ -143,6 +143,18 @@ public class Media
     /// If the media is officially licensed or a self-published doujin release.
     /// </summary>
     [JsonProperty("isLicensed")] public bool IsLicensed { get; private set; }
+    /// <summary>
+    /// The URL for the media page on the AniList website.
+    /// </summary>
+    [JsonProperty("siteUrl")] public Uri Url { get; private set; }
+    /// <summary>
+    /// When the media's data was last updated.
+    /// </summary>
+    [JsonProperty("updatedAt")] private readonly int _updatedAt;
+    /// <summary>
+    /// When the media's data was last updated.
+    /// </summary>
+    public DateTime UpdatedAt => DateTimeOffset.FromUnixTimeSeconds(_updatedAt).DateTime;
 
     /* below are properties only for the authenticated user */
 
