@@ -9,11 +9,13 @@ public class SearchTests
     private readonly AniClient _client = new();
 
     [Test]
-    public async Task SearchAnimeMediaTest()
+    [TestCase("one piece")]
+    [TestCase("demon slayer")]
+    public async Task SearchAnimeMediaTest(string query)
     {
         var results = await _client.SearchMediaAsync(new SearchMediaFilter
         {
-            Query = "demon slayer",
+            Query = query,
             Sort = MediaSort.Popularity,
             Type = MediaType.Anime
         }, new AniPaginationOptions(1, 5));
@@ -22,11 +24,13 @@ public class SearchTests
     }
 
     [Test]
-    public async Task SearchMangaMediaTest()
+    [TestCase("black clover")]
+    [TestCase("oshi no ko")]
+    public async Task SearchMangaMediaTest(string query)
     {
         var results = await _client.SearchMediaAsync(new SearchMediaFilter
         {
-            Query = "one piece",
+            Query = query,
             Sort = MediaSort.Popularity,
             Type = MediaType.Manga
         }, new AniPaginationOptions(1, 5));

@@ -25,6 +25,7 @@ public class GetTests
 
     [Test]
     [TestCase(1)]
+    [TestCase(164912)]
     public async Task GetMediaTest(int id)
     {
         var data = await _client.GetMediaAsync(id);

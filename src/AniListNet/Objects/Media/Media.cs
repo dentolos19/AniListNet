@@ -36,13 +36,12 @@ public class Media
     /// <summary>
     /// The current releasing status of the media.
     /// </summary>2
-    [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus Status { get; private set; }
+    [JsonProperty("status")] [GqlParameter("version", 2)] public MediaStatus? Status { get; private set; }
 
     /// <summary>
     /// Short description of the media's story and characters.
     /// </summary>
-    [JsonProperty("description")] [GqlParameter("asHtml", false)]
-    public string? Description { get; private set; }
+    [JsonProperty("description")] [GqlParameter("asHtml", false)] public string? Description { get; private set; }
 
     /// <summary>
     /// The first official release date of the media.
@@ -147,14 +146,6 @@ public class Media
     /// The URL for the media page on the AniList website.
     /// </summary>
     [JsonProperty("siteUrl")] public Uri Url { get; private set; }
-    /// <summary>
-    /// When the media's data was last updated.
-    /// </summary>
-    [JsonProperty("updatedAt")] private readonly int _updatedAt;
-    /// <summary>
-    /// When the media's data was last updated.
-    /// </summary>
-    public DateTime UpdatedAt => DateTimeOffset.FromUnixTimeSeconds(_updatedAt).DateTime;
 
     /* below are properties only for the authenticated user */
 
