@@ -25,9 +25,8 @@ public class UserMutationsTests
     [OneTimeSetUp]
     public async Task AuthorizationSetup()
     {
-        Directory.SetCurrentDirectory(Path.Join(Directory.GetCurrentDirectory(), "../../../"));
         Env.Load(); // loads variables from .env file
-        var userToken = Environment.GetEnvironmentVariable("AniListToken");
+        var userToken = Environment.GetEnvironmentVariable("AUTH_TOKEN");
         var isAuthorized = await _client.TryAuthenticateAsync(userToken!);
         if (!isAuthorized)
             throw new Exception("Client is not authorized.");
