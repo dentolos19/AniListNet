@@ -42,7 +42,18 @@ public class Media
     /// Short description of the media's story and characters.
     /// </summary>
     /// <remarks>In markdown format.</remarks>
-    [JsonProperty("description")] [GqlParameter("asHtml", false)] public string? Description { get; private set; }
+    [JsonProperty("description")]
+    [GqlParameter("asHtml", false)]
+    public string? Description { get; private set; }
+
+    /// <summary>
+    /// Short description of the media's story and characters.
+    /// </summary>
+    /// <remarks>In markdown format.</remarks>
+    [JsonProperty("descriptionHtml")]
+    [GqlAlias("descriptionHtml", "description")]
+    [GqlParameter("asHtml", true)]
+    public string? HtmlDescripton { get; private set; }
 
     /// <summary>
     /// The first official release date of the media.

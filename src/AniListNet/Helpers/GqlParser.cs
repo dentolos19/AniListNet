@@ -24,14 +24,14 @@ internal static class GqlParser
     public static IList<GqlSelection> ParseType(Type type)
     {
         var elementType = type.GetElementType();
-        if (elementType != null)
+        if (elementType is not null)
             type = elementType;
         var selections = new List<GqlSelection>();
         var variables = type.GetProperties().Cast<MemberInfo>().Concat(type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance));
         foreach (var variable in variables)
         {
             var jsonAttribute = variable.GetCustomAttribute<JsonPropertyAttribute>();
-            if (jsonAttribute == null)
+            if (jsonAttribute is null)
                 continue;
             var subSelections = ParseType(variable.MemberType switch
             {
@@ -39,7 +39,14 @@ internal static class GqlParser
                 MemberTypes.Property => ((PropertyInfo)variable).PropertyType
             });
             var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => attribute.Parameter).ToArray();
-            selections.Add(new GqlSelection(jsonAttribute.PropertyName ?? variable.Name, subSelections, parameters));
+            var selection = new GqlSelection(jsonAttribute.PropertyName ?? variable.Name, subSelections, parameters);
+            var aliasAttribute = variable.GetCustomAttribute<GqlAliasAttribute>();
+            if (aliasAttribute is not null)
+            {
+                selection.Alias = aliasAttribute.Alias;
+                selection.Name = aliasAttribute.AliasFor;
+            }
+            selections.Add(selection);
         }
         return selections;
     }
@@ -49,7 +56,10 @@ internal static class GqlParser
         var stringBuilder = new StringBuilder();
         foreach (var selection in selections)
         {
-            stringBuilder.Append((stringBuilder.Length > 0 ? ',' : string.Empty) + selection.Name);
+            stringBuilder.Append(stringBuilder.Length > 0 ? ',' : string.Empty);
+            if (!string.IsNullOrEmpty(selection.Alias))
+                stringBuilder.Append(selection.Alias + ":");
+            stringBuilder.Append(selection.Name);
             if (selection.Parameters is { Count: > 0 })
                 stringBuilder.Append($"({BuildParameters(selection.Parameters)})");
             if (selection.Selections is { Count: > 0 })

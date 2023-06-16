@@ -67,8 +67,6 @@ See more features by visiting the [features wiki](https://github.com/dentolos19/
 ## 🔨 Todo
 
 - [ ] Add query functions for notification data
-- [ ] Add query/mutations functions for user settings/activities
+- [ ] Add query/mutations functions for user activities
 - [ ] Add query/mutations functions for forums
-- [ ] Add more options for filtering
-- [ ] Add more data for `User`
-- [ ] Use generics instead of arrays
+- [ ] Use generics instead of arrays (target v2.0)
