@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class MediaStaffEdge : MediaEdge
 {
-    [JsonProperty("staffRole")] public string Role { get; private set; }
+    [GqlSelection("staffRole")] public string Role { get; private set; }
 }

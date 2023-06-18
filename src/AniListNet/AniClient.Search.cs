@@ -16,8 +16,8 @@ public partial class AniClient
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Media>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["media"].ToObject<Media[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<Media[]>(response["Page"]["media"])
         );
     }
 
@@ -31,8 +31,8 @@ public partial class AniClient
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Character>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["characters"].ToObject<Character[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<Character[]>(response["Page"]["characters"])
         );
     }
 
@@ -49,8 +49,8 @@ public partial class AniClient
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Staff>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["staff"].ToObject<Staff[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<Staff[]>(response["Page"]["staff"])
         );
     }
 
@@ -67,8 +67,8 @@ public partial class AniClient
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Studio>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["studios"].ToObject<Studio[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<Studio[]>(response["Page"]["studios"])
         );
     }
 
@@ -85,8 +85,8 @@ public partial class AniClient
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<User>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["users"].ToObject<User[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<User[]>(response["Page"]["users"])
         );
     }
 

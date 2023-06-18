@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
@@ -7,12 +7,12 @@ namespace AniListNet.Objects;
 /// </summary>
 public class MediaTrend
 {
-    [JsonProperty("date")] public int _date { get; set; }
+    [GqlSelection("date")] public int _date { get; private set; }
 
     /// <summary>
     /// The ID of the tag.
     /// </summary>
-    [JsonProperty("mediaId")] public int MediaId { get; set; }
+    [GqlSelection("mediaId")] public int MediaId { get; private set; }
 
     /// <summary>
     /// The day the data was recorded.
@@ -22,35 +22,35 @@ public class MediaTrend
     /// <summary>
     /// The amount of media activity on the day.
     /// </summary>
-    [JsonProperty("trending")] public int Trending { get; set; }
+    [GqlSelection("trending")] public int Trending { get; private set; }
 
     /// <summary>
     /// A weighted average score of all the user's scores of the media.
     /// </summary>
-    [JsonProperty("averageScore")] public int AverageScore { get; set; }
+    [GqlSelection("averageScore")] public int AverageScore { get; private set; }
 
     /// <summary>
     /// The number of users with the media on their list.
     /// </summary>
-    [JsonProperty("popularity")] public int Popularity { get; set; }
+    [GqlSelection("popularity")] public int Popularity { get; private set; }
 
     /// <summary>
     /// The number of users with watching/reading the media.
     /// </summary>
-    [JsonProperty("inProgress")] public int InProgressCount { get; set; }
+    [GqlSelection("inProgress")] public int InProgressCount { get; private set; }
 
     /// <summary>
     /// If the media was being released at this time.
     /// </summary>
-    [JsonProperty("releasing")] public bool IsReleasing { get; set; }
+    [GqlSelection("releasing")] public bool IsReleasing { get; private set; }
 
     /// <summary>
     /// The episode number of the anime released on this day.
     /// </summary>
-    [JsonProperty("episode")] public int? Episode { get; set; }
+    [GqlSelection("episode")] public int? Episode { get; private set; }
 
     /// <summary>
     /// The related media.
     /// </summary>
-    [JsonProperty("media")] public Media Media { get; set; }
+    [GqlSelection("media")] public Media Media { get; private set; }
 }

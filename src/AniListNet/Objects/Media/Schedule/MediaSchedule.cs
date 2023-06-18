@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
@@ -8,12 +8,12 @@ namespace AniListNet.Objects;
 /// <remarks>We only aim to guarantee that FUTURE airing data is present and accurate.</remarks>
 public class MediaSchedule
 {
-    [JsonProperty("airingAt")] private readonly int _airingAt;
+    [GqlSelection("airingAt")] private readonly int _airingAt;
 
     /// <summary>
     /// The ID of the airing schedule item.
     /// </summary>
-    [JsonProperty("id")] public int Id { get; private set; }
+    [GqlSelection("id")] public int Id { get; private set; }
 
     /// <summary>
     /// The time the episode airs at.
@@ -23,10 +23,10 @@ public class MediaSchedule
     /// <summary>
     /// The airing episode number.
     /// </summary>
-    [JsonProperty("episode")] public int Episode { get; private set; }
+    [GqlSelection("episode")] public int Episode { get; private set; }
 
     /// <summary>
     /// The associate media of the airing episode.
     /// </summary>
-    [JsonProperty("media")] public Media Media { get; private set; }
+    [GqlSelection("media")] public Media Media { get; private set; }
 }

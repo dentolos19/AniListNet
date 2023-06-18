@@ -8,16 +8,16 @@ public partial class AniClient
 {
     public async Task<User> GetAuthenticatedUserAsync()
     {
-        var selections = new GqlSelection("Viewer", GqlParser.ParseType(typeof(User)));
+        var selections = new GqlSelection("Viewer", typeof(User).ToSelections());
         var response = await PostRequestAsync(selections);
-        return response["Viewer"].ToObject<User>();
+        return GqlParser.ParseFromJson<User>(response["Viewer"]);
     }
 
     public async Task<User> UpdateUserOptionsAsync(UserOptionsMutation mutation)
     {
         var selections = new GqlSelection("UpdateUser", typeof(User).ToSelections(), mutation.ToParameters());
         var response = await PostRequestAsync(selections, true);
-        return response["UpdateUser"].ToObject<User>();
+        return GqlParser.ParseFromJson<User>(response["UpdateUser"]);
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public partial class AniClient
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
         var selections = new GqlSelection("SaveMediaListEntry", typeof(MediaEntry).ToSelections(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
-        return response["SaveMediaListEntry"].ToObject<MediaEntry>();
+        return GqlParser.ParseFromJson<MediaEntry>(response["SaveMediaListEntry"]);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public partial class AniClient
             new("id", mediaId)
         });
         var response = await PostRequestAsync(selections, true);
-        return response["DeleteMediaListEntry"]["deleted"].ToObject<bool>();
+        return GqlParser.ParseFromJson<bool>(response["DeleteMediaListEntry"]["deleted"]);
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public partial class AniClient
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
         var selections = new GqlSelection("SaveReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
-        return response["SaveReview"].ToObject<MediaReview>();
+        return GqlParser.ParseFromJson<MediaReview>(response["SaveReview"]);
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ public partial class AniClient
             new("id", reviewId)
         });
         var response = await PostRequestAsync(selections, true);
-        return response["DeleteReview"]["deleted"].ToObject<bool>();
+        return GqlParser.ParseFromJson<bool>(response["DeleteReview"]["deleted"]);
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ public partial class AniClient
         var parameters = new List<GqlParameter> { new("reviewId", reviewId), new("rating", rating) };
         var selections = new GqlSelection("RateReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
-        return response["RateReview"].ToObject<MediaReview>();
+        return GqlParser.ParseFromJson<MediaReview>(response["RateReview"]);
     }
 
     /// <summary>
@@ -93,7 +93,7 @@ public partial class AniClient
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
         var selections = new GqlSelection("SaveRecommendation", typeof(MediaRecommendation).ToSelections(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
-        return response["SaveRecommendation"].ToObject<MediaRecommendation>();
+        return GqlParser.ParseFromJson<MediaRecommendation>(response["SaveRecommendation"]);
     }
 
     public async Task<bool> ToggleFollowUserAsync(int mediaId)
@@ -106,7 +106,7 @@ public partial class AniClient
             new("userId", mediaId)
         });
         var response = await PostRequestAsync(selections, true);
-        return response["ToggleFollow"]["isFollowing"].ToObject<bool>();
+        return GqlParser.ParseFromJson<bool>(response["ToggleFollow"]["isFollowing"]);
     }
 
     public async Task<bool> ToggleMediaFavoriteAsync(int mediaId, MediaType type)
@@ -116,49 +116,44 @@ public partial class AniClient
             MediaType.Anime => "animeId",
             MediaType.Manga => "mangaId"
         }, mediaId);
-        return (await GetSingleDataAsync(
-            new GqlSelection("Media", default, new GqlParameter[]
-            {
-                new("id", mediaId)
-            }),
+        var json = await GetSingleDataAsync(
+            new GqlSelection("Media", default, new GqlParameter[] { new("id", mediaId) }),
             new GqlSelection("isFavourite")
-        )).ToObject<bool>();
+        );
+        return GqlParser.ParseFromJson<bool>(json);
     }
 
     public async Task<bool> ToggleCharacterFavoriteAsync(int characterId)
     {
         await ToggleFavoriteAsync("characterId", characterId);
-        return (await GetSingleDataAsync(
-            new GqlSelection("Character", default, new GqlParameter[]
-            {
-                new("id", characterId)
-            }),
+        var json = await GetSingleDataAsync(
+            new GqlSelection("Character", default, new GqlParameter[] { new("id", characterId) }),
             new GqlSelection("isFavourite")
-        )).ToObject<bool>();
+        );
+        return GqlParser.ParseFromJson<bool>(json);
     }
 
     public async Task<bool> ToggleStaffFavoriteAsync(int staffId)
     {
         await ToggleFavoriteAsync("staffId", staffId);
-        return (await GetSingleDataAsync(
-            new GqlSelection("Staff", default, new GqlParameter[]
-            {
-                new("id", staffId)
-            }),
+        var json = await GetSingleDataAsync(
+            new GqlSelection("Staff", default, new GqlParameter[] { new("id", staffId) }),
             new GqlSelection("isFavourite")
-        )).ToObject<bool>();
+        );
+        return GqlParser.ParseFromJson<bool>(json);
     }
 
     public async Task<bool> ToggleStudioFavoriteAsync(int studioId)
     {
         await ToggleFavoriteAsync("studioId", studioId);
-        return (await GetSingleDataAsync(
+        var json = await GetSingleDataAsync(
             new GqlSelection("Studio", default, new GqlParameter[]
             {
                 new("id", studioId)
             }),
             new GqlSelection("isFavourite")
-        )).ToObject<bool>();
+        );
+        return GqlParser.ParseFromJson<bool>(json);
     }
 
     /* below are methods made for private use */

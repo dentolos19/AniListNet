@@ -1,4 +1,5 @@
-﻿using AniListNet.Helpers;
+﻿using System.Collections;
+using AniListNet.Helpers;
 
 namespace AniListNet;
 
@@ -13,7 +14,7 @@ public class AniPaginationOptions
         PageSize = pageSize;
     }
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         return new GqlParameter[]
         {

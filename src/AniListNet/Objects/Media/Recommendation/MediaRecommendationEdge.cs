@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class MediaRecommendationEdge
 {
-    [JsonProperty("node")] public MediaRecommendation Recommendation { get; private set; }
+    [GqlSelection("node")] public MediaRecommendation Recommendation { get; private set; }
 }

@@ -11,8 +11,9 @@ public partial class AniClient
     /// </summary>
     public async Task<string[]> GetGenreCollectionAsync()
     {
-        var response = await PostRequestAsync(new GqlSelection("GenreCollection"));
-        return response["GenreCollection"].ToObject<string[]>();
+        var selections = new GqlSelection("GenreCollection");
+        var response = await PostRequestAsync(selections);
+        return GqlParser.ParseFromJson<string[]>(response["GenreCollection"]);
     }
 
     /// <summary>
@@ -20,8 +21,12 @@ public partial class AniClient
     /// </summary>
     public async Task<MediaTag[]> GetTagCollectionAsync()
     {
-        var response = await PostRequestAsync(new GqlSelection("MediaTagCollection", typeof(MediaTag).ToSelections()));
-        return response["MediaTagCollection"].ToObject<MediaTag[]>();
+        var selections = new GqlSelection("MediaTagCollection")
+        {
+            Selections = GqlParser.ParseToSelections<MediaTag>().ToArray()
+        };
+        var response = await PostRequestAsync(selections);
+        return GqlParser.ParseFromJson<MediaTag[]>(response["MediaTagCollection"]);
     }
 
     /// <summary>
@@ -29,12 +34,13 @@ public partial class AniClient
     /// </summary>
     public async Task<Media> GetMediaAsync(int mediaId)
     {
-        var selections = new GqlSelection("Media", typeof(Media).ToSelections(), new GqlParameter[]
+        var selections = new GqlSelection("Media")
         {
-            new("id", mediaId)
-        });
+            Parameters = new GqlParameter[] { new("id", mediaId) },
+            Selections = GqlParser.ParseToSelections<Media>().ToArray()
+        };
         var response = await PostRequestAsync(selections);
-        return response["Media"].ToObject<Media>();
+        return GqlParser.ParseFromJson<Media>(response["Media"]);
     }
 
     /// <summary>
@@ -42,10 +48,13 @@ public partial class AniClient
     /// </summary>
     public async Task<MediaReview> GetMediaReviewAsync(int reviewId)
     {
-        var parameters = new List<GqlParameter> { new("id", reviewId) };
-        var selections = new GqlSelection("Review", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var selections = new GqlSelection("Review")
+        {
+            Parameters = new GqlParameter[] { new("id", reviewId) },
+            Selections = GqlParser.ParseToSelections<MediaReview>().ToArray()
+        };
         var response = await PostRequestAsync(selections);
-        return response["Review"].ToObject<MediaReview>();
+        return GqlParser.ParseFromJson<MediaReview>(response["Review"]);
     }
 
     /// <summary>
@@ -55,15 +64,18 @@ public partial class AniClient
     {
         filter ??= new MediaSchedulesFilter();
         paginationOptions ??= new AniPaginationOptions();
-        var selections = new GqlSelection("Page", new GqlSelection[]
+        var selections = new GqlSelection("Page")
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("airingSchedules", typeof(MediaSchedule).ToSelections(), filter.ToParameters())
-        }, paginationOptions.ToParameters());
+            Parameters = paginationOptions.ToParameters(),
+            Selections = new GqlSelection[] {
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("airingSchedules",  GqlParser.ParseToSelections<MediaSchedule>(), filter.ToParameters())
+            }
+        };
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaSchedule>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["airingSchedules"].ToObject<MediaSchedule[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaSchedule[]>(response["Page"]["airingSchedules"])
         );
     }
 
@@ -74,15 +86,19 @@ public partial class AniClient
     {
         filter ??= new MediaTrendFilter();
         paginationOptions ??= new AniPaginationOptions();
-        var selections = new GqlSelection("Page", new GqlSelection[]
+        var selections = new GqlSelection("Page")
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("mediaTrends", typeof(MediaTrend).ToSelections(), filter.ToParameters())
-        }, paginationOptions.ToParameters());
+            Parameters = paginationOptions.ToParameters(),
+            Selections = new GqlSelection[]
+            {
+                new("pageInfo", typeof(PageInfo).ToSelections()),
+                new("mediaTrends", typeof(MediaTrend).ToSelections(), filter.ToParameters())
+            }
+        };
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaTrend>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["mediaTrends"].ToObject<MediaTrend[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaTrend[]>(response["Page"]["mediaTrends"])
         );
     }
 
@@ -91,12 +107,13 @@ public partial class AniClient
     /// </summary>
     public async Task<Character> GetCharacterAsync(int characterId)
     {
-        var selections = new GqlSelection("Character", typeof(Character).ToSelections(), new GqlParameter[]
+        var selections = new GqlSelection("Character")
         {
-            new("id", characterId)
-        });
+            Parameters = new GqlParameter[] { new("id", characterId) },
+            Selections = GqlParser.ParseToSelections<Character>()
+        };
         var response = await PostRequestAsync(selections);
-        return response["Character"].ToObject<Character>();
+        return GqlParser.ParseFromJson<Character>(response["Character"]);
     }
 
     /// <summary>
@@ -104,12 +121,13 @@ public partial class AniClient
     /// </summary>
     public async Task<Staff> GetStaffAsync(int staffId)
     {
-        var selections = new GqlSelection("Staff", typeof(Staff).ToSelections(), new GqlParameter[]
+        var selections = new GqlSelection("Staff")
         {
-            new("id", staffId)
-        });
+            Parameters = new GqlParameter[] { new("id", staffId) },
+            Selections = GqlParser.ParseToSelections<Staff>()
+        };
         var response = await PostRequestAsync(selections);
-        return response["Staff"].ToObject<Staff>();
+        return GqlParser.ParseFromJson<Staff>(response["Staff"]);
     }
 
     /// <summary>
@@ -117,12 +135,13 @@ public partial class AniClient
     /// </summary>
     public async Task<Studio> GetStudioAsync(int studioId)
     {
-        var selections = new GqlSelection("Studio", typeof(Studio).ToSelections(), new GqlParameter[]
+        var selections = new GqlSelection("Studio")
         {
-            new("id", studioId)
-        });
+            Parameters = new GqlParameter[] { new("id", studioId) },
+            Selections = GqlParser.ParseToSelections<Studio>()
+        };
         var response = await PostRequestAsync(selections);
-        return response["Studio"].ToObject<Studio>();
+        return GqlParser.ParseFromJson<Studio>(response["Studio"]);
     }
 
     /// <summary>
@@ -130,11 +149,12 @@ public partial class AniClient
     /// </summary>
     public async Task<User> GetUserAsync(int userId)
     {
-        var selections = new GqlSelection("User", typeof(User).ToSelections(), new GqlParameter[]
+        var selections = new GqlSelection("User")
         {
-            new("id", userId)
-        });
+            Parameters = new GqlParameter[] { new("id", userId) },
+            Selections = GqlParser.ParseToSelections<User>()
+        };
         var response = await PostRequestAsync(selections);
-        return response["User"].ToObject<User>();
+        return GqlParser.ParseFromJson<User>(response["User"]);
     }
 }

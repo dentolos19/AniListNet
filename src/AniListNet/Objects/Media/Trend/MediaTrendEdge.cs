@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class MediaTrendEdge
 {
-    [JsonProperty("node")] public MediaTrend Node { get; set; }
+    [GqlSelection("node")] public MediaTrend Node { get; private set; }
 }

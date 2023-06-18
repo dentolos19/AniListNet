@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
@@ -7,39 +7,39 @@ public class MediaEntry
     /// <summary>
     /// The ID of the list entry.
     /// </summary>
-    [JsonProperty("id")] public int Id { get; private set; }
+    [GqlSelection("id")] public int Id { get; private set; }
 
     /// <summary>
     /// The watching/reading status.
     /// </summary>
-    [JsonProperty("status")] public MediaEntryStatus Status { get; private set; }
+    [GqlSelection("status")] public MediaEntryStatus Status { get; private set; }
 
     /// <summary>
     /// The score of the entry.
     /// </summary>
-    [JsonProperty("score")] public float Score { get; private set; }
+    [GqlSelection("score")] public float Score { get; private set; }
 
     /// <summary>
     /// The amount of episodes/chapters consumed by the user.
     /// </summary>
-    [JsonProperty("progress")] public int Progress { get; private set; }
+    [GqlSelection("progress")] public int Progress { get; private set; }
 
     /// <summary>
     /// The amount of volumes read by the user.
     /// </summary>
-    [JsonProperty("progressVolumes")] public int? VolumeProgress { get; private set; }
+    [GqlSelection("progressVolumes")] public int? VolumeProgress { get; private set; }
 
     /// <summary>
     /// When the entry was started by the user.
     /// </summary>
-    [JsonProperty("startedAt")] public Date StartDate { get; private set; }
+    [GqlSelection("startedAt")] public Date StartDate { get; private set; }
 
     /// <summary>
     /// When the entry was completed by the user.
     /// </summary>
-    [JsonProperty("completedAt")] public Date CompleteDate { get; private set; }
+    [GqlSelection("completedAt")] public Date CompleteDate { get; private set; }
 
-    [JsonProperty("media")] public Media Media { get; private set; }
+    [GqlSelection("media")] public Media Media { get; private set; }
 
     /* below are properties that are not part of the API */
 

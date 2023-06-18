@@ -1,45 +1,45 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class MediaEntrySub
 {
-    [JsonProperty("media")] private readonly Media _media;
+    [GqlSelection("media")] private readonly Media _media;
 
     /// <summary>
     /// The ID of the list entry.
     /// </summary>
-    [JsonProperty("id")] public int Id { get; private set; }
+    [GqlSelection("id")] public int Id { get; private set; }
 
     /// <summary>
     /// The watching/reading status.
     /// </summary>
-    [JsonProperty("status")] public MediaEntryStatus Status { get; private set; }
+    [GqlSelection("status")] public MediaEntryStatus Status { get; private set; }
 
     /// <summary>
     /// The score of the entry.
     /// </summary>
-    [JsonProperty("score")] public float Score { get; private set; }
+    [GqlSelection("score")] public float Score { get; private set; }
 
     /// <summary>
     /// The amount of episodes/chapters consumed by the user.
     /// </summary>
-    [JsonProperty("progress")] public int Progress { get; private set; }
+    [GqlSelection("progress")] public int Progress { get; private set; }
 
     /// <summary>
     /// The amount of volumes read by the user.
     /// </summary>
-    [JsonProperty("progressVolumes")] public int? VolumeProgress { get; private set; }
+    [GqlSelection("progressVolumes")] public int? VolumeProgress { get; private set; }
 
     /// <summary>
     /// When the entry was started by the user.
     /// </summary>
-    [JsonProperty("startedAt")] public Date StartDate { get; private set; }
+    [GqlSelection("startedAt")] public Date StartDate { get; private set; }
 
     /// <summary>
     /// When the entry was completed by the user.
     /// </summary>
-    [JsonProperty("completedAt")] public Date CompleteDate { get; private set; }
+    [GqlSelection("completedAt")] public Date CompleteDate { get; private set; }
 
     /// <summary>
     /// The max possible progress of the anime or manga.
@@ -55,8 +55,8 @@ public class MediaEntrySub
 
     private class Media
     {
-        [JsonProperty("episodes")] public int? Episodes { get; private set; }
-        [JsonProperty("chapters")] public int? Chapters { get; private set; }
-        [JsonProperty("volumes")] public int? Volumes { get; private set; }
+        [GqlSelection("episodes")] public int? Episodes { get; private set; }
+        [GqlSelection("chapters")] public int? Chapters { get; private set; }
+        [GqlSelection("volumes")] public int? Volumes { get; private set; }
     }
 }

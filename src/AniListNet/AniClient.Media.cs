@@ -10,15 +10,13 @@ public partial class AniClient
     /// </summary>
     public async Task<MediaTag[]> GetMediaTagsAsync(int mediaId)
     {
-        var selections = new GqlSelection("Media", new GqlSelection[]
+        var selections = new GqlSelection("Media")
         {
-            new("tags", typeof(MediaTag).ToSelections())
-        }, new GqlParameter[]
-        {
-            new("id", mediaId)
-        });
+            Parameters = new GqlParameter[] { new("id", mediaId) },
+            Selections = new GqlSelection[] { new("tags", GqlParser.ParseToSelections<MediaTag>()) }
+        };
         var response = await PostRequestAsync(selections);
-        return response["Media"]["tags"].ToObject<MediaTag[]>();
+        return GqlParser.ParseFromJson<MediaTag[]>(response["Media"]["tags"]);
     }
 
     /// <summary>
@@ -26,18 +24,19 @@ public partial class AniClient
     /// </summary>
     public async Task<MediaRelationEdge[]> GetMediaRelationsAsync(int mediaId)
     {
-        var selections = new GqlSelection("Media", new GqlSelection[]
+        var selections = new GqlSelection("Media")
         {
-            new("relations", new GqlSelection[]
+            Parameters = new GqlParameter[] { new("id", mediaId) },
+            Selections = new GqlSelection[]
             {
-                new("edges", typeof(MediaRelationEdge).ToSelections())
-            })
-        }, new GqlParameter[]
-        {
-            new("id", mediaId)
-        });
+                new("relations", new GqlSelection[]
+                {
+                    new("edges", GqlParser.ParseToSelections<MediaRelationEdge>())
+                })
+            }
+        };
         var response = await PostRequestAsync(selections);
-        return response["Media"]["relations"]["edges"].ToObject<MediaRelationEdge[]>();
+        return GqlParser.ParseFromJson<MediaRelationEdge[]>(response["Media"]["relations"]["edges"]);
     }
 
     /// <summary>
@@ -46,24 +45,26 @@ public partial class AniClient
     public async Task<AniPagination<CharacterEdge>> GetMediaCharactersAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
-        var selections = new GqlSelection("Media", new GqlSelection[]
+        var selections = new GqlSelection("Media")
         {
-            new("characters", new GqlSelection[]
+            Parameters = new GqlParameter[] { new("id", mediaId) },
+            Selections = new GqlSelection[]
             {
-                new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(CharacterEdge).ToSelections())
-            }, new GqlParameter[]
-            {
-                new("sort", CharacterSort.Role)
-            }.Concat(paginationOptions.ToParameters()))
-        }, new GqlParameter[]
-        {
-            new("id", mediaId)
-        });
+                new("characters")
+                {
+                    Parameters = new GqlParameter[] { new("sort", CharacterSort.Role) }.Concat(paginationOptions.ToParameters()).ToArray(),
+                    Selections = new GqlSelection[]
+                    {
+                        new("pageInfo", typeof(PageInfo).ToSelections()),
+                        new("edges", typeof(CharacterEdge).ToSelections())
+                    }
+                }
+            }
+        };
         var response = await PostRequestAsync(selections);
         return new AniPagination<CharacterEdge>(
-            response["Media"]["characters"]["pageInfo"].ToObject<PageInfo>(),
-            response["Media"]["characters"]["edges"].ToObject<CharacterEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Media"]["characters"]["pageInfo"]),
+            GqlParser.ParseFromJson<CharacterEdge[]>(response["Media"]["characters"]["edges"])
         );
     }
 
@@ -86,8 +87,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<StaffEdge>(
-            response["Media"]["staff"]["pageInfo"].ToObject<PageInfo>(),
-            response["Media"]["staff"]["edges"].ToObject<StaffEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Media"]["staff"]["pageInfo"]),
+            GqlParser.ParseFromJson<StaffEdge[]>(response["Media"]["staff"]["edges"])
         );
     }
 
@@ -107,7 +108,7 @@ public partial class AniClient
             new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
-        return response["Media"]["studios"]["edges"].ToObject<StudioEdge[]>();
+        return GqlParser.ParseFromJson<StudioEdge[]>(response["Media"]["studios"]["edges"]);
     }
 
     /// <summary>
@@ -129,8 +130,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaRecommendationEdge>(
-            response["Media"]["recommendations"]["pageInfo"].ToObject<PageInfo>(),
-            response["Media"]["recommendations"]["edges"].ToObject<MediaRecommendationEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Media"]["recommendations"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaRecommendationEdge[]>(response["Media"]["recommendations"]["edges"])
         );
     }
 
@@ -153,8 +154,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaReviewEdge>(
-            response["Media"]["reviews"]["pageInfo"].ToObject<PageInfo>(),
-            response["Media"]["reviews"]["edges"].ToObject<MediaReviewEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Media"]["reviews"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaReviewEdge[]>(response["Media"]["reviews"]["edges"])
         );
     }
 
@@ -170,6 +171,6 @@ public partial class AniClient
             new("id", mediaId)
         });
         var response = await PostRequestAsync(selections);
-        return response["Media"]["mediaListEntry"].ToObject<MediaEntry?>();
+        return GqlParser.ParseFromJson<MediaEntry?>(response["Media"]["mediaListEntry"]);
     }
 }

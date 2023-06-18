@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
@@ -7,27 +7,27 @@ public class MediaRecommendation
     /// <summary>
     /// The ID of the recommendation.
     /// </summary>
-    [JsonProperty("id")] public int Id { get; private set; }
+    [GqlSelection("id")] public int Id { get; private set; }
 
     /// <summary>
     /// Users rating of the recommendation.
     /// </summary>
-    [JsonProperty("rating")] public int Rating { get; private set; }
+    [GqlSelection("rating")] public int Rating { get; private set; }
 
     /// <summary>
     /// The media the recommendation is from.
     /// </summary>
-    [JsonProperty("media")] public Media Media { get; private set; }
+    [GqlSelection("media")] public Media Media { get; private set; }
 
     /// <summary>
     /// The recommended media.
     /// </summary>
-    [JsonProperty("mediaRecommendation")] public Media Recommendation { get; private set; }
+    [GqlSelection("mediaRecommendation")] public Media Recommendation { get; private set; }
 
     /// <summary>
     /// The user that first created the recommendation.
     /// </summary>
-    [JsonProperty("user")] public User User { get; private set; }
+    [GqlSelection("user")] public User User { get; private set; }
 
     /* below are properties only for the authenticated user */
 
@@ -35,5 +35,5 @@ public class MediaRecommendation
     /// The rating of the recommendation by currently authenticated user.
     /// </summary>
     /// <remarks>Requires user authentication with AniList!</remarks>
-    [JsonProperty("userRating")] public MediaRecommendationRating UserRating { get; private set; }
+    [GqlSelection("userRating")] public MediaRecommendationRating UserRating { get; private set; }
 }

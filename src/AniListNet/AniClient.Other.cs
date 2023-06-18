@@ -26,8 +26,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaCharacterEdge>(
-            response["Character"]["media"]["pageInfo"].ToObject<PageInfo>(),
-            response["Character"]["media"]["edges"].ToObject<MediaCharacterEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Character"]["media"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaCharacterEdge[]>(response["Character"]["media"]["edges"])
         );
     }
 
@@ -51,8 +51,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaStaffEdge>(
-            response["Staff"]["staffMedia"]["pageInfo"].ToObject<PageInfo>(),
-            response["Staff"]["staffMedia"]["edges"].ToObject<MediaStaffEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Staff"]["staffMedia"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaStaffEdge[]>(response["Staff"]["staffMedia"]["edges"])
         );
     }
 
@@ -76,8 +76,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaStaffEdge>(
-            response["Staff"]["characterMedia"]["pageInfo"].ToObject<PageInfo>(),
-            response["Staff"]["characterMedia"]["edges"].ToObject<MediaStaffEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Staff"]["characterMedia"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaStaffEdge[]>(response["Staff"]["characterMedia"]["edges"])
         );
     }
 
@@ -103,8 +103,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<CharacterEdge>(
-            response["Staff"]["characters"]["pageInfo"].ToObject<PageInfo>(),
-            response["Staff"]["characters"]["edges"].ToObject<CharacterEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Staff"]["characters"]["pageInfo"]),
+            GqlParser.ParseFromJson<CharacterEdge[]>(response["Staff"]["characters"]["edges"])
         );
     }
 
@@ -128,8 +128,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaStudioEdge>(
-            response["Studio"]["media"]["pageInfo"].ToObject<PageInfo>(),
-            response["Studio"]["media"]["edges"].ToObject<MediaStudioEdge[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Studio"]["media"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaStudioEdge[]>(response["Studio"]["media"]["edges"])
         );
     }
 }

@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class MediaEntryCollection
 {
-    [JsonProperty("lists")] public MediaEntryList[] Lists { get; private set; }
-    [JsonProperty("hasNextChunk")] public bool HasNextChunk { get; private set; }
+    [GqlSelection("lists")] public MediaEntryList[] Lists { get; private set; }
+    [GqlSelection("hasNextChunk")] public bool HasNextChunk { get; private set; }
 }

@@ -1,10 +1,10 @@
 ﻿namespace AniListNet.Helpers;
 
-[AttributeUsage(AttributeTargets.Property |  AttributeTargets.Field, AllowMultiple = false)]
-public class GqlSelectionAttribute : Attribute
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
+internal class GqlSelectionAttribute : Attribute
 {
-    public string Name { get; set; }
-    public string? Alias { get; set; }
+    public string Name { get; }
+    public string? Alias { get; }
 
     public GqlSelectionAttribute(string name, string? alias = null)
     {

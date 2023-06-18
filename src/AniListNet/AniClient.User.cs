@@ -19,8 +19,8 @@ public partial class AniClient
         }, paginationOptions.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<User>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["followers"].ToObject<User[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<User[]>(response["Page"]["followers"])
         );
     }
 
@@ -37,8 +37,8 @@ public partial class AniClient
         }, paginationOptions.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<User>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["following"].ToObject<User[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<User[]>(response["Page"]["following"])
         );
     }
 
@@ -56,8 +56,8 @@ public partial class AniClient
         }, paginationOptions.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaEntry>(
-            response["Page"]["pageInfo"].ToObject<PageInfo>(),
-            response["Page"]["mediaList"].ToObject<MediaEntry[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaEntry[]>(response["Page"]["mediaList"])
         );
     }
 
@@ -72,7 +72,7 @@ public partial class AniClient
             new("perChunk", paginationOptions.PageSize)
         });
         var response = await PostRequestAsync(selections);
-        return response["MediaListCollection"].ToObject<MediaEntryCollection>();
+        return GqlParser.ParseFromJson<MediaEntryCollection>(response["MediaListCollection"]);
     }
 
     public async Task<MediaListCollection> GetUserListCollectionAsync(int userId, MediaType type)
@@ -83,7 +83,7 @@ public partial class AniClient
             new("type", type)
         });
         var response = await PostRequestAsync(selections);
-        return response["MediaListCollection"].ToObject<MediaListCollection>();
+        return GqlParser.ParseFromJson<MediaListCollection>(response["MediaListCollection"]);
     }
 
     public Task<AniPagination<Media>> GetUserAnimeFavoritesAsync(int userId, AniPaginationOptions? paginationOptions = null)
@@ -136,8 +136,8 @@ public partial class AniClient
         });
         var response = await PostRequestAsync(selections);
         return new AniPagination<T>(
-            response["User"]["favourites"][type]["pageInfo"].ToObject<PageInfo>(),
-            response["User"]["favourites"][type]["nodes"].ToObject<T[]>()
+            GqlParser.ParseFromJson<PageInfo>(response["User"]["favourites"][type]["pageInfo"]),
+            GqlParser.ParseFromJson<T[]>(response["User"]["favourites"][type]["nodes"])
         );
     }
 }

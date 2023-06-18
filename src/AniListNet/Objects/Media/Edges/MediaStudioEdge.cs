@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class MediaStudioEdge : MediaEdge
 {
-    [JsonProperty("isMainStudio")] public bool IsMainStudio { get; private set; }
+    [GqlSelection("isMainStudio")] public bool IsMainStudio { get; private set; }
 }

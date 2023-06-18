@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class CharacterEdge
 {
-    [JsonProperty("node")] public Character Character { get; private set; }
-    [JsonProperty("id")] public int Id { get; private set; }
-    [JsonProperty("role")] public CharacterRole Role { get; private set; }
+    [GqlSelection("node")] public Character Character { get; private set; }
+    [GqlSelection("id")] public int Id { get; private set; }
+    [GqlSelection("role")] public CharacterRole Role { get; private set; }
 }

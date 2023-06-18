@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
 public class StudioEdge
 {
-    [JsonProperty("node")] public Studio Studio { get; private set; }
-    [JsonProperty("id")] public int Id { get; private set; }
-    [JsonProperty("isMain")] public bool IsMain { get; private set; }
+    [GqlSelection("node")] public Studio Studio { get; private set; }
+    [GqlSelection("id")] public int Id { get; private set; }
+    [GqlSelection("isMain")] public bool IsMain { get; private set; }
 }

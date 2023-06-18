@@ -1,11 +1,14 @@
 ﻿namespace AniListNet.Helpers;
 
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true)]
 internal class GqlParameterAttribute : Attribute
 {
-    public GqlParameter Parameter { get; }
+    public string Name { get; }
+    public object? Value { get; }
 
     public GqlParameterAttribute(string name, object? value)
     {
-        Parameter = new GqlParameter(name, value);
+        Name = name;
+        Value = value;
     }
 }

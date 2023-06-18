@@ -1,18 +1,59 @@
 ﻿using System.Collections;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AniListNet.Helpers;
 
 internal static class GqlParser
 {
-    public static string ParseSelections(GqlSelection selection)
+    private static readonly JsonSerializer JsonSerializer = new() { ContractResolver = new GqlObjectResolver() };
+
+    public static IList<GqlSelection> ParseToSelections<TObject>()
     {
-        return ParseSelections(new[] { selection });
+        return ParseToSelections(typeof(TObject));
     }
 
-    public static string ParseSelections(IEnumerable<GqlSelection> selections)
+    public static IList<GqlSelection> ParseToSelections(Type type)
+    {
+        var elementType = type.GetElementType();
+        if (elementType is not null)
+            type = elementType;
+        var properties = type.GetProperties().Cast<MemberInfo>();
+        var fields = type.GetFields().Cast<MemberInfo>();
+        var variables = properties.Concat(fields);
+        var selections = new List<GqlSelection>();
+        foreach (var variable in variables)
+        {
+            var selectionAttribute = variable.GetCustomAttribute<GqlSelectionAttribute>();
+            if (selectionAttribute is null)
+                continue;
+            var subSelections = ParseToSelections(variable.MemberType switch
+            {
+                MemberTypes.Field => ((FieldInfo)variable).FieldType,
+                MemberTypes.Property => ((PropertyInfo)variable).PropertyType
+            });
+            var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => new GqlParameter(attribute));
+            var selection = new GqlSelection(selectionAttribute)
+            {
+                Parameters = parameters.ToList(),
+                Selections = subSelections
+            };
+            if (!string.IsNullOrEmpty(selectionAttribute.Alias))
+                selection.Alias = selectionAttribute.Alias;
+            selections.Add(selection);
+        }
+        return selections;
+    }
+
+    public static string ParseToString(GqlSelection selection)
+    {
+        return ParseToString(new[] { selection });
+    }
+
+    public static string ParseToString(IEnumerable<GqlSelection> selections)
     {
         var stringBuilder = new StringBuilder();
         stringBuilder.Append('{');
@@ -21,34 +62,16 @@ internal static class GqlParser
         return stringBuilder.ToString();
     }
 
-    public static IList<GqlSelection> ParseType(Type type)
+    public static TObject? ParseFromJson<TObject>(JToken token)
     {
-        var elementType = type.GetElementType();
-        if (elementType is not null)
-            type = elementType;
-        var selections = new List<GqlSelection>();
-        var variables = type.GetProperties().Cast<MemberInfo>().Concat(type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance));
-        foreach (var variable in variables)
-        {
-            var jsonAttribute = variable.GetCustomAttribute<JsonPropertyAttribute>();
-            if (jsonAttribute is null)
-                continue;
-            var subSelections = ParseType(variable.MemberType switch
-            {
-                MemberTypes.Field => ((FieldInfo)variable).FieldType,
-                MemberTypes.Property => ((PropertyInfo)variable).PropertyType
-            });
-            var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => attribute.Parameter).ToArray();
-            var selection = new GqlSelection(jsonAttribute.PropertyName ?? variable.Name, subSelections, parameters);
-            var aliasAttribute = variable.GetCustomAttribute<GqlAliasAttribute>();
-            if (aliasAttribute is not null)
-            {
-                selection.Alias = aliasAttribute.Alias;
-                selection.Name = aliasAttribute.AliasFor;
-            }
-            selections.Add(selection);
-        }
-        return selections;
+        return token.ToObject<TObject>(JsonSerializer);
+    }
+
+    private static string GetEnumMemberValue(Enum @enum)
+    {
+        var field = @enum.GetType().GetField(@enum.ToString());
+        var attribute = field?.GetCustomAttribute<EnumMemberAttribute>();
+        return attribute?.Value ?? @enum.ToString();
     }
 
     private static string BuildSelections(IEnumerable<GqlSelection> selections)
@@ -83,7 +106,7 @@ internal static class GqlParser
             null => "null",
             string @string => @string.StartsWith('$') ? @string.TrimStart('$') : $"\"{@string}\"",
             bool @bool => @bool ? "true" : "false",
-            Enum @enum => HelperUtilities.GetEnumMemberValue(@enum),
+            Enum @enum => GetEnumMemberValue(@enum),
             IEnumerable<GqlParameter> parameters => ((Func<string>)(() =>
             {
                 var stringBuilder = new StringBuilder();
