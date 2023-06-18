@@ -10,8 +10,7 @@ public class Media
     /// <summary>
     /// The ID of the media.
     /// </summary>
-    [GqlSelection("id")]
-    public int Id { get; private set; }
+    [GqlSelection("id")] public int Id { get; private set; }
 
     /// <summary>
     /// The MyAnimeList ID of the media.

@@ -23,7 +23,17 @@ public class Character
     /// A general description of the character.
     /// </summary>
     /// <remarks>In markdown format.</remarks>
-    [GqlSelection("description")] [GqlParameter("asHtml", false)] public string? Description { get; private set; }
+    [GqlSelection("description")]
+    [GqlParameter("asHtml", false)]
+    public string? Description { get; private set; }
+
+    /// <summary>
+    /// A general description of the character.
+    /// </summary>
+    /// <remarks>In HTML format.</remarks>
+    [GqlSelection("description", "descriptionHtml")]
+    [GqlParameter("asHtml", true)]
+    public string? DescriptionHtml { get; private set; }
 
     /// <summary>
     /// The character's gender. Usually Male, Female, or Non-binary but can be any string.

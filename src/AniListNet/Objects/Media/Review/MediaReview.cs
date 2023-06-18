@@ -1,5 +1,4 @@
 ﻿using AniListNet.Helpers;
-using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
@@ -40,7 +39,17 @@ public class MediaReview
     /// The main review body text.
     /// </summary>
     /// <remarks>In markdown format.</remarks>
-    [GqlSelection("body")] [GqlParameter("asHtml", false)] public string Body { get; private set; }
+    [GqlSelection("body")]
+    [GqlParameter("asHtml", false)]
+    public string Body { get; private set; }
+
+    /// <summary>
+    /// The main review body text.
+    /// </summary>
+    /// <remarks>In HTML format.</remarks>
+    [GqlSelection("body", "bodyHtml")]
+    [GqlParameter("asHtml", true)]
+    public string BodyHtml { get; private set; }
 
     /// <summary>
     /// The total user rating of the review.

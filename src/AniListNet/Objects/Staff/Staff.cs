@@ -28,7 +28,18 @@ public class Staff
     /// <summary>
     /// A general description of the staff member.
     /// </summary>
-    [GqlSelection("description")] [GqlParameter("asHtml", false)] public string? Description { get; private set; }
+    /// <remarks>In markdown format.</remarks>
+    [GqlSelection("description")]
+    [GqlParameter("asHtml", false)]
+    public string? Description { get; private set; }
+
+    /// <summary>
+    /// A general description of the staff member.
+    /// </summary>
+    /// <remarks>In HTML format.</remarks>
+    [GqlSelection("description", "descriptionHtml")]
+    [GqlParameter("asHtml", true)]
+    public string? DescriptionHtml { get; private set; }
 
     /// <summary>
     /// The person's primary occupations.
