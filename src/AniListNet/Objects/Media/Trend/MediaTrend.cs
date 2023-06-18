@@ -1,4 +1,5 @@
 ﻿using AniListNet.Helpers;
+using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
@@ -7,7 +8,7 @@ namespace AniListNet.Objects;
 /// </summary>
 public class MediaTrend
 {
-    [GqlSelection("date")] public int _date { get; private set; }
+    [GqlSelection("date")] public readonly int _date;
 
     /// <summary>
     /// The ID of the tag.

@@ -35,7 +35,8 @@ public partial class AniClient
         var body = JObject.FromObject(new { query = (isMutation ? "mutation" : string.Empty) + selection });
         var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
         var response = await _client.PostAsync(_url, content);
-        var json = JObject.Parse(await response.Content.ReadAsStringAsync());
+        var responseText = await response.Content.ReadAsStringAsync();
+        var json = JObject.Parse(responseText);
         if (!response.IsSuccessStatusCode)
             throw new Exception(json["errors"].First["message"].ToString());
         response.Headers.TryGetValues("X-RateLimit-Limit", out var rateLimitValues);

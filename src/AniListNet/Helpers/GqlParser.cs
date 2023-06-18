@@ -21,29 +21,49 @@ internal static class GqlParser
         var elementType = type.GetElementType();
         if (elementType is not null)
             type = elementType;
-        var properties = type.GetProperties().Cast<MemberInfo>();
-        var fields = type.GetFields().Cast<MemberInfo>();
+        var flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        var properties = type.GetProperties(flags).Cast<MemberInfo>();
+        var fields = type.GetFields(flags).Cast<MemberInfo>();
         var variables = properties.Concat(fields);
         var selections = new List<GqlSelection>();
         foreach (var variable in variables)
         {
             var selectionAttribute = variable.GetCustomAttribute<GqlSelectionAttribute>();
-            if (selectionAttribute is null)
-                continue;
-            var subSelections = ParseToSelections(variable.MemberType switch
+            var jsonAttribute = variable.GetCustomAttribute<JsonPropertyAttribute>();
+            if (selectionAttribute is not null)
             {
-                MemberTypes.Field => ((FieldInfo)variable).FieldType,
-                MemberTypes.Property => ((PropertyInfo)variable).PropertyType
-            });
-            var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => new GqlParameter(attribute));
-            var selection = new GqlSelection(selectionAttribute)
+                var subSelections = ParseToSelections(variable.MemberType switch
+                {
+                    MemberTypes.Field => ((FieldInfo)variable).FieldType,
+                    MemberTypes.Property => ((PropertyInfo)variable).PropertyType
+                });
+                var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => new GqlParameter(attribute));
+                var selection = new GqlSelection(selectionAttribute)
+                {
+                    Parameters = parameters.ToList(),
+                    Selections = subSelections
+                };
+                if (!string.IsNullOrEmpty(selectionAttribute.Alias))
+                    selection.Alias = selectionAttribute.Alias;
+                selections.Add(selection);
+            }
+            else if (jsonAttribute is not null)
             {
-                Parameters = parameters.ToList(),
-                Selections = subSelections
-            };
-            if (!string.IsNullOrEmpty(selectionAttribute.Alias))
-                selection.Alias = selectionAttribute.Alias;
-            selections.Add(selection);
+                var subSelections = ParseToSelections(variable.MemberType switch
+                {
+                    MemberTypes.Field => ((FieldInfo)variable).FieldType,
+                    MemberTypes.Property => ((PropertyInfo)variable).PropertyType
+                });
+                var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => new GqlParameter(attribute));
+                var selection = new GqlSelection(jsonAttribute.PropertyName ?? variable.Name, subSelections, parameters);
+                var aliasAttribute = variable.GetCustomAttribute<GqlAliasAttribute>();
+                if (aliasAttribute is not null)
+                {
+                    selection.Alias = aliasAttribute.Alias;
+                    selection.Name = aliasAttribute.AliasFor;
+                }
+                selections.Add(selection);
+            }
         }
         return selections;
     }

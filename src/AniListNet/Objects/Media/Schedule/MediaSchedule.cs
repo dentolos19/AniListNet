@@ -1,4 +1,5 @@
 ﻿using AniListNet.Helpers;
+using Newtonsoft.Json;
 
 namespace AniListNet.Objects;
 
