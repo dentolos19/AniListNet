@@ -67,9 +67,10 @@ public partial class AniClient
         var selections = new GqlSelection("Page")
         {
             Parameters = paginationOptions.ToParameters(),
-            Selections = new GqlSelection[] {
+            Selections = new GqlSelection[]
+            {
                 new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
-                new("airingSchedules",  GqlParser.ParseToSelections<MediaSchedule>(), filter.ToParameters())
+                new("airingSchedules", GqlParser.ParseToSelections<MediaSchedule>(), filter.ToParameters())
             }
         };
         var response = await PostRequestAsync(selections);

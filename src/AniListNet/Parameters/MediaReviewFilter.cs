@@ -5,7 +5,6 @@ namespace AniListNet.Parameters;
 
 public class MediaReviewFilter
 {
-
     public MediaReviewSort Sort { get; set; } = MediaReviewSort.Rating;
     public bool SortDescending { get; set; } = true;
 

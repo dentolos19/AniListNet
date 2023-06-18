@@ -1,5 +1,4 @@
 ﻿using AniListNet.Objects;
-using DotNetEnv;
 using NUnit.Framework;
 
 namespace AniListNet.Tests;

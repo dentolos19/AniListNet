@@ -1,5 +1,4 @@
 ﻿using AniListNet.Helpers;
-using AniListNet.Objects;
 
 namespace AniListNet.Parameters;
 

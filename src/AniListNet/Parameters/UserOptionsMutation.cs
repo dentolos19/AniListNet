@@ -24,7 +24,7 @@ public class UserOptionsMutation
         if (ScoreFormat.HasValue)
             parameters.Add(new GqlParameter("scoreFormat", ScoreFormat));
         if (!string.IsNullOrEmpty(RowOrder))
-           parameters.Add(new GqlParameter("rowOrder", RowOrder));
+            parameters.Add(new GqlParameter("rowOrder", RowOrder));
         if (!string.IsNullOrEmpty(ProfileColor))
             parameters.Add(new GqlParameter("profileColor", ProfileColor));
         if (AnimeListOptions is not null)

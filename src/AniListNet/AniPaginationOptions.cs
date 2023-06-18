@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using AniListNet.Helpers;
+﻿using AniListNet.Helpers;
 
 namespace AniListNet;
 
