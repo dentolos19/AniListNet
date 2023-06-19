@@ -12,7 +12,7 @@ public class MediaSchedulesFilter
     public MediaScheduleSort Sort { get; set; } = MediaScheduleSort.Time;
     public bool SortDescending { get; set; }
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (MediaId.HasValue)

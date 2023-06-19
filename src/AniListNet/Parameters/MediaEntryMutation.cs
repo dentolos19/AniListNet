@@ -12,7 +12,7 @@ public class MediaEntryMutation
     public DateTime? StartDate { get; set; }
     public DateTime? CompleteDate { get; set; }
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (Status.HasValue)

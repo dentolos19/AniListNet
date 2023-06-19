@@ -11,8 +11,8 @@ public partial class AniClient
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("media", typeof(Media).ToSelections(), filter.ToParameters().ToArray())
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("media", GqlParser.ParseToSelections<Media>(), filter.ToParameters().ToArray())
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Media>(
@@ -26,8 +26,8 @@ public partial class AniClient
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("characters", typeof(Character).ToSelections(), filter.ToParameters().ToArray())
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("characters", GqlParser.ParseToSelections<Character>(), filter.ToParameters().ToArray())
         }, options.ToParameters());
         var response = await PostRequestAsync(selections);
         return new AniPagination<Character>(
@@ -41,8 +41,8 @@ public partial class AniClient
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("staff", typeof(Staff).ToSelections(), new GqlParameter[]
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("staff", GqlParser.ParseToSelections<Staff>(), new GqlParameter[]
             {
                 new("search", query)
             })
@@ -59,8 +59,8 @@ public partial class AniClient
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("studios", typeof(Studio).ToSelections(), new GqlParameter[]
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("studios", GqlParser.ParseToSelections<Studio>(), new GqlParameter[]
             {
                 new("search", query)
             })
@@ -77,8 +77,8 @@ public partial class AniClient
         options ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("users", typeof(User).ToSelections(), new GqlParameter[]
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("users", GqlParser.ParseToSelections<User>(), new GqlParameter[]
             {
                 new("search", query)
             })

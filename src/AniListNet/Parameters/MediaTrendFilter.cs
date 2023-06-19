@@ -14,7 +14,7 @@ public class MediaTrendFilter
     public MediaTrendSort Sort { get; set; } = MediaTrendSort.Popularity;
     public bool SortDescending { get; set; } = true;
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (MediaId.HasValue)

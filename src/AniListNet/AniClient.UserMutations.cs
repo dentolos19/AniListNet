@@ -8,14 +8,21 @@ public partial class AniClient
 {
     public async Task<User> GetAuthenticatedUserAsync()
     {
-        var selections = new GqlSelection("Viewer", typeof(User).ToSelections());
+        var selections = new GqlSelection("Viewer")
+        {
+            Selections = GqlParser.ParseToSelections<User>()
+        };
         var response = await PostRequestAsync(selections);
         return GqlParser.ParseFromJson<User>(response["Viewer"]);
     }
 
     public async Task<User> UpdateUserOptionsAsync(UserOptionsMutation mutation)
     {
-        var selections = new GqlSelection("UpdateUser", typeof(User).ToSelections(), mutation.ToParameters());
+        var selections = new GqlSelection("UpdateUser")
+        {
+            Parameters = mutation.ToParameters(),
+            Selections = GqlParser.ParseToSelections<User>()
+        };
         var response = await PostRequestAsync(selections, true);
         return GqlParser.ParseFromJson<User>(response["UpdateUser"]);
     }
@@ -25,8 +32,11 @@ public partial class AniClient
     /// </summary>
     public async Task<MediaEntry> SaveMediaEntryAsync(int mediaId, MediaEntryMutation mutation)
     {
-        var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
-        var selections = new GqlSelection("SaveMediaListEntry", typeof(MediaEntry).ToSelections(), parameters.ToArray());
+        var selections = new GqlSelection("SaveMediaListEntry")
+        {
+            Parameters = new GqlParameter[] { new("mediaId", mediaId) }.Concat(mutation.ToParameters()).ToArray(),
+            Selections = GqlParser.ParseToSelections<MediaEntry>()
+        };
         var response = await PostRequestAsync(selections, true);
         return GqlParser.ParseFromJson<MediaEntry>(response["SaveMediaListEntry"]);
     }
@@ -53,7 +63,7 @@ public partial class AniClient
     public async Task<MediaReview> SaveMediaReviewAsync(int mediaId, MediaReviewMutation mutation)
     {
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
-        var selections = new GqlSelection("SaveReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var selections = new GqlSelection("SaveReview", GqlParser.ParseToSelections<MediaReview>(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
         return GqlParser.ParseFromJson<MediaReview>(response["SaveReview"]);
     }
@@ -80,7 +90,7 @@ public partial class AniClient
     public async Task<MediaReview> RateMediaReviewAsync(int reviewId, MediaReviewRating rating)
     {
         var parameters = new List<GqlParameter> { new("reviewId", reviewId), new("rating", rating) };
-        var selections = new GqlSelection("RateReview", typeof(MediaReview).ToSelections(), parameters.ToArray());
+        var selections = new GqlSelection("RateReview", GqlParser.ParseToSelections<MediaReview>(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
         return GqlParser.ParseFromJson<MediaReview>(response["RateReview"]);
     }
@@ -91,7 +101,7 @@ public partial class AniClient
     public async Task<MediaRecommendation> SaveMediaRecommendationAsync(int mediaId, MediaRecommendationMutation mutation)
     {
         var parameters = new List<GqlParameter> { new("mediaId", mediaId) }.Concat(mutation.ToParameters());
-        var selections = new GqlSelection("SaveRecommendation", typeof(MediaRecommendation).ToSelections(), parameters.ToArray());
+        var selections = new GqlSelection("SaveRecommendation", GqlParser.ParseToSelections<MediaRecommendation>(), parameters.ToArray());
         var response = await PostRequestAsync(selections, true);
         return GqlParser.ParseFromJson<MediaRecommendation>(response["SaveRecommendation"]);
     }

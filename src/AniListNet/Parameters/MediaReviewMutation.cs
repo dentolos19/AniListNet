@@ -26,7 +26,7 @@ public class MediaReviewMutation
     /// </summary>
     public bool IsPrivate { get; set; }
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter> { new("private", IsPrivate) };
         if (Id.HasValue)

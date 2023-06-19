@@ -2,11 +2,6 @@ namespace AniListNet.Helpers;
 
 internal static class HelperExtensions
 {
-    public static IEnumerable<GqlSelection> ToSelections(this Type type)
-    {
-        return GqlParser.ParseToSelections(type);
-    }
-
     public static (TObject[], TObject[]) SeparateByBooleans<TObject>(this IDictionary<TObject, bool> dictionary)
     {
         var includedItems = dictionary.Where(item => item.Value);

@@ -10,7 +10,7 @@ public class SearchCharacterFilter
     public CharacterSort Sort { get; set; } = CharacterSort.Relevance;
     public bool SortDescending { get; set; } = true;
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (IsBirthday.HasValue)

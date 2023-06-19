@@ -10,7 +10,7 @@ public class GetMediaFilter
     public MediaSort Sort { get; set; } = MediaSort.Popularity;
     public bool SortDescending { get; set; } = true;
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (Type.HasValue)

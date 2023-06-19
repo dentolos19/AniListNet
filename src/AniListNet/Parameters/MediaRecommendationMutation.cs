@@ -15,7 +15,7 @@ public class MediaRecommendationMutation
     /// </summary>
     public MediaRecommendationRating Rating { get; set; } = MediaRecommendationRating.NoRating;
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>
         {

@@ -11,7 +11,7 @@ public class UserListOptionsMutation
     public bool? IsAdvancedScoringEnabled { get; set; }
     public string? Theme { get; set; }
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (SectionOrder is { Length: > 0 })

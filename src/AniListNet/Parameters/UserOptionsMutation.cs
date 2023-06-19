@@ -14,7 +14,7 @@ public class UserOptionsMutation
     public UserListOptionsMutation? MangaListOptions { get; set; }
     public UserStaffNameLanguage? StaffNameLanguage { get; set; }
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (MediaTitleLanguage.HasValue)

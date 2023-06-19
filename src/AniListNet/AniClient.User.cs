@@ -11,8 +11,8 @@ public partial class AniClient
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("followers", typeof(User).ToSelections(), new GqlParameter[]
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("followers", GqlParser.ParseToSelections<User>(), new GqlParameter[]
             {
                 new("userId", userId)
             })
@@ -29,8 +29,8 @@ public partial class AniClient
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("following", typeof(User).ToSelections(), new GqlParameter[]
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("following", GqlParser.ParseToSelections<User>(), new GqlParameter[]
             {
                 new("userId", userId)
             })
@@ -48,8 +48,8 @@ public partial class AniClient
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Page", new GqlSelection[]
         {
-            new("pageInfo", typeof(PageInfo).ToSelections()),
-            new("mediaList", typeof(MediaEntry).ToSelections(), new GqlParameter[]
+            new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+            new("mediaList", GqlParser.ParseToSelections<MediaEntry>(), new GqlParameter[]
             {
                 new("userId", userId)
             }.Concat(filter.ToParameters()))
@@ -64,7 +64,7 @@ public partial class AniClient
     public async Task<MediaEntryCollection> GetUserEntryCollectionAsync(int userId, MediaType type, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
-        var selections = new GqlSelection("MediaListCollection", typeof(MediaEntryCollection).ToSelections(), new GqlParameter[]
+        var selections = new GqlSelection("MediaListCollection", GqlParser.ParseToSelections<MediaEntryCollection>(), new GqlParameter[]
         {
             new("userId", userId),
             new("type", type),
@@ -77,7 +77,7 @@ public partial class AniClient
 
     public async Task<MediaListCollection> GetUserListCollectionAsync(int userId, MediaType type)
     {
-        var selections = new GqlSelection("MediaListCollection", typeof(MediaListCollection).ToSelections(), new GqlParameter[]
+        var selections = new GqlSelection("MediaListCollection", GqlParser.ParseToSelections<MediaListCollection>(), new GqlParameter[]
         {
             new("userId", userId),
             new("type", type)
@@ -118,7 +118,7 @@ public partial class AniClient
 
     /* below are methods made for private use */
 
-    private async Task<AniPagination<T>> GetUserFavoritesAsync<T>(int userId, string type, AniPaginationOptions paginationOptions)
+    private async Task<AniPagination<TObject>> GetUserFavoritesAsync<TObject>(int userId, string type, AniPaginationOptions paginationOptions)
     {
         var selections = new GqlSelection("User", new GqlSelection[]
         {
@@ -126,8 +126,8 @@ public partial class AniClient
             {
                 new(type, new GqlSelection[]
                 {
-                    new("pageInfo", typeof(PageInfo).ToSelections()),
-                    new("nodes", typeof(T).ToSelections())
+                    new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                    new("nodes", GqlParser.ParseToSelections<TObject>())
                 }, paginationOptions.ToParameters())
             })
         }, new GqlParameter[]
@@ -135,9 +135,9 @@ public partial class AniClient
             new("id", userId)
         });
         var response = await PostRequestAsync(selections);
-        return new AniPagination<T>(
+        return new AniPagination<TObject>(
             GqlParser.ParseFromJson<PageInfo>(response["User"]["favourites"][type]["pageInfo"]),
-            GqlParser.ParseFromJson<T[]>(response["User"]["favourites"][type]["nodes"])
+            GqlParser.ParseFromJson<TObject[]>(response["User"]["favourites"][type]["nodes"])
         );
     }
 }

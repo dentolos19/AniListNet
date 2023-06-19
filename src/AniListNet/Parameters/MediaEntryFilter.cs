@@ -10,7 +10,7 @@ public class MediaEntryFilter
     public MediaEntrySort Sort { get; set; } = MediaEntrySort.LastUpdated;
     public bool SortDescending { get; set; } = true;
 
-    internal IEnumerable<GqlParameter> ToParameters()
+    internal IList<GqlParameter> ToParameters()
     {
         var parameters = new List<GqlParameter>();
         if (Type.HasValue)

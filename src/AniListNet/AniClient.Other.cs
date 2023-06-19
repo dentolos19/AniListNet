@@ -17,8 +17,8 @@ public partial class AniClient
         {
             new("media", new GqlSelection[]
             {
-                new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaCharacterEdge).ToSelections())
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("edges", GqlParser.ParseToSelections<MediaCharacterEdge>())
             }, filter.ToParameters().Concat(paginationOptions.ToParameters()))
         }, new GqlParameter[]
         {
@@ -42,8 +42,8 @@ public partial class AniClient
         {
             new("staffMedia", new GqlSelection[]
             {
-                new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaStaffEdge).ToSelections())
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("edges", GqlParser.ParseToSelections<MediaStaffEdge>())
             }, filter.ToParameters().Concat(paginationOptions.ToParameters()))
         }, new GqlParameter[]
         {
@@ -67,8 +67,8 @@ public partial class AniClient
         {
             new("characterMedia", new GqlSelection[]
             {
-                new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaStaffEdge).ToSelections())
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("edges", GqlParser.ParseToSelections<MediaStaffEdge>())
             }, filter.ToParameters().Concat(paginationOptions.ToParameters()))
         }, new GqlParameter[]
         {
@@ -91,8 +91,8 @@ public partial class AniClient
         {
             new("characters", new GqlSelection[]
             {
-                new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(CharacterEdge).ToSelections())
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("edges", GqlParser.ParseToSelections<CharacterEdge>())
             }, new GqlParameter[]
             {
                 new("sort", sort)
@@ -119,8 +119,8 @@ public partial class AniClient
         {
             new("media", new GqlSelection[]
             {
-                new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("edges", typeof(MediaStudioEdge).ToSelections())
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("edges", GqlParser.ParseToSelections<MediaStudioEdge>())
             }, filter.ToParameters().Concat(paginationOptions.ToParameters()))
         }, new GqlParameter[]
         {

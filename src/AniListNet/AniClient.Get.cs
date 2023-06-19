@@ -92,8 +92,8 @@ public partial class AniClient
             Parameters = paginationOptions.ToParameters(),
             Selections = new GqlSelection[]
             {
-                new("pageInfo", typeof(PageInfo).ToSelections()),
-                new("mediaTrends", typeof(MediaTrend).ToSelections(), filter.ToParameters())
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("mediaTrends", GqlParser.ParseToSelections<MediaTrend>(), filter.ToParameters())
             }
         };
         var response = await PostRequestAsync(selections);
