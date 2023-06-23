@@ -8,5 +8,5 @@ public enum UserSort
     [EnumMember(Value = "USERNAME")] Username,
     [EnumMember(Value = "WATCHED_TIME")] WatchedTime,
     [EnumMember(Value = "CHAPTERS_READ")] ChaptersRead,
-    [EnumMember(Value = "SEARCH_MATCH")] Relevance,
+    [EnumMember(Value = "SEARCH_MATCH")] Relevance
 }

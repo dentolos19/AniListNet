@@ -8,5 +8,5 @@ public enum StaffSort
     [EnumMember(Value = "ROLE")] Role,
     [EnumMember(Value = "LANGUAGE")] Language,
     [EnumMember(Value = "SEARCH_MATCH")] Relevance,
-    [EnumMember(Value = "FAVOURITES")] Favorites,
+    [EnumMember(Value = "FAVOURITES")] Favorites
 }

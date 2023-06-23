@@ -11,10 +11,7 @@ internal class GqlObjectResolver : DefaultContractResolver
         var flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
         var properties = objectType.GetProperties(flags).Where(property => property.CanWrite).Cast<MemberInfo>();
         var fields = objectType.GetFields(flags).Cast<MemberInfo>();
-        return
-            objectType.BaseType is null ?
-                properties.Concat(fields).ToList() :
-                properties.Concat(fields).Concat(GetSerializableMembers(objectType.BaseType)).ToList();
+        return (objectType.BaseType is null ? properties.Concat(fields) : properties.Concat(fields).Concat(GetSerializableMembers(objectType.BaseType))).ToList();
     }
 
     protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
