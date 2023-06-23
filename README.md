@@ -68,5 +68,5 @@ See more features by visiting the [features wiki](https://github.com/dentolos19/
 
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user activities
-- [ ] Add query/mutations functions for forums
+- [ ] Use same naming conventions for object data (target v2.0)
 - [ ] Use generics instead of arrays (target v2.0)
