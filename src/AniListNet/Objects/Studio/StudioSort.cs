@@ -2,10 +2,10 @@
 
 namespace AniListNet.Objects;
 
-public enum CharacterSort
+public enum StudioSort
 {
     [EnumMember(Value = "ID")] Id,
-    [EnumMember(Value = "ROLE")] Role,
+    [EnumMember(Value = "NAME")] Name,
     [EnumMember(Value = "SEARCH_MATCH")] Relevance,
-    [EnumMember(Value = "FAVOURITES")] Favorites,
+    [EnumMember(Value = "FAVOURITES")] Favorites
 }

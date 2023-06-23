@@ -2,9 +2,10 @@
 
 namespace AniListNet.Objects;
 
-public class MediaCharacterEdge
+public class MediaCharacterEdge : MediaEdge
 {
-    [GqlSelection("node")] public Media Media { get; private set; }
-    [GqlSelection("id")] public string Id { get; private set; }
+    /// <summary>
+    /// The character's role in the media.
+    /// </summary>
     [GqlSelection("characterRole")] public string Role { get; private set; }
 }

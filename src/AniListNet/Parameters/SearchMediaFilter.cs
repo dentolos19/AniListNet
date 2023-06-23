@@ -67,7 +67,13 @@ public class SearchMediaFilter
             if (excludedItems is { Length: > 0 })
                 parameters.Add(new GqlParameter("tag_not_in", excludedItems));
         }
-        parameters.Add(new GqlParameter("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending && Sort != MediaSort.Relevance ? "_DESC" : string.Empty)));
+        parameters.Add(
+            new GqlParameter(
+                "sort",
+                $"${HelperUtilities.GetEnumMemberValue(Sort)}" +
+                (SortDescending && Sort != MediaSort.Relevance ? "_DESC" : string.Empty)
+            )
+        );
         return parameters;
     }
 }

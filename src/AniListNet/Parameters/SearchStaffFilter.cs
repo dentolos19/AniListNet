@@ -3,11 +3,11 @@ using AniListNet.Objects;
 
 namespace AniListNet.Parameters;
 
-public class SearchCharacterFilter
+public class SearchStaffFilter
 {
     public bool? IsBirthday { get; set; }
     public string? Query { get; set; }
-    public CharacterSort Sort { get; set; } = CharacterSort.Relevance;
+    public StaffSort Sort { get; set; } = StaffSort.Relevance;
     public bool SortDescending { get; set; } = true;
 
     internal IList<GqlParameter> ToParameters()
@@ -21,7 +21,7 @@ public class SearchCharacterFilter
             new GqlParameter(
                 "sort",
                 $"${HelperUtilities.GetEnumMemberValue(Sort)}" +
-                (SortDescending && Sort != CharacterSort.Relevance ? "_DESC" : string.Empty)
+                (SortDescending && Sort != StaffSort.Relevance ? "_DESC" : string.Empty)
             )
         );
         return parameters;

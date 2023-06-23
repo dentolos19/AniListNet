@@ -8,7 +8,7 @@ public class MediaCover : Image
     [GqlSelection("color")] private readonly string? _color;
 
     /// <summary>
-    /// The cover image URL of the media at its largest size. If this size isn't available, large will be provided instead.
+    /// The cover image's URL of the media at its largest size. If this size isn't available, large will be provided instead.
     /// </summary>
     [GqlSelection("extraLarge")] public Uri ExtraLargeImageUrl { get; private set; }
 
