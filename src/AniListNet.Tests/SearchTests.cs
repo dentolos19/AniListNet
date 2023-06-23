@@ -11,6 +11,7 @@ public class SearchTests
     [Test]
     [TestCase("one piece")]
     [TestCase("demon slayer")]
+    [Category("Media")]
     public async Task SearchAnimeMediaTest(string query)
     {
         var results = await _client.SearchMediaAsync(new SearchMediaFilter
@@ -103,9 +104,33 @@ public class SearchTests
     }
 
     [Test]
+    public async Task SearchCharacterByBirthdayTest()
+    {
+        var results = await _client.SearchCharacterAsync(new SearchCharacterFilter
+        {
+            IsBirthday = true,
+            Sort = CharacterSort.Favorites
+        }, new AniPaginationOptions(2, 10));
+        Console.WriteLine(ObjectDumper.Dump(results));
+        Assert.Pass();
+    }
+
+    [Test]
     public async Task SearchStaffTest()
     {
         var results = await _client.SearchStaffAsync("kazuha", new AniPaginationOptions(2, 10));
+        Console.WriteLine(ObjectDumper.Dump(results));
+        Assert.Pass();
+    }
+
+    [Test]
+    public async Task SearchStaffByBirthdayTest()
+    {
+        var results = await _client.SearchStaffAsync(new SearchStaffFilter
+        {
+            IsBirthday = true,
+            Sort = StaffSort.Favorites
+        }, new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
         Assert.Pass();
     }
