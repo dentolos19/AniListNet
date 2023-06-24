@@ -29,41 +29,22 @@ internal static class GqlParser
         foreach (var variable in variables)
         {
             var selectionAttribute = variable.GetCustomAttribute<GqlSelectionAttribute>();
-            var jsonAttribute = variable.GetCustomAttribute<JsonPropertyAttribute>();
-            if (selectionAttribute is not null)
+            if (selectionAttribute is null)
+                continue;
+            var subSelections = ParseToSelections(variable.MemberType switch
             {
-                var subSelections = ParseToSelections(variable.MemberType switch
-                {
-                    MemberTypes.Field => ((FieldInfo)variable).FieldType,
-                    MemberTypes.Property => ((PropertyInfo)variable).PropertyType
-                });
-                var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => new GqlParameter(attribute));
-                var selection = new GqlSelection(selectionAttribute)
-                {
-                    Parameters = parameters.ToList(),
-                    Selections = subSelections
-                };
-                if (!string.IsNullOrEmpty(selectionAttribute.Alias))
-                    selection.Alias = selectionAttribute.Alias;
-                selections.Add(selection);
-            }
-            else if (jsonAttribute is not null)
+                MemberTypes.Field => ((FieldInfo)variable).FieldType,
+                MemberTypes.Property => ((PropertyInfo)variable).PropertyType
+            });
+            var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => new GqlParameter(attribute));
+            var selection = new GqlSelection(selectionAttribute)
             {
-                var subSelections = ParseToSelections(variable.MemberType switch
-                {
-                    MemberTypes.Field => ((FieldInfo)variable).FieldType,
-                    MemberTypes.Property => ((PropertyInfo)variable).PropertyType
-                });
-                var parameters = variable.GetCustomAttributes<GqlParameterAttribute>().Select(attribute => new GqlParameter(attribute));
-                var selection = new GqlSelection(jsonAttribute.PropertyName ?? variable.Name, subSelections, parameters);
-                var aliasAttribute = variable.GetCustomAttribute<GqlAliasAttribute>();
-                if (aliasAttribute is not null)
-                {
-                    selection.Alias = aliasAttribute.Alias;
-                    selection.Name = aliasAttribute.AliasFor;
-                }
-                selections.Add(selection);
-            }
+                Parameters = parameters.ToList(),
+                Selections = subSelections
+            };
+            if (!string.IsNullOrEmpty(selectionAttribute.Alias))
+                selection.Alias = selectionAttribute.Alias;
+            selections.Add(selection);
         }
         return selections;
     }
