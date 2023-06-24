@@ -11,7 +11,6 @@ public class SearchTests
     [Test]
     [TestCase("one piece")]
     [TestCase("demon slayer")]
-    [Category("Media")]
     public async Task SearchAnimeMediaTest(string query)
     {
         var results = await _client.SearchMediaAsync(new SearchMediaFilter

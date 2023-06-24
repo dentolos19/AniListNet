@@ -10,9 +10,9 @@ public class UserMutationsTests
     private readonly AniClient _client = new();
     private readonly Random _random = new();
 
-    private string GenerateRandomString(int length = 10)
+    private string GenerateRandomString(int length = 16, string additionalCharacters = "")
     {
-        const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + additionalCharacters;
         return new string(Enumerable.Repeat(characters, length).Select(@string => @string[_random.Next(@string.Length)]).ToArray());
     }
 
@@ -121,7 +121,30 @@ public class UserMutationsTests
     }
 
     [Test]
-    public async Task DeleteMediaReviewAsyncTest()
+    public async Task SaveMediaReviewWithNewLinesTest()
+    {
+        if (!_client.IsAuthenticated)
+            Assert.Fail("Client is not authorized.");
+        var body = GenerateRandomString(2200, "\n");
+        var summary = GenerateRandomString(20);
+        var data = await _client.SaveMediaReviewAsync(1, new MediaReviewMutation
+        {
+            Body = body,
+            Summary = summary,
+            Score = 3,
+            IsPrivate = true
+        });
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.That(
+            data.Body == body &&
+            data.Summary == summary &&
+            data is { Score: 3, IsPrivate: true },
+            Is.True
+        );
+    }
+
+    [Test]
+    public async Task DeleteMediaReviewTest()
     {
         if (!_client.IsAuthenticated)
             Assert.Fail("Client is not authorized.");
