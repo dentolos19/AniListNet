@@ -33,12 +33,18 @@ public partial class AniClient
     private async Task<JToken> PostRequestAsync(GqlSelection selection, bool isMutation = false)
     {
         var body = JObject.FromObject(new { query = (isMutation ? "mutation" : string.Empty) + selection });
+        var bodyText = body["query"].ToObject<string>();
         var content = new StringContent(body.ToString(), Encoding.UTF8, "application/json");
         var response = await _client.PostAsync(_url, content);
         var responseText = await response.Content.ReadAsStringAsync();
         var json = JObject.Parse(responseText);
         if (!response.IsSuccessStatusCode)
-            throw new Exception(json["errors"].First["message"].ToString());
+            throw new AniException
+            (
+                json["errors"].First["message"].ToString(),
+                bodyText,
+                responseText
+            );
         response.Headers.TryGetValues("X-RateLimit-Limit", out var rateLimitValues);
         response.Headers.TryGetValues("X-RateLimit-Remaining", out var rateRemainingValues);
         var rateLimitString = rateLimitValues?.FirstOrDefault();
