@@ -1,5 +1,6 @@
 ﻿using AniListNet.Helpers;
 using AniListNet.Objects;
+using AniListNet.Parameters;
 
 namespace AniListNet;
 
@@ -138,24 +139,26 @@ public partial class AniClient
     /// <summary>
     /// Gets reviews associated with the given media ID.
     /// </summary>
-    public async Task<AniPagination<MediaReviewEdge>> GetMediaReviewsAsync(int mediaId, AniPaginationOptions? paginationOptions = null)
+    public async Task<AniPagination<MediaReview>> GetMediaReviewsAsync(int mediaId, MediaReviewFilter? filter = null, AniPaginationOptions? pagination = null)
     {
-        paginationOptions ??= new AniPaginationOptions();
-        var selections = new GqlSelection("Media", new GqlSelection[]
+        filter ??= new MediaReviewFilter();
+        pagination ??= new AniPaginationOptions();
+        var selections = new GqlSelection("Page")
         {
-            new("reviews", new GqlSelection[]
+            Parameters = pagination.ToParameters(),
+            Selections = new GqlSelection[]
             {
                 new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
-                new("edges", GqlParser.ParseToSelections<MediaReviewEdge>())
-            }, paginationOptions.ToParameters())
-        }, new GqlParameter[]
-        {
-            new("id", mediaId)
-        });
+                new("reviews", GqlParser.ParseToSelections<MediaReview>(), filter.ToParameters().Concat(new GqlParameter[]
+                {
+                    new("mediaId", mediaId)
+                }))
+            }
+        };
         var response = await PostRequestAsync(selections);
-        return new AniPagination<MediaReviewEdge>(
-            GqlParser.ParseFromJson<PageInfo>(response["Media"]["reviews"]["pageInfo"]),
-            GqlParser.ParseFromJson<MediaReviewEdge[]>(response["Media"]["reviews"]["edges"])
+        return new AniPagination<MediaReview>(
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaReview[]>(response["Page"]["reviews"])
         );
     }
 

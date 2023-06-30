@@ -5,6 +5,7 @@ namespace AniListNet.Parameters;
 
 public class MediaReviewFilter
 {
+    public MediaType? Type { get; set; }
     public MediaReviewSort Sort { get; set; } = MediaReviewSort.Rating;
     public bool SortDescending { get; set; } = true;
 
@@ -14,6 +15,8 @@ public class MediaReviewFilter
         {
             new("sort", $"${HelperUtilities.GetEnumMemberValue(Sort)}" + (SortDescending ? "_DESC" : string.Empty))
         };
+        if (Type.HasValue)
+            parameters.Add(new GqlParameter("mediaType", Type.Value));
         return parameters;
     }
 }

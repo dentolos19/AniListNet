@@ -34,7 +34,7 @@ public partial class AniClient
             Selections = new GqlSelection[]
             {
                 new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
-                new("characters", GqlParser.ParseToSelections<Character>(), filter.ToParameters().ToArray())
+                new("characters", GqlParser.ParseToSelections<Character>(), filter.ToParameters())
             }
         };
         var response = await PostRequestAsync(selections);
