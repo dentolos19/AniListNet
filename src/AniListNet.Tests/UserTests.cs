@@ -64,6 +64,14 @@ public class UserTests
     }
 
     [Test]
+    public async Task GetUserMediaReviewsTest()
+    {
+        var data = await _client.GetUserMediaReviews(98098);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.Pass();
+    }
+
+    [Test]
     public async Task GetUserCharactersFavoritesTest()
     {
         var data = await _client.GetUserCharacterFavoritesAsync(5114158);

@@ -86,6 +86,29 @@ public partial class AniClient
         return GqlParser.ParseFromJson<MediaListCollection>(response["MediaListCollection"]);
     }
 
+    public async Task<AniPagination<MediaReview>> GetUserMediaReviews(int userId, MediaReviewFilter? filter = null, AniPaginationOptions? pagination = null)
+    {
+        filter ??= new MediaReviewFilter();
+        pagination ??= new AniPaginationOptions();
+        var selections = new GqlSelection("Page")
+        {
+            Parameters = pagination.ToParameters(),
+            Selections = new GqlSelection[]
+            {
+                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                new("reviews", GqlParser.ParseToSelections<MediaReview>(), filter.ToParameters().Concat(new GqlParameter[]
+                {
+                    new("userId", userId)
+                }))
+            }
+        };
+        var response = await PostRequestAsync(selections);
+        return new AniPagination<MediaReview>(
+            GqlParser.ParseFromJson<PageInfo>(response["Page"]["pageInfo"]),
+            GqlParser.ParseFromJson<MediaReview[]>(response["Page"]["reviews"])
+        );
+    }
+
     public Task<AniPagination<Media>> GetUserAnimeFavoritesAsync(int userId, AniPaginationOptions? paginationOptions = null)
     {
         paginationOptions ??= new AniPaginationOptions();
