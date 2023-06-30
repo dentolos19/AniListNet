@@ -86,7 +86,7 @@ public partial class AniClient
         return GqlParser.ParseFromJson<MediaListCollection>(response["MediaListCollection"]);
     }
 
-    public async Task<AniPagination<MediaReview>> GetUserMediaReviews(int userId, MediaReviewFilter? filter = null, AniPaginationOptions? pagination = null)
+    public async Task<AniPagination<MediaReview>> GetUserMediaReviewsAsync(int userId, MediaReviewFilter? filter = null, AniPaginationOptions? pagination = null)
     {
         filter ??= new MediaReviewFilter();
         pagination ??= new AniPaginationOptions();
