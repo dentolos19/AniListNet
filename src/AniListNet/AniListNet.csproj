@@ -9,7 +9,7 @@
 
         <Title>AniList.NET</Title>
         <Description>A simple .NET API wrapper for AniList!</Description>
-        <Version>1.5.0</Version>
+        <Version>1.6.0</Version>
         <Authors>Dennise Catolos</Authors>
         <PackageIcon>Resources\Icon.png</PackageIcon>
         <PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
