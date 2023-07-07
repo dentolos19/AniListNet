@@ -2,9 +2,6 @@ using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
-/// <summary>
-/// List group of anime or manga entries.
-/// </summary>
 public class MediaList
 {
     [GqlSelection("name")] public string Name { get; private set; }

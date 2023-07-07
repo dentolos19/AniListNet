@@ -2,10 +2,6 @@
 
 namespace AniListNet.Objects;
 
-/// <summary>
-/// Media Airing Schedule.
-/// </summary>
-/// <remarks>We only aim to guarantee that FUTURE airing data is present and accurate.</remarks>
 public class MediaSchedule
 {
     [GqlSelection("airingAt")] private readonly int _airingAt;

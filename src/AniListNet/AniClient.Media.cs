@@ -166,13 +166,11 @@ public partial class AniClient
 
     public async Task<MediaEntry?> GetMediaEntryAsync(int mediaId)
     {
-        var selections = new GqlSelection("Media", new GqlSelection[]
+        var selections = new GqlSelection("Media")
         {
-            new("mediaListEntry", GqlParser.ParseToSelections<MediaEntry>())
-        }, new GqlParameter[]
-        {
-            new("id", mediaId)
-        });
+            Parameters = new GqlParameter[] { new("id", mediaId) },
+            Selections = new GqlSelection[] { new("mediaListEntry", GqlParser.ParseToSelections<MediaEntry>()) }
+        };
         var response = await PostRequestAsync(selections);
         return GqlParser.ParseFromJson<MediaEntry?>(response["Media"]["mediaListEntry"]);
     }

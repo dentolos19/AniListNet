@@ -2,9 +2,6 @@
 
 namespace AniListNet.Objects;
 
-/// <summary>
-/// Daily media statistics.
-/// </summary>
 public class MediaTrend
 {
     [GqlSelection("date")] public readonly int _date;

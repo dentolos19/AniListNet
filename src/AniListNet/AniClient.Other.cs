@@ -14,16 +14,21 @@ public partial class AniClient
         filter ??= new GetMediaFilter();
         paginationOptions ??= new AniPaginationOptions();
         var selections = new GqlSelection("Character", new GqlSelection[]
-        {
-            new("media", new GqlSelection[]
             {
-                new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
-                new("edges", GqlParser.ParseToSelections<MediaCharacterEdge>())
-            }, filter.ToParameters().Concat(paginationOptions.ToParameters()))
-        }, new GqlParameter[]
-        {
-            new("id", characterId)
-        });
+                new(
+                    "media",
+                    new GqlSelection[]
+                    {
+                        new("pageInfo", GqlParser.ParseToSelections<PageInfo>()),
+                        new("edges", GqlParser.ParseToSelections<MediaCharacterEdge>())
+                    },
+                    filter.ToParameters().Concat(paginationOptions.ToParameters())
+                )
+            },
+            new GqlParameter[]
+            {
+                new("id", characterId)
+            });
         var response = await PostRequestAsync(selections);
         return new AniPagination<MediaCharacterEdge>(
             GqlParser.ParseFromJson<PageInfo>(response["Character"]["media"]["pageInfo"]),

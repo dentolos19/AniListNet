@@ -2,9 +2,6 @@
 
 namespace AniListNet.Objects;
 
-/// <summary>
-/// A Review that features in an anime or manga.
-/// </summary>
 public class MediaReview
 {
     [GqlSelection("createdAt")] private readonly int _createdAt;

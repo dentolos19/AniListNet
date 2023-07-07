@@ -2,9 +2,6 @@
 
 namespace AniListNet.Objects;
 
-/// <summary>
-/// The role the character plays in the media.
-/// </summary>
 public enum CharacterRole
 {
     /// <summary>

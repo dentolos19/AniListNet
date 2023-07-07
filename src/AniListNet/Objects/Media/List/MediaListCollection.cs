@@ -2,9 +2,6 @@ using AniListNet.Helpers;
 
 namespace AniListNet.Objects;
 
-/// <summary>
-/// Media list collection query, provides list pre-grouped by status & custom lists. User ID and Media Type arguments required.
-/// </summary>
 public class MediaListCollection
 {
     /// <summary>

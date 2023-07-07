@@ -28,6 +28,7 @@ public class MediaTests
     public async Task GetMediaCharactersTest()
     {
         var data = await _client.GetMediaCharactersAsync(1, new AniPaginationOptions(2, 5));
+        // var data = await (await _client.GetMediaAsync(1)).GetCharactersAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -36,6 +37,7 @@ public class MediaTests
     public async Task GetMediaStaffTest()
     {
         var data = await _client.GetMediaStaffAsync(1, new AniPaginationOptions(2, 5));
+        // var data = await (await _client.GetMediaAsync(1)).GetStaffAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
@@ -49,7 +51,7 @@ public class MediaTests
     }
 
     [Test]
-    public async Task GetMediaRecommendationTest()
+    public async Task GetMediaRecommendationsTest()
     {
         var data = await _client.GetMediaRecommendationsAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));
