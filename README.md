@@ -29,13 +29,13 @@ var client = new AniClient();
 // easy authentication with AniList
 var isAuthenticated = await client.TryAuthenticateAsync("<AUTH_TOKEN>");
 if (!isAuthenticated)
-  throw new Exception("Unable to authenticate with AniList.");
+  throw new Exception("Unable to authenticate with AniList!");
 
 var results = await client.SearchMediaAsync(new SearchMediaFilter
 {
-   Query = "one piece",
-   Type = MediaType.Anime,
-   Sort = MediaSort.Popularity,
+   Query = "one piece", // the term to search for
+   Type = MediaType.Anime, // filters search results to anime only
+   Sort = MediaSort.Popularity, // sorts them by popularity
    Format = new Dictionary<MediaFormat, bool>
    {
       { MediaFormat.TV, true }, // set to only search for TV shows and movies
@@ -48,8 +48,7 @@ foreach (var result in results.Data) // prints all results into console
    Console.WriteLine(result.Title.EnglishTitle);
 ```
 
-For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages)
-or check out the [unit tests](./AniListNet.Tests).
+For more examples for using this library, visit the [usages wiki](https://github.com/dentolos19/AniListNet/wiki/Usages) or check out the [unit tests](./AniListNet.Tests).
 
 ## ⚙️ Features
 
@@ -68,5 +67,5 @@ See more features by visiting the [features wiki](https://github.com/dentolos19/
 
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user activities
-- [ ] Use same naming conventions for object data (target v2.0)
-- [ ] Use generics instead of arrays (target v2.0)
+- [ ] Use same naming conventions for object data (target v2)
+- [ ] Use generics instead of arrays (target v2)
