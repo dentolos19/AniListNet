@@ -63,9 +63,33 @@ For more examples for using this library, visit the [usages wiki](https://github
 
 See more features by visiting the [features wiki](https://github.com/dentolos19/AniListNet/wiki/Features).
 
-## 🔨 Todo
+## 🧑‍💻 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+### Prerequisites
+
+- [.NET](https://dot.net) 6+
+
+### Installation
+
+1. Clone the repo: `git clone https://github.com/dentolos19/AniListNet.git`
+2. Go to [AniList](https://anilist.gitbook.io/anilist-apiv2-docs/overview/oauth/implicit-grant) and generate your API key
+3. Use the template `.env.template` and create a file called `.env` inside the project `AniListNet.Tests` and input your key
+2. Restore dependencies: `dotnet restore`
+3. Test the library: `dotnet test` or, use the built-in tests runner in your IDE (recommended)
+
+## 🔨 Roadmap
 
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user activities
 - [ ] Use same naming conventions for object data (target v2)
 - [ ] Use generics instead of arrays (target v2)
+
+## 💖 Credits
+
+- **Icon** from [AniList](https://anilist.io), edited by me.
+
+## 📜 License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
