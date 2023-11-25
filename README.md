@@ -88,7 +88,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ## 💖 Credits
 
-- **Icon** from [AniList](https://anilist.io), edited by me.
+- **Icon** from [AniList](https://anilist.co), edited by me.
 
 ## 📜 License
 
