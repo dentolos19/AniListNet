@@ -1,12 +1,12 @@
-# environment files
+# ide files
 .vs/
 .idea/
 
 # output files
-bin/
-obj/
+[Bb]in/
+[Oo]bj/
 
-# user files
+# user-specific files
 *.user
 *.suo
 .env
