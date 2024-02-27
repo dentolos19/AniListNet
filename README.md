@@ -23,28 +23,28 @@ using AniListNet;
 using AniListNet.Objects;
 using AniListNet.Parameters;
 
-// a simple class that fulfils all your needs
+// A simple class that fulfils all your needs
 var client = new AniClient();
 
-// easy authentication with AniList
+// Easy authentication with AniList
 var isAuthenticated = await client.TryAuthenticateAsync("<AUTH_TOKEN>");
 if (!isAuthenticated)
   throw new Exception("Unable to authenticate with AniList!");
 
 var results = await client.SearchMediaAsync(new SearchMediaFilter
 {
-   Query = "one piece", // the term to search for
-   Type = MediaType.Anime, // filters search results to anime only
-   Sort = MediaSort.Popularity, // sorts them by popularity
+   Query = "one piece", // The term to search for
+   Type = MediaType.Anime, // Filters search results to anime only
+   Sort = MediaSort.Popularity, // Sorts them by popularity
    Format = new Dictionary<MediaFormat, bool>
    {
-      { MediaFormat.TV, true }, // set to only search for TV shows and movies
+      { MediaFormat.TV, true }, // Set to only search for TV shows and movies
       { MediaFormat.Movie, true },
-      { MediaFormat.TVShort, false } // set to not show TV shorts
+      { MediaFormat.TVShort, false } // Set to not show TV shorts
    }
 });
 
-foreach (var result in results.Data) // prints all results into console
+foreach (var result in results.Data) // Prints all results into console
    Console.WriteLine(result.Title.EnglishTitle);
 ```
 
@@ -60,8 +60,6 @@ To see more examples, go check out [the wiki](https://github.com/dentolos19/AniL
 - [x] Get intricate details about any character or staff like which anime and manga they appeared in or worked on!
 - [x] Get user details like followers, entries, collections, and favorites!
 - [x] Update a user's followings, entries and favorites easily!
-
-See more features by visiting the [features wiki](https://github.com/dentolos19/AniListNet/wiki/Features).
 
 ## 🔨 Roadmap
 
@@ -81,10 +79,10 @@ Contributions are what make the open source community such an amazing place to l
 ### Installation
 
 1. Clone the repo: `git clone https://github.com/dentolos19/AniListNet.git`
-2. Generate your API key for AniList, learn more by [clicking here](https://anilist.gitbook.io/anilist-apiv2-docs/overview/oauth/implicit-grant).
+2. Get your API key, learn how by [clicking here](https://github.com/dentolos19/AniListNet/wiki/Tutorials#authenticating-with-anilist).
 3. Use the template `.env.template` and create a file named `.env` inside the project `AniListNet.Tests` and enter your key.
-2. Restore dependencies: `dotnet restore`
-3. Test the library: `dotnet test` or use the built-in tests runner in your IDE (recommended)
+4. Restore dependencies: `dotnet restore` (optional)
+5. Test the library: `dotnet test` or use the built-in tests runner in your IDE (recommended)
 
 ## 💖 Credits
 
