@@ -13,42 +13,7 @@ about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anil
 
 ## ⚒️ Usage
 
-Install the package in your project.
-
-- .NET CLI: `dotnet add package AniListNet`
-- Package Manager CLI: `Install-Package AniListNet`
-
-```cs
-using AniListNet;
-using AniListNet.Objects;
-using AniListNet.Parameters;
-
-// A simple class that fulfils all your needs
-var client = new AniClient();
-
-// Easy authentication with AniList
-var isAuthenticated = await client.TryAuthenticateAsync("<AUTH_TOKEN>");
-if (!isAuthenticated)
-  throw new Exception("Unable to authenticate with AniList!");
-
-var results = await client.SearchMediaAsync(new SearchMediaFilter
-{
-   Query = "one piece", // The term to search for
-   Type = MediaType.Anime, // Filters search results to anime only
-   Sort = MediaSort.Popularity, // Sorts them by popularity
-   Format = new Dictionary<MediaFormat, bool>
-   {
-      { MediaFormat.TV, true }, // Set to only search for TV shows and movies
-      { MediaFormat.Movie, true },
-      { MediaFormat.TVShort, false } // Set to not show TV shorts
-   }
-});
-
-foreach (var result in results.Data) // Prints all results into console
-   Console.WriteLine(result.Title.EnglishTitle);
-```
-
-To see more examples, go check out [the wiki](https://github.com/dentolos19/AniListNet/wiki)!
+Go check out [the wiki](https://github.com/dentolos19/AniListNet/wiki) to learn how to use this in your project!
 
 ## ⚙️ Features
 
@@ -61,7 +26,7 @@ To see more examples, go check out [the wiki](https://github.com/dentolos19/AniL
 - [x] Get user details like followers, entries, collections, and favorites!
 - [x] Update a user's followings, entries and favorites easily!
 
-## 🔨 Roadmap
+### Roadmap
 
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user activities
