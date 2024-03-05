@@ -20,7 +20,10 @@ public class SearchTests
             Type = MediaType.Anime
         }, new AniPaginationOptions(1, 5));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.IsTrue(results.Data.Any(item => item.Type == MediaType.Anime));
+        Assert.That(
+            results.Data.Any(item => item.Type == MediaType.Anime),
+            Is.True
+        );
     }
 
     [Test]
@@ -35,7 +38,10 @@ public class SearchTests
             Type = MediaType.Manga
         }, new AniPaginationOptions(1, 5));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.IsTrue(results.Data.Any(item => item.Type == MediaType.Manga));
+        Assert.That(
+            results.Data.Any(item => item.Type == MediaType.Manga),
+            Is.True
+        );
     }
 
     [Test]
@@ -55,12 +61,15 @@ public class SearchTests
             }
         }, new AniPaginationOptions(1, 5));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.IsTrue(results.Data.Any(item => item.Format is
-            (MediaFormat.TV or
-            MediaFormat.TVShort or
-            MediaFormat.Special) and not
-            MediaFormat.Movie
-        ));
+        Assert.That(
+            results.Data.Any(item => item.Format is
+                (MediaFormat.TV or
+                MediaFormat.TVShort or
+                MediaFormat.Special) and not
+                MediaFormat.Movie
+            ),
+            Is.True
+        );
     }
 
     [Test]
@@ -71,7 +80,10 @@ public class SearchTests
             Season = MediaSeason.Winter
         });
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.IsTrue(results.Data.Any(item => item.Season == MediaSeason.Winter));
+        Assert.That(
+            results.Data.Any(item => item.Season == MediaSeason.Winter),
+            Is.True
+        );
     }
 
     [Test]
@@ -87,11 +99,14 @@ public class SearchTests
             }
         });
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.IsTrue(results.Data.Any(item =>
-            item.Genres.Contains("Action") &&
-            item.Genres.Contains("Fantasy") &&
-            !item.Genres.Contains("Romance")
-        ));
+        Assert.That(
+            results.Data.Any(item =>
+                item.Genres.Contains("Action") &&
+                item.Genres.Contains("Fantasy") &&
+                !item.Genres.Contains("Romance")
+            ),
+            Is.True
+        );
     }
 
     [Test]
@@ -99,7 +114,7 @@ public class SearchTests
     {
         var results = await _client.SearchCharacterAsync("kazuha", new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -111,7 +126,7 @@ public class SearchTests
             Sort = CharacterSort.Favorites
         }, new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -119,7 +134,7 @@ public class SearchTests
     {
         var results = await _client.SearchStaffAsync("kazuha", new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -131,7 +146,7 @@ public class SearchTests
             Sort = StaffSort.Favorites
         }, new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -139,7 +154,7 @@ public class SearchTests
     {
         var results = await _client.SearchStudioAsync("a", new AniPaginationOptions(2, 10));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -147,6 +162,6 @@ public class SearchTests
     {
         var results = await _client.SearchUserAsync("dentolos", new AniPaginationOptions(1, 5));
         Console.WriteLine(ObjectDumper.Dump(results));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 }

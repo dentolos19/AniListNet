@@ -19,7 +19,7 @@ public class UserMutationsTests
     private TEnum GetRandomEnum<TEnum>()
     {
         var values = Enum.GetValues(typeof(TEnum));
-        return (TEnum)values.GetValue(_random.Next(values.Length));
+        return (TEnum)values.GetValue(_random.Next(values.Length))!;
     }
 
     [OneTimeSetUp]
@@ -37,7 +37,7 @@ public class UserMutationsTests
     {
         var data = await _client.GetAuthenticatedUserAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -173,7 +173,7 @@ public class UserMutationsTests
             Summary = GenerateRandomString(20)
         });
         var newData = await _client.RateMediaReviewAsync(data.Id, MediaReviewRating.DownVote);
-        Assert.Multiple(async () =>
+        await Assert.MultipleAsync(async () =>
         {
             Assert.That(newData.UserRating, Is.EqualTo(MediaReviewRating.DownVote));
             Assert.That(await _client.DeleteMediaReviewAsync(data.Id), Is.True);

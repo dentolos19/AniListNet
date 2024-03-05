@@ -30,7 +30,7 @@ public class MediaTests
         var data = await _client.GetMediaCharactersAsync(1, new AniPaginationOptions(2, 5));
         // var data = await (await _client.GetMediaAsync(1)).GetCharactersAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -39,7 +39,7 @@ public class MediaTests
         var data = await _client.GetMediaStaffAsync(1, new AniPaginationOptions(2, 5));
         // var data = await (await _client.GetMediaAsync(1)).GetStaffAsync();
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -47,7 +47,7 @@ public class MediaTests
     {
         var data = await _client.GetMediaStudiosAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -55,7 +55,7 @@ public class MediaTests
     {
         var data = await _client.GetMediaRecommendationsAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -63,14 +63,15 @@ public class MediaTests
     {
         var data = await _client.GetMediaReviewsAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
+    // TODO: Needs improvement
     [Test]
-    public async Task GetMediaEntryTest() // TODO: needs improvement
+    public async Task GetMediaEntryTest()
     {
         var data = await _client.GetMediaEntryAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 }

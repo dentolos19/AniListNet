@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-
         <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>latest</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-
+    </PropertyGroup>
+    
+    <PropertyGroup>
         <Title>AniList.NET</Title>
         <Description>A simple .NET API wrapper for AniList!</Description>
         <Version>1.7.0</Version>
         <Authors>Dennise Catolos</Authors>
-        <PackageIcon>Resources\Icon.png</PackageIcon>
+        <PackageIcon>icon.png</PackageIcon>
         <PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
-
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,10 +21,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="Resources\Icon.png">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
+      <None Include="..\..\public\icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <Link>icon.png</Link>
+      </None>
     </ItemGroup>
 
 </Project>

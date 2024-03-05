@@ -17,7 +17,7 @@ public class OtherTests
             Sort = MediaSort.Favorites
         });
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -25,7 +25,7 @@ public class OtherTests
     {
         var data = await _client.GetStaffProductionMediaAsync(95269);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -33,7 +33,7 @@ public class OtherTests
     {
         var data = await _client.GetStaffVoicedMediaAsync(95269);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -41,7 +41,7 @@ public class OtherTests
     {
         var data = await _client.GetStaffVoicedCharactersAsync(95269);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 
     [Test]
@@ -49,6 +49,6 @@ public class OtherTests
     {
         var data = await _client.GetStudioMediaAsync(1);
         Console.WriteLine(ObjectDumper.Dump(data));
-        Assert.Pass();
+        Assert.Pass(); // TODO: Add proper assertions
     }
 }
