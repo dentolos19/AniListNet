@@ -1,17 +1,17 @@
-# ide files
+# IDE configurations
 .vs/
 .idea/
 
-# output files
+# Output files
 [Bb]in/
 [Oo]bj/
 
-# user-specific files
+# User-specific files
 *.user
 *.suo
 .env
 
-# miscellaneous files
+# Miscellaneous files
 .DS_Store
 Desktop.ini
 Thumbs.db
