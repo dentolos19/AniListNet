@@ -1,0 +1,7 @@
+- [Home](./)
+- [Features](./Features)
+- [Tutorials](./Tutorials)
+  - [Authenticating with AniList](./Tutorials#authenticating-with-anilist)
+  - [Filtering Search Queries](./Tutorials#filtering-search-queries)
+  - [Paginating Results](./Tutorials#paginating-results)
+- [Changelog](https://github.com/dentolos19/AniListNet/releases)

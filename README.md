@@ -1,5 +1,5 @@
 <h1>
-    <img src="public/icon.png" alt="Icon" height="30">
+    <img src="docs/icon.png" alt="Icon" height="30">
     <span>AniList.NET</span>
 </h1>
 
