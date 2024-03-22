@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <Title>AniList.NET</Title>
         <Description>A simple .NET API wrapper for AniList!</Description>
@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="..\..\public\icon.png">
+      <None Include="..\..\docs\icon.png">
         <Pack>True</Pack>
         <PackagePath></PackagePath>
         <Link>icon.png</Link>

@@ -64,7 +64,7 @@ public class Staff
     /// <summary>
     /// The person's age in years.
     /// </summary>
-    [GqlSelection("age")] public int? Age { get; private set; } // TODO: check if age is non-nullable
+    [GqlSelection("age")] public int? Age { get; private set; } // TODO: Check if age is non-nullable
 
     /// <summary>
     /// [startYear, endYear] (If the 2nd value is not present staff is still active)

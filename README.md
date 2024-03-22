@@ -28,6 +28,7 @@ Go check out [the wiki](https://github.com/dentolos19/AniListNet/wiki) to learn 
 
 ### Roadmap
 
+- [ ] Improve tests (help wanted)
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user activities
 - [ ] Use same naming conventions for object data (target v2)

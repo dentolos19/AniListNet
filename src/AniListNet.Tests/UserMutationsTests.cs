@@ -57,10 +57,10 @@ public class UserMutationsTests
         Console.WriteLine(user.Dump());
         Assert.Multiple(() =>
         {
-            // Assert.That(user.Options.MediaTitleLanguage, Is.EqualTo(userMutation.MediaTitleLanguage)); // TODO: fix this
+            // Assert.That(user.Options.MediaTitleLanguage, Is.EqualTo(userMutation.MediaTitleLanguage)); // TODO: Fix this
             Assert.That(user.Options.DisplayAdultContent, Is.EqualTo(userMutation.DisplayAdultContent));
             Assert.That(user.ListOptions.ScoreFormat, Is.EqualTo(userMutation.ScoreFormat));
-            // Assert.That(user.Options.StaffNameLanguage, Is.EqualTo(userMutation.StaffNameLanguage)); // TODO: fix this
+            // Assert.That(user.Options.StaffNameLanguage, Is.EqualTo(userMutation.StaffNameLanguage)); // TODO: Fix this
         });
     }
 
