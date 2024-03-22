@@ -31,7 +31,7 @@ Go check out [the wiki](https://github.com/dentolos19/AniListNet/wiki) to learn 
 - [ ] Improve tests (help wanted)
 - [ ] Add query functions for notification data
 - [ ] Add query/mutations functions for user activities
-- [ ] Use same naming conventions for object data (target v2)
+- [ ] Use same API naming conventions for object properties (target v2)
 - [ ] Use generics instead of arrays (target v2)
 
 ## 🧑‍💻 Contributing
@@ -40,7 +40,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ### Prerequisites
 
-- [.NET](https://dot.net) 6+
+- [.NET](https://dot.net) 8+
 
 ### Installation
 
