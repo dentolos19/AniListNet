@@ -51,4 +51,22 @@ public class OtherTests
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass();
     }
+    
+    [Test]
+    public async Task ValidateRateLimitTest()
+    {
+        var rateRemaining = 0;
+        var rateLimit = 0;
+
+        _client.RateChanged += (_, args) =>
+        {
+            rateRemaining = args.RateRemaining;
+            rateLimit = args.RateLimit;
+        };
+        
+        var data = await _client.GetStudioMediaAsync(1);
+        Console.WriteLine(ObjectDumper.Dump(data));
+        Assert.True(rateLimit > 0);
+        Assert.True(rateRemaining == rateLimit - 1);
+    }
 }
