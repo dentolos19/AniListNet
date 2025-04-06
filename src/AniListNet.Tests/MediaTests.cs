@@ -51,9 +51,11 @@ public class MediaTests
     }
 
     [Test]
-    public async Task GetMediaRecommendationsTest()
+    [TestCase(1)]
+    [TestCase(98014)]
+    public async Task GetMediaRecommendationsTest(int id)
     {
-        var data = await _client.GetMediaRecommendationsAsync(1);
+        var data = await _client.GetMediaRecommendationsAsync(id);
         Console.WriteLine(ObjectDumper.Dump(data));
         Assert.Pass(); // TODO: Add proper assertions
     }
