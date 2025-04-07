@@ -1,6 +1,6 @@
 <h1>
-    <img src="docs/icon.png" alt="Icon" height="30">
-    <span>AniList.NET</span>
+  <img src="docs/icon.png" alt="Icon" height="30">
+  <span>AniList.NET</span>
 </h1>
 
 [![NuGet Version](https://img.shields.io/nuget/v/AniListNet?logo=nuget)](https://nuget.org/packages/AniListNet)
@@ -9,7 +9,7 @@
 A simple .NET API wrapper for [AniList](https://anilist.co)!
 
 This project is designed to bring you a simpler way to access and interact with the AniList API. For more information
-about the API itself, visit [AniList APIv2 docs](https://anilist.gitbook.io/anilist-apiv2-docs).
+about the API itself, visit the [AniList Docs](https://docs.anilist.co).
 
 ## ⚒️ Usage
 
