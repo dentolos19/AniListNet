@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using AniListNet.Helpers;
 using Newtonsoft.Json.Linq;
@@ -22,8 +23,13 @@ public partial class AniClient
             _ = await GetAuthenticatedUserAsync();
             IsAuthenticated = true;
         }
-        catch
+        catch (AniException aniException)
         {
+            if (aniException.StatusCode != HttpStatusCode.Unauthorized)
+            {
+                throw;
+            }
+            
             _client.DefaultRequestHeaders.Authorization = null;
             IsAuthenticated = false;
         }
@@ -50,7 +56,8 @@ public partial class AniClient
             (
                 responseJson["errors"]!.First!["message"]!.ToString(),
                 bodyText!,
-                responseText
+                responseText,
+                response.StatusCode
             );
 
         // Check rate limit
