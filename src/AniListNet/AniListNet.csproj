@@ -10,7 +10,7 @@
     <PropertyGroup>
         <Title>AniList.NET</Title>
         <Description>A simple .NET API wrapper for AniList!</Description>
-        <Version>1.7.0</Version>
+        <Version>1.7.1</Version>
         <Authors>Dennise Catolos</Authors>
         <PackageIcon>icon.png</PackageIcon>
         <PackageProjectUrl>https://github.com/dentolos19/AniListNet</PackageProjectUrl>
@@ -21,11 +21,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Include="..\..\docs\icon.png">
-        <Pack>True</Pack>
-        <PackagePath></PackagePath>
-        <Link>icon.png</Link>
-      </None>
+        <None Include="..\..\docs\icon.png">
+            <PackagePath></PackagePath>
+            <Pack>True</Pack>
+            <Link>icon.png</Link>
+        </None>
     </ItemGroup>
 
 </Project>

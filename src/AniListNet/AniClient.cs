@@ -26,10 +26,7 @@ public partial class AniClient
         catch (AniException aniException)
         {
             if (aniException.StatusCode != HttpStatusCode.Unauthorized)
-            {
                 throw;
-            }
-            
             _client.DefaultRequestHeaders.Authorization = null;
             IsAuthenticated = false;
         }
@@ -98,10 +95,10 @@ public partial class AniClient
 
         // Send request
         var token = await PostRequestAsync(selection);
-        
+
         // Get value from path
         token = path.Aggregate(token, (current, item) => current![item.Name]!);
-        
+
         return token!;
     }
 }
